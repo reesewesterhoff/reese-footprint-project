@@ -7,11 +7,12 @@ class GeneratorForm extends Component {
         generator: {
             size: '',
             monthlyCost: 0,
+            energyUnit: '',
         }
     }
 
     handleGeneratorToggle = () => {
-        this.props.dispatch({type: 'TOGGLE_GENERATOR'})
+        this.props.dispatch({ type: 'TOGGLE_GENERATOR' })
     }
 
     handleChangeFor = property => event => {
@@ -21,6 +22,14 @@ class GeneratorForm extends Component {
                 ...this.state.generator,
                 [property]: event.target.value,
             },
+        });
+    }
+
+    handleAddGenerator = event => {
+        event.preventDefault();
+        this.props.dispatch({
+            type: 'ADD_GENERATOR',
+            payload: this.state.generator,
         });
     }
 
@@ -35,32 +44,37 @@ class GeneratorForm extends Component {
                     value={this.props.generator}
                     onChange={this.handleGeneratorToggle}
                 />
+                <form onSubmit={this.handleAddGenerator}>
+                    {this.props.generator === true ? (
+                        <React.Fragment>
+                            <input
+                                type="text"
+                                placeholder="Generator Size"
+                                value={this.state.generator.size}
+                                onChange={this.handleChangeFor('size')}
+                            />
+                            <br />
+                            <input
+                                type="number"
+                                placeholder="Monthly Fuel Cost"
+                                value={this.state.generator.monthlyCost}
+                                onChange={this.handleChangeFor('monthlyCost')}
+                            />
+                            <select value={this.state.generator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
+                                <option value="">--Select Energy Unit--</option>
+                                <option value="kVA">kVA</option>
+                                <option value="kWh">kWh</option>
+                            </select>
+                        </React.Fragment>
+                    ) : (
+                            null
+                        )}
 
-                {this.props.generator === true ? (
-                    <React.Fragment>
-                        <input 
-                          type="text" 
-                          placeholder="Generator Size" 
-                          value={this.state.generator.size} 
-                          onChange={this.handleChangeFor('size')}
-                        />
-                        <br />
-                        <input 
-                          type="number" 
-                          placeholder="Monthly Fuel Cost" 
-                          value={this.state.generator.monthlyCost} 
-                          onChange={this.handleChangeFor('monthlyCost')}
-                        />
-                        <select>
-                            <option value="">--Select Energy Unit--</option>
-                            <option value="kVA">kVA</option>
-                            <option value="kWh">kWh</option>
-                        </select>
-                    </React.Fragment>
-                ) : (
-                        null
-                    )}
-                    {JSON.stringify(this.state, null, 2)}
+                    <input type="submit" />
+                </form>
+
+
+                {JSON.stringify(this.state, null, 2)}
             </div>
 
         )
