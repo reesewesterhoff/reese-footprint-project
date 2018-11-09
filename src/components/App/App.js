@@ -59,8 +59,6 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
-            {/* If none of the other routes matched, we will show a 404. */}
-            <Route render={() => <h1>404</h1>} />
 
             <Route
               exact
@@ -82,6 +80,8 @@ class App extends Component {
               path="/results"
               component={Results}
             />
+            {/* If none of the other routes matched, we will show a 404. */}
+            <Route render={() => <h1>404</h1>} />
           </Switch>
           <Footer />
         </div>
