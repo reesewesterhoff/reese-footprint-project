@@ -1,6 +1,6 @@
 let showGeneratorInputs = false;
 
-const generatorReducer = (state = {}, action) => {
+const generator = (state = {}, action) => {
     switch (action.type) {
         case 'TOGGLE_GENERATOR':
             showGeneratorInputs = !showGeneratorInputs;
@@ -8,4 +8,6 @@ const generatorReducer = (state = {}, action) => {
         default:
             return state;
     }
-}
+};
+
+export default generatorReducer;
