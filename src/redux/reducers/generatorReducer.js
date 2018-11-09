@@ -5,6 +5,8 @@ const generator = (state = {}, action) => {
         case 'TOGGLE_GENERATOR':
             showGeneratorInputs = !showGeneratorInputs;
             return showGeneratorInputs;
+        case 'ADD_GENERATOR':
+            return {...action.payload};
         default:
             return state;
     }
