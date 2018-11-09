@@ -25,10 +25,10 @@ VALUES('Small Health Clinic', 'Daytime clinic with limited services. Electricity
 
 ------------------------------------------ BELOW IS STRETCH MODE --------------------------------------------
 
---a table of user emails and passwords
-CREATE TABLE "users" (
+--a table of user emails and passwords. A user's email will serve as their "username".
+CREATE TABLE "person" (
     "id" SERIAL PRIMARY KEY,
-    "email" VARCHAR,
+    "username" VARCHAR,
     "password" VARCHAR
 );
 
@@ -47,7 +47,7 @@ CREATE TABLE "sites" (
 CREATE TABLE "projects" (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR(255),
-    "user_id" INT REFERENCES "users"
+    "user_id" INT REFERENCES "person"
 );
 
 --appliances table. We want users to have the ability to select appliances from a preset list.
