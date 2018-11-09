@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 class AddSite extends Component{
-
+    
     state ={
         siteName: '',
         siteLocation: '',
@@ -12,19 +12,19 @@ class AddSite extends Component{
 
     handleChange = (property) => (event) =>{
         this.setState({
-            ...this.state,
-            [property]: event.target.value
-        })
+        ...this.state,
+        [property]: event.target.value
+    })
     }
-
+    
     handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(this.state);
-        
+    event.preventDefault();
+    console.log(this.state);
     }
 
     render(){
         return (
+
             <div>
                 <h1>Add Site</h1>
 
@@ -36,23 +36,23 @@ class AddSite extends Component{
 
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        <input type="text" placeholder="Site Name" value={this.state.siteName} onChange={this.handleChange('siteName')} />
+                        <input type="text" placeholder="Site Name" />
                     </label>
                     <label>
                       
-                        <input type="text" placeholder="Site Location" value={this.state.siteLocation} onChange={this.handleChange('siteLocation')}/>
+                        <input type="text" placeholder="Site Location" />
                     </label>
                     <label>
                        
-                        <input type="text"  placeholder="Funding Start Date" value={this.state.fundStartDate} onChange={this.handleChange('fundStartDate')}/>
+                        <input type="text"  placeholder="Funding Start Date" />
                     </label>
                     <label>
                     
-                        <input type="text" placeholder="Funding End Date" value={this.state.fundEndDate} onChange={this.handleChange('fundEndDate')}/>
+                        <input type="text" placeholder="Funding End Date" />
                     </label>
                     <label>
 
-                        <input type="text" placeholder="Monthly Budget" value={this.state.monthlyBudget} onChange={this.handleChange('monthlyBudget')}/>
+                        <input type="text" placeholder="Monthly Budget" />
                     </label>
                     <input type="submit" value="Submit" />
                 </form>
