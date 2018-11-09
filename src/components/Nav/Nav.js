@@ -32,16 +32,16 @@ const Nav = (props) => (
 
 
       
-      <Link to="/add_site">
+      <Link className="nav-link" to="/add_site">
         Add Site
       </Link>
-      <Link to="/generator">
+      <Link className="nav-link" to="/generator">
         Generator
       </Link>
-      <Link to="/site_type">
+      <Link className="nav-link" to="/site_type">
         Site Type
       </Link>
-      <Link to="/results">
+      <Link className="nav-link" to="/results">
         Results
       </Link>
     </div>
