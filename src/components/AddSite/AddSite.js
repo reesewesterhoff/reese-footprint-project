@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 
 class AddSite extends Component {
 
@@ -15,15 +15,14 @@ class AddSite extends Component {
             ...this.state,
             [property]: event.target.value
         })
-        this.props.dispatch({
-            type: 'ADD_SITE', payload: this.state
-        })
-
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state);
+        this.props.dispatch({
+            type: 'ADD_SITE', payload: this.state
+        })
+        
     }
 
     render() {
@@ -52,4 +51,9 @@ class AddSite extends Component {
     }
 }
 
-export default AddSite;
+const mapStateToProps = state => ({
+    state: state,
+  });
+  
+
+export default connect(mapStateToProps)(AddSite);
