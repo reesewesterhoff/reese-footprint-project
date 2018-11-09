@@ -18,7 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import AddSite from '../AddSite/AddSite';
 import GeneratorForm from '../GeneratorForm/GeneratorForm';
-import SiteType from '../SiteType/SiteType';
+import SiteTypeList from '../SiteTypeList/SiteTypeList';
 import Results from '../Results/Results';
 
 import './App.css';
@@ -73,7 +73,7 @@ class App extends Component {
             <Route
               exact
               path="/site_type"
-              component={SiteType}
+              component={SiteTypeList}
             />
             <Route
               exact
