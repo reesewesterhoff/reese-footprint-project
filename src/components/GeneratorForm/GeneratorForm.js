@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class GeneratorForm extends Component {
 
     state = {
-        hasGenerator: false,
         generator: {
             size: '',
             monthlyCost: 0,
         }
     }
 
-    handleGeneratorToggle = event => {
-        this.setState({
-            hasGenerator: !this.state.hasGenerator,
-        });
+    handleGeneratorToggle = () => {
+        this.props.dispatch({type: 'TOGGLE_GENERATOR'})
     }
 
     handleChangeFor = property => event => {
@@ -34,11 +32,11 @@ class GeneratorForm extends Component {
                 <h5>Do you have a generator(s)? Check box for 'yes'.</h5>
                 <input
                     type="checkbox"
-                    value={this.state.hasGenerator}
-                    onClick={this.handleGeneratorToggle}
+                    value={this.props.generator}
+                    onChange={this.handleGeneratorToggle}
                 />
 
-                {this.state.hasGenerator ? (
+                {this.props.generator === true ? (
                     <React.Fragment>
                         <input 
                           type="text" 
@@ -53,6 +51,11 @@ class GeneratorForm extends Component {
                           value={this.state.generator.monthlyCost} 
                           onChange={this.handleChangeFor('monthlyCost')}
                         />
+                        <select>
+                            <option value="">--Select Energy Unit--</option>
+                            <option value="kVA">kVA</option>
+                            <option value="kWh">kWh</option>
+                        </select>
                     </React.Fragment>
                 ) : (
                         null
@@ -64,4 +67,8 @@ class GeneratorForm extends Component {
     }
 }
 
-export default GeneratorForm;
+const mapStateToProps = state => ({
+    generator: state.generator,
+});
+
+export default connect(mapStateToProps)(GeneratorForm);
