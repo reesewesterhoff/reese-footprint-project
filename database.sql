@@ -32,6 +32,13 @@ CREATE TABLE "person" (
     "password" VARCHAR
 );
 
+--projects table. Each project can have multiple sites
+CREATE TABLE "projects" (
+    "id" SERIAL PRIMARY KEY,
+    "name" VARCHAR(255),
+    "user_id" INT REFERENCES "person"
+);
+
 --sites table, for projects which have multiple sites
 CREATE TABLE "sites" (
     "id" SERIAL PRIMARY KEY,
@@ -41,13 +48,6 @@ CREATE TABLE "sites" (
     "latitude" DECIMAL,
     "longitude" DECIMAL,
     "appliances" INT[]
-);
-
---projects table. Each project can have multiple sites
-CREATE TABLE "projects" (
-    "id" SERIAL PRIMARY KEY,
-    "name" VARCHAR(255),
-    "user_id" INT REFERENCES "person"
 );
 
 --appliances table. We want users to have the ability to select appliances from a preset list.
