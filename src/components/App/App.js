@@ -16,6 +16,10 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
+import AddSite from '../AddSite/AddSite';
+import GeneratorForm from '../GeneratorForm/GeneratorForm';
+import SiteType from '../SiteType/SiteType';
+import Results from '../Results/Results';
 
 import './App.css';
 
@@ -57,6 +61,27 @@ class App extends Component {
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
+
+            <Route
+              exact
+              path="/add_site"
+              component={AddSite}
+            />
+            <Route
+              exact
+              path="/generator"
+              component={GeneratorForm}
+            />
+            <Route
+              exact
+              path="/site_type"
+              component={SiteType}
+            />
+            <Route
+              exact
+              path="/results"
+              component={Results}
+            />
           </Switch>
           <Footer />
         </div>
