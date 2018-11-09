@@ -4,13 +4,26 @@ class GeneratorForm extends Component {
 
     state = {
         hasGenerator: false,
+        generator: {
+            size: '',
+            monthlyCost: 0,
+        }
     }
 
-    handleGeneratorToggle = async event => {
-        await this.setState({
+    handleGeneratorToggle = event => {
+        this.setState({
             hasGenerator: !this.state.hasGenerator,
         });
-        await console.log(this.state.hasGenerator);
+    }
+
+    handleChangeFor = property => event => {
+        this.setState({
+            ...this.state,
+            generator: {
+                ...this.state.generator,
+                [property]: event.target.value,
+            },
+        });
     }
 
     render() {
@@ -27,14 +40,24 @@ class GeneratorForm extends Component {
 
                 {this.state.hasGenerator ? (
                     <React.Fragment>
-                        <input type="text" placeholder="Generator Size" />
+                        <input 
+                          type="text" 
+                          placeholder="Generator Size" 
+                          value={this.state.generator.size} 
+                          onChange={this.handleChangeFor('size')}
+                        />
                         <br />
-                        <input type="text" placeholder="Monthly Fuel Cost" />
+                        <input 
+                          type="number" 
+                          placeholder="Monthly Fuel Cost" 
+                          value={this.state.generator.monthlyCost} 
+                          onChange={this.handleChangeFor('monthlyCost')}
+                        />
                     </React.Fragment>
                 ) : (
                         null
                     )}
-
+                    {JSON.stringify(this.state, null, 2)}
             </div>
 
         )
