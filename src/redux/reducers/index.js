@@ -5,6 +5,7 @@ import user from './userReducer';
 import siteTypes from './siteTypesReducer';
 import sites from './addSiteReducer';
 import generator from './generatorReducer';
+import selectedSite from './selectedSiteReducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   siteTypes,
   sites,
   generator,
+  selectedSite,
 });
 
 export default rootReducer;

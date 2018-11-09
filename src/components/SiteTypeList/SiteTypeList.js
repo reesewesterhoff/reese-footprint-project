@@ -8,9 +8,9 @@ class SiteTypeList extends Component {
         this.props.dispatch({type: 'FETCH_SITE_TYPES'});   
     }
 
-    selectSite(site) {
+    selectSite = (site) => {
         console.log('clicked site', site);
-        // this.props.dispatch({type: 'SET_SELECTED_SITE', payload: site});
+        this.props.dispatch({type: 'SET_SELECTED_SITE', payload: site});
     }
 
     render() {
