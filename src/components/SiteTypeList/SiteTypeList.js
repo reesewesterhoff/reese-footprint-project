@@ -15,7 +15,7 @@ class SiteTypeList extends Component {
                 <h1>Choose Site Type</h1>
                 <select>
                     <option value=''>---Select A Site---</option>
-                    {this.props.sites.map(site => {
+                    {this.props.siteTypes.map(site => {
                         return <option value={site.id} key={site.id}>
                             {site.type}
                         </option>
@@ -32,7 +32,7 @@ class SiteTypeList extends Component {
 
 const mapStateToProps = state => {
     return {
-        sites: state.sites,
+        siteTypes: state.siteTypes,
     }
 }
 
