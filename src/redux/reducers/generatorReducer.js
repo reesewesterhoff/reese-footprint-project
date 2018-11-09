@@ -10,4 +10,4 @@ const generator = (state = {}, action) => {
     }
 };
 
-export default generatorReducer;
+export default generator;
