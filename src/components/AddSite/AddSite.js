@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
+
 class AddSite extends Component {
 
     state = {
         siteName: '',
-        siteLocation: '',
         fundStartDate: '',
         fundEndDate: '',
         monthlyBudget: '',
@@ -15,6 +15,10 @@ class AddSite extends Component {
             ...this.state,
             [property]: event.target.value
         })
+        this.props.dispatch({
+            type: 'ADD_SITE', payload: this.state
+        })
+
     }
 
     handleSubmit = (event) => {
@@ -35,23 +39,11 @@ class AddSite extends Component {
                 </p>
 
                 <form onSubmit={this.handleSubmit}>
-                    <label>
                         <input type="text" placeholder="Site Name" value={this.state.siteName} onChange={this.handleChange('siteName')} />
-                    </label>
-                    <label>
-                        <input type="text" placeholder="Site Location" value={this.state.siteLocation} onChange={this.handleChange('siteLocation')} />
-                    </label>
-                    <label>
                         <input type="text" placeholder="Funding Start Date" value={this.state.fundStartDate} onChange={this.handleChange('fundStartDate')} />
-                    </label>
-                    <label>
                         <input type="text" placeholder="Funding End Date" value={this.state.fundEndDate} onChange={this.handleChange('fundEndDate')} />
-                    </label>
-                    <label>
-
                         <input type="text" placeholder="Monthly Budget" value={this.state.monthlyBudget} onChange={this.handleChange('monthlyBudget')} />
-                    </label>
-                    <input type="submit" value="Submit" />
+                        <input type="submit" value="Submit" />
                 </form>
                 
             </div>
