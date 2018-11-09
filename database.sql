@@ -55,5 +55,5 @@ CREATE TABLE "projects" (
 CREATE TABLE "appliances" (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR,
-    "kilowatts" INT
+    "watts" INT
 );
