@@ -1,29 +1,39 @@
 import React, { Component } from 'react';
-import Bar from 'react-chartjs-2';
+import {Bar, Line} from 'react-chartjs-2';
 
 class Results extends Component {
 
     state={
         data: {
-            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            labels: [2015, 2016, 2017, 2018, 2019, 2020],
             datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                label: 'Time to cover initial investment',
+                data: [24000, 19000, 14000, 9000, 4000, 1000], //these values will be set dynamically when user enters info
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
+                    'rgba(54, 162, 235, 0.2)'
                 ],
                 borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                    'rgba(54, 162, 235, 1)'
+                ],
+                borderWidth: 1
+            },{
+                label: 'Solar energy savings',
+                data: [1000, 5000, 10000, 11000, 20000, 27000],
+                backgroundColor: [
+                    'green'
+                ],
+                borderColor: [
+                    'green'
+                ],
+                borderWidth: 1
+            },{
+                label: 'Cost of Diesel',
+                data: [5000, 12000, 19000, 26000, 33000, 40000],
+                backgroundColor: [
+                    'grey'
+                ],
+                borderColor: [
+                    'grey'
                 ],
                 borderWidth: 1
             }]
@@ -39,56 +49,11 @@ class Results extends Component {
         }
     }
 
-    // ctx = null;
-
-    // refFunction = element => {
-    //     this.ctx = element.getContext('2d');
-    //     console.log('ctx = ',this.ctx);
-    // }
-
-    // ctx = document.getElementById("myChart").getContext('2d');
-    // myChart = new Chart(this.ctx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    //         datasets: [{
-    //             label: '# of Votes',
-    //             data: [12, 19, 3, 5, 2, 3],
-    //             backgroundColor: [
-    //                 'rgba(255, 99, 132, 0.2)',
-    //                 'rgba(54, 162, 235, 0.2)',
-    //                 'rgba(255, 206, 86, 0.2)',
-    //                 'rgba(75, 192, 192, 0.2)',
-    //                 'rgba(153, 102, 255, 0.2)',
-    //                 'rgba(255, 159, 64, 0.2)'
-    //             ],
-    //             borderColor: [
-    //                 'rgba(255,99,132,1)',
-    //                 'rgba(54, 162, 235, 1)',
-    //                 'rgba(255, 206, 86, 1)',
-    //                 'rgba(75, 192, 192, 1)',
-    //                 'rgba(153, 102, 255, 1)',
-    //                 'rgba(255, 159, 64, 1)'
-    //             ],
-    //             borderWidth: 1
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             yAxes: [{
-    //                 ticks: {
-    //                     beginAtZero: true
-    //                 }
-    //             }]
-    //         }
-    //     }
-    // });
 
     render() {
         return (<div>
             <h1>Results</h1>
-            {/* <canvas id="myChart" width="400" height="400" ref={this.refFunction}></canvas> */}
-            <Bar data={this.state.data} options={this.state.options} />
+            <Line data={this.state.data} options={this.state.options}/>
         </div>)
     }
 }
