@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 class GeneratorForm extends Component {
 
     state = {
+        showGenerator: false,
         generator: {
             size: '',
             monthlyCost: 0,
@@ -12,7 +13,10 @@ class GeneratorForm extends Component {
     }
 
     handleGeneratorToggle = () => {
-        this.props.dispatch({ type: 'TOGGLE_GENERATOR' })
+        this.setState({
+            ...this.state,
+            showGenerator: !this.state.showGenerator
+        });
     }
 
     handleChangeFor = property => event => {
@@ -31,6 +35,9 @@ class GeneratorForm extends Component {
             type: 'ADD_GENERATOR',
             payload: this.state.generator,
         });
+        this.setState({
+            showGenerator: false,
+        });
     }
 
     render() {
@@ -41,11 +48,11 @@ class GeneratorForm extends Component {
                 <h5>Do you have a generator(s)? Check box for 'yes'.</h5>
                 <input
                     type="checkbox"
-                    value={this.props.generator}
+                    checked={this.state.showGenerator}
                     onChange={this.handleGeneratorToggle}
                 />
                 <form onSubmit={this.handleAddGenerator}>
-                    {this.props.generator === true ? (
+                    {this.state.showGenerator === true ? (
                         <React.Fragment>
                             <input
                                 type="text"
@@ -53,6 +60,11 @@ class GeneratorForm extends Component {
                                 value={this.state.generator.size}
                                 onChange={this.handleChangeFor('size')}
                             />
+                            <select value={this.state.generator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
+                                <option value="">--Select Energy Unit--</option>
+                                <option value="kVA">kVA</option>
+                                <option value="kWh">kWh</option>
+                            </select>
                             <br />
                             <input
                                 type="number"
@@ -60,11 +72,6 @@ class GeneratorForm extends Component {
                                 value={this.state.generator.monthlyCost}
                                 onChange={this.handleChangeFor('monthlyCost')}
                             />
-                            <select value={this.state.generator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
-                                <option value="">--Select Energy Unit--</option>
-                                <option value="kVA">kVA</option>
-                                <option value="kWh">kWh</option>
-                            </select>
                         </React.Fragment>
                     ) : (
                             null
