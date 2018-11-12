@@ -61,6 +61,12 @@ class App extends Component {
               component={InfoPage}
             />
 
+            <ProtectedRoute
+              exact
+              path="/project"
+              component={InfoPage}
+            />
+
             <Route
               exact
               path="/add_site"
