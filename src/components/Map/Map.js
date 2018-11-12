@@ -10,7 +10,7 @@ class Map extends React.Component {
   state = {
     bounds: null,
     center: {
-      lat: 44.9765, lng: -93.2761
+      lat: 45, lng: 49
     },
     isMarkerShown: false,
     showInfoWindow: false,
@@ -30,7 +30,7 @@ class Map extends React.Component {
     this.setState({
       bounds: null,
       center: {
-        lat: 44.9778, lng: -93.2650
+        lat: 45, lng: 49
       },
       markers: [],
       onMapMounted: ref => {
@@ -95,7 +95,7 @@ class Map extends React.Component {
       <div>
         <GoogleMap
           ref={this.state.onMapMounted}
-          defaultZoom={14}
+          defaultZoom={1}
           center={this.state.center}
           onClick={this.handleClick}
           onBoundsChanged={this.props.onBoundsChanged}>

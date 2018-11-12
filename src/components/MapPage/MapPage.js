@@ -25,6 +25,7 @@ class MapPage extends Component {
   render() {
     return (
       <div>
+      <h2>Site Location</h2>
         <Map 
             googleMapURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
             loadingElement = {<div style={{ height: `100%` }} />}
