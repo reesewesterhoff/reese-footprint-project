@@ -21,7 +21,7 @@ class AddSite extends Component {
     handleSubmit = event => {
         event.preventDefault();
         this.props.dispatch({
-            type: 'ADD_SITE', payload: { ...this.state, ...this.props.generator }
+            type: 'ADD_SITE', payload: { ...this.state, siteGenerators: this.props.generator }
         });
         this.setState({
             siteName: '',

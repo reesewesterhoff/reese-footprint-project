@@ -5,8 +5,8 @@ class GeneratorItem extends Component {
     render() {
         return (
             <React.Fragment>
-                <li key={this.props.site.generatorSize}>
-                    Total Load: {this.props.site.generatorSize} {this.props.site.energyUnit} <br/> Monthly Fuel Cost: ${this.props.site.monthlyCost}
+                <li key={this.props.newGen.generatorSize}>
+                    Total Generator Load: {this.props.newGen.generatorSize} {this.props.newGen.energyUnit} <br/> Monthly Fuel Cost: ${this.props.newGen.monthlyCost}
                 </li>
             </React.Fragment>
         )
@@ -15,6 +15,7 @@ class GeneratorItem extends Component {
 
 const mapStateToProps = state => ({
     sites: state.sites,
+    generator: state.generator,
 });
 
 export default connect(mapStateToProps)(GeneratorItem)
