@@ -22,6 +22,9 @@ class SiteTypeList extends Component {
                 <div>
                     <SiteTypeCategory />
                 </div>
+                <div>
+                    
+                </div>
                 {this.props.siteTypes.map(site => {
                     return  <SiteTypeItem 
                                 site={site}

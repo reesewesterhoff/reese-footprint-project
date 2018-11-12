@@ -14,15 +14,10 @@ import RouterIcon from '@material-ui/icons/Router';
 // jss styles
 const styles = {
     card: {
-        margin: 20,
         marginTop: 75,
         width: 350,
         maxHeight: 400,
         textAlign: 'center',
-        display: 'inline-block',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-evenly',
     },
     pos: {
         marginBottom: 12,
@@ -36,6 +31,12 @@ const styles = {
         width: '100%',
         margin: 'auto',
     },
+    cardDiv: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
+    }
 };
 
 class SiteTypeCategory extends Component {
@@ -46,7 +47,7 @@ class SiteTypeCategory extends Component {
         const { classes } = this.props;
 
         return (
-            <div>
+            <div className={classes.cardDiv}>
                 <Card className={classes.card} >
                     <CardContent>
                         <Typography>
