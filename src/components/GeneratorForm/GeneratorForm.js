@@ -37,6 +37,11 @@ class GeneratorForm extends Component {
         });
         this.setState({
             showGenerator: false,
+            newGenerator: {
+                generatorSize: 0,
+                energyUnit: '',
+                monthlyCost: 0,
+            }
         });
     }
 
