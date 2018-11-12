@@ -67,7 +67,7 @@ class SiteTypeCategory extends Component {
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
-                                // onClick={() => this.props.selectSiteCategory('emergency/medical')}
+                                onClick={() => this.props.selectSiteCategory('emergency/medical')}
                                 >
                                 Select
                             </Button>
@@ -94,7 +94,7 @@ class SiteTypeCategory extends Component {
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
-                                // onClick={() => this.props.selectSiteCategory('office/storage')}
+                                onClick={() => this.props.selectSiteCategory('office/storage')}
                                 >
                                 Select
                             </Button>
@@ -121,7 +121,7 @@ class SiteTypeCategory extends Component {
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
-                                // onClick={() => this.props.selectSiteCategory('food/water/shelter')}
+                                onClick={() => this.props.selectSiteCategory('food/water/shelter')}
                                 >
                                 Select
                             </Button>
@@ -148,7 +148,7 @@ class SiteTypeCategory extends Component {
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
-                                // onClick={() => this.props.selectSiteCategory('communications')}
+                                onClick={() => this.props.selectSiteCategory('communications')}
                                 >
                                 Select
                             </Button>

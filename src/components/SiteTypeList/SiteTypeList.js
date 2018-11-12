@@ -15,12 +15,19 @@ class SiteTypeList extends Component {
         this.props.dispatch({type: 'SET_SELECTED_SITE', payload: site});
     }
 
+    selectSiteCategory = (category) => {
+        console.log(category);
+        
+    }
+
     render() {
         return (
             <div>
                 <h1>Choose Site Category And Type</h1>
                 <div>
-                    <SiteTypeCategory />
+                    <SiteTypeCategory 
+                        selectSiteCategory={this.selectSiteCategory}
+                    />
                 </div>
                 <div>
                     
