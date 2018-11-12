@@ -48,7 +48,7 @@ class GeneratorForm extends Component {
     render() {
         return (
             <div>
-                <label htmlFor={this.state.showGenerator}>Do you have a generator(s)? Check box for 'yes'.</label>
+                <label htmlFor={this.state.showGenerator.toString()}>Do you have a generator(s)? Check box for 'yes'.</label>
                 <input
                     type="checkbox"
                     checked={this.state.showGenerator}
@@ -90,8 +90,6 @@ class GeneratorForm extends Component {
                 ) : (
                         null
                     )}
-
-
             </div>
 
         )
