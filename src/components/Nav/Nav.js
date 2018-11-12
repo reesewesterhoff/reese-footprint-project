@@ -35,9 +35,6 @@ const Nav = (props) => (
       <Link className="nav-link" to="/add_site">
         Add Site
       </Link>
-      <Link className="nav-link" to="/generator">
-        Generator
-      </Link>
       <Link className="nav-link" to="/site_type">
         Site Type
       </Link>
