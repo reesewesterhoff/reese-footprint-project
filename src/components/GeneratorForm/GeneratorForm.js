@@ -48,12 +48,12 @@ class GeneratorForm extends Component {
     render() {
         return (
             <div>
-                <h5>Do you have a generator(s)? Check box for 'yes'.</h5>
+                <label htmlFor={this.state.showGenerator}>Do you have a generator(s)? Check box for 'yes'.</label>
                 <input
                     type="checkbox"
                     checked={this.state.showGenerator}
                     onChange={this.handleGeneratorToggle}
-                />
+                /><br/>
                 {this.state.showGenerator === true ? (
                     <React.Fragment>
                         <label htmlFor={this.state.newGenerator.generatorSize}>Generator Size</label>
