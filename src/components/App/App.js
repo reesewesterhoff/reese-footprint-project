@@ -20,6 +20,7 @@ import AddSite from '../AddSite/AddSite';
 import GeneratorForm from '../GeneratorForm/GeneratorForm';
 import SiteTypeList from '../SiteTypeList/SiteTypeList';
 import Results from '../Results/Results';
+import MapPage from '../MapPage/MapPage';
 
 import './App.css';
 
@@ -79,6 +80,11 @@ class App extends Component {
               exact
               path="/results"
               component={Results}
+            />
+            <Route
+              exact
+              path="/map"
+              component={MapPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
