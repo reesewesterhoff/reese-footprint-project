@@ -21,6 +21,7 @@ import GeneratorForm from '../GeneratorForm/GeneratorForm';
 import SiteTypeList from '../SiteTypeList/SiteTypeList';
 import Results from '../Results/Results';
 import MapPage from '../MapPage/MapPage';
+import ProjectPage from '../ProjectPage/ProjectPage';
 
 import './App.css';
 
@@ -59,6 +60,12 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/project"
+              component={ProjectPage}
             />
 
             <Route
