@@ -49,40 +49,37 @@ class GeneratorForm extends Component {
                     checked={this.state.showGenerator}
                     onChange={this.handleGeneratorToggle}
                 />
-                    {this.state.showGenerator === true ? (
-                        <React.Fragment>
-                            <input
-                                type="text"
-                                placeholder="Generator Size"
-                                value={this.state.generator.size}
-                                onChange={this.handleChangeFor('size')}
-                            />
-                            <select value={this.state.generator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
-                                <option value="">--Select Energy Unit--</option>
-                                <option value="kVA">kVA</option>
-                                <option value="kWh">kWh</option>
-                            </select>
-                            <br />
-                            <input
-                                type="number"
-                                placeholder="Monthly Fuel Cost"
-                                value={this.state.generator.monthlyCost}
-                                onChange={this.handleChangeFor('monthlyCost')}
-                            />
-                        </React.Fragment>
-                    ) : (
-                            null
-                        )}
-
-                    <button
-                        onClick={this.handleAddGenerator}
-                    >
-                    {this.state.showGenerator ? (
-                        'Add Generator'
-                    ) : (
-                        'alajklsdhf'
-                    )}
+                {this.state.showGenerator === true ? (
+                    <React.Fragment>
+                        <input
+                            type="text"
+                            placeholder="Generator Size"
+                            value={this.state.generator.size}
+                            onChange={this.handleChangeFor('size')}
+                        />
+                        <select value={this.state.generator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
+                            <option value="">--Select Energy Unit--</option>
+                            <option value="kVA">kVA</option>
+                            <option value="kWh">kWh</option>
+                        </select>
+                        <br />
+                        <input
+                            type="number"
+                            placeholder="Monthly Fuel Cost"
+                            value={this.state.generator.monthlyCost}
+                            onChange={this.handleChangeFor('monthlyCost')}
+                        />
+                        <button
+                            onClick={this.handleAddGenerator}
+                        >
+                            Add Generator
                     </button>
+                    </React.Fragment>
+                ) : (
+                        null
+                    )}
+
+
             </div>
 
         )
