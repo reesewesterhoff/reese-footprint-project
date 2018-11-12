@@ -8,10 +8,10 @@ class GeneratorList extends Component {
             <div>
                 List of Generators:
                 <ul>
-                    {this.props.sites.map(site => (
+                    {this.props.generator.map(newGen => (
                         <GeneratorItem 
-                            key={site.generatorSize}
-                            site={site}
+                            key={newGen.generatorSize}
+                            newGen={newGen}
                         />
                     ))}
                 </ul>
@@ -22,6 +22,7 @@ class GeneratorList extends Component {
 
 const mapStateToProps = state => ({
     sites: state.sites,
+    generator: state.generator,
 });
 
 export default connect(mapStateToProps)(GeneratorList);
