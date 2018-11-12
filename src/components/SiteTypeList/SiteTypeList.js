@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import SiteTypeItem from '../SiteTypeItem/SiteTypeItem';
 import { connect } from 'react-redux';
 import SiteTypeCategory from '../SiteTypeCategory/SiteTypeCategory';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+    card: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
+    }
+}
 
 
 class SiteTypeList extends Component {
@@ -21,6 +32,9 @@ class SiteTypeList extends Component {
     }
 
     render() {
+
+        const { classes } = this.props;
+
         return (
             <div>
                 <h1>Choose Site Category And Type</h1>
@@ -29,7 +43,7 @@ class SiteTypeList extends Component {
                         selectSiteCategory={this.selectSiteCategory}
                     />
                 </div>
-                <div>
+                <div className={classes.card}>
                     {this.props.siteTypes.map(site => {
                         return <SiteTypeItem
                             site={site}
@@ -39,13 +53,14 @@ class SiteTypeList extends Component {
                     }
                     )}
                 </div>
-
-
             </div>
         );
     }
 }
 
+SiteTypeList.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
 
 const mapStateToProps = state => {
@@ -54,4 +69,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(SiteTypeList);
+export default withStyles(styles)(connect(mapStateToProps)(SiteTypeList));

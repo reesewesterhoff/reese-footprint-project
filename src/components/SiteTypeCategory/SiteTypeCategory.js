@@ -41,6 +41,29 @@ const styles = {
 
 class SiteTypeCategory extends Component {
 
+    state = {
+        active: null,
+    }
+
+    // getInitialState = () => {
+    //     return { active: null}
+    //   }
+
+    toggleColor = (position) => {
+        if (this.state.active === position) {
+          this.setState({active : null})
+        } else {
+          this.setState({active : position})
+        }
+      }
+      
+      myColor = (position) => {
+        if (this.state.active === position) {
+          return "blue";
+        }
+        return "";
+      }
+
 
     render() {
 
@@ -48,7 +71,7 @@ class SiteTypeCategory extends Component {
 
         return (
             <div className={classes.cardDiv}>
-                <Card className={classes.card} >
+                <Card className={classes.card} style={{background: this.myColor(0)}} onClick={() => {this.toggleColor(0)}}>
                     <CardContent>
                         <Typography>
                             <br />
@@ -75,7 +98,7 @@ class SiteTypeCategory extends Component {
                     </CardActions>
                     <br />
                 </Card>
-                <Card className={classes.card} >
+                <Card className={classes.card} style={{background: this.myColor(1)}} onClick={() => {this.toggleColor(1)}}>
                     <CardContent>
                         <Typography>
                             <br />
@@ -102,7 +125,7 @@ class SiteTypeCategory extends Component {
                     </CardActions>
                     <br />
                 </Card>
-                <Card className={classes.card} >
+                <Card className={classes.card} style={{background: this.myColor(2)}} onClick={() => {this.toggleColor(2)}}>
                     <CardContent>
                         <Typography>
                             <br />
@@ -129,7 +152,7 @@ class SiteTypeCategory extends Component {
                     </CardActions>
                     <br />
                 </Card>
-                <Card className={classes.card} >
+                <Card className={classes.card} style={{background: this.myColor(3)}} onClick={() => {this.toggleColor(3)}}>
                     <CardContent>
                         <Typography>
                             <br />
