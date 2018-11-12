@@ -7,17 +7,17 @@ import SiteTypeCategory from '../SiteTypeCategory/SiteTypeCategory';
 class SiteTypeList extends Component {
 
     componentDidMount() {
-        this.props.dispatch({type: 'FETCH_SITE_TYPES'});   
+       
     }
 
     selectSite = (site) => {
         console.log('clicked site', site);
-        this.props.dispatch({type: 'SET_SELECTED_SITE', payload: site});
+        this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
     }
 
     selectSiteCategory = (category) => {
         console.log(category);
-        
+        this.props.dispatch({ type: 'FETCH_SITE_TYPES' });
     }
 
     render() {
@@ -25,21 +25,21 @@ class SiteTypeList extends Component {
             <div>
                 <h1>Choose Site Category And Type</h1>
                 <div>
-                    <SiteTypeCategory 
+                    <SiteTypeCategory
                         selectSiteCategory={this.selectSiteCategory}
                     />
                 </div>
                 <div>
-                    
+                    {this.props.siteTypes.map(site => {
+                        return <SiteTypeItem
+                            site={site}
+                            key={site.id}
+                            selectSite={this.selectSite}
+                        />
+                    }
+                    )}
                 </div>
-                {this.props.siteTypes.map(site => {
-                    return  <SiteTypeItem 
-                                site={site}
-                                key={site.id}
-                                selectSite={this.selectSite}
-                            />
-                    }      
-                )}
+
 
             </div>
         );
