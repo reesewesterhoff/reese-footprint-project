@@ -21,6 +21,7 @@ import GeneratorForm from '../GeneratorForm/GeneratorForm';
 import SiteTypeList from '../SiteTypeList/SiteTypeList';
 import Results from '../Results/Results';
 import MapPage from '../MapPage/MapPage';
+import ProjectPage from '../ProjectPage/ProjectPage';
 
 import './App.css';
 
@@ -64,7 +65,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/project"
-              component={InfoPage}
+              component={ProjectPage}
             />
 
             <Route
