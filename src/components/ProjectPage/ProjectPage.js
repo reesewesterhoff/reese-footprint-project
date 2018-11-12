@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import './ProjectPage.css'
 
 
 // this could also be written with destructuring parameters as:
@@ -14,7 +15,7 @@ import { withRouter } from 'react-router-dom';
 
     return (
       <div >
-        <h1>Project</h1>
+        <h1 className="projectHeader">Project</h1>
       </div>
     );
   }
