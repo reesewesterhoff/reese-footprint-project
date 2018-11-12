@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import {Bar, Line} from 'react-chartjs-2';
+import axios from 'axios';
+
 
 class Results extends Component {
 
     state={
+        messageToBeSent: {
+            name: '',
+            email: '',
+            message: '',
+        },
         data: {
             labels: [2015, 2016, 2017, 2018, 2019, 2020],
             datasets: [{
@@ -49,11 +56,33 @@ class Results extends Component {
         }
     }
 
+    handleChange = (property) => (event) => {
+        this.setState({ messageToBeSent: {...this.state.messageToBeSent, [property]: event.target.value} });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(`${this.state.messageToBeSent.name} is sending 
+            from ${this.state.messageToBeSent.email} the following message: ${this.state.messageToBeSent.message}`);
+        axios.post('/email', {content: this.state.messageToBeSent, data: this.state.data.datasets.map(dataset=>dataset.data)}
+        ).then((response)=>{
+            console.log('Response is:',response.data);
+        }).catch((error)=>{
+            console.log('Error in POST:',error);
+        })
+    }
+
 
     render() {
         return (<div>
             <h1>Results</h1>
             <Line data={this.state.data} options={this.state.options}/>
+            <form onSubmit={this.handleSubmit}>
+                <input placeholder="Name" type="text" onChange={this.handleChange('name')}/>
+                <input placeholder="Email" type="text"  onChange={this.handleChange('email')}/>
+                <input placeholder="Message" type="text"  onChange={this.handleChange('message')}/>
+                <input type="submit" value="Contact the experts" />
+            </form>
         </div>)
     }
 }
