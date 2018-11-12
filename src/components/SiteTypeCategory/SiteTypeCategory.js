@@ -14,15 +14,10 @@ import RouterIcon from '@material-ui/icons/Router';
 // jss styles
 const styles = {
     card: {
-        margin: 20,
         marginTop: 75,
         width: 350,
         maxHeight: 400,
         textAlign: 'center',
-        display: 'inline-block',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-evenly',
     },
     pos: {
         marginBottom: 12,
@@ -36,9 +31,38 @@ const styles = {
         width: '100%',
         margin: 'auto',
     },
+    cardDiv: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
+    }
 };
 
 class SiteTypeCategory extends Component {
+
+    state = {
+        active: null,
+    }
+
+    // getInitialState = () => {
+    //     return { active: null}
+    //   }
+
+    toggleColor = (position) => {
+        if (this.state.active === position) {
+          this.setState({active : null})
+        } else {
+          this.setState({active : position})
+        }
+      }
+      
+      myColor = (position) => {
+        if (this.state.active === position) {
+          return "blue";
+        }
+        return "";
+      }
 
 
     render() {
@@ -46,8 +70,8 @@ class SiteTypeCategory extends Component {
         const { classes } = this.props;
 
         return (
-            <div>
-                <Card className={classes.card} >
+            <div className={classes.cardDiv}>
+                <Card className={classes.card} style={{background: this.myColor(0)}} onClick={() => {this.toggleColor(0)}}>
                     <CardContent>
                         <Typography>
                             <br />
@@ -66,7 +90,7 @@ class SiteTypeCategory extends Component {
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
-                                // onClick={() => this.props.selectSiteCategory('emergency/medical')}
+                                onClick={() => this.props.selectSiteCategory('emergency/medical')}
                                 >
                                 Select
                             </Button>
@@ -74,7 +98,7 @@ class SiteTypeCategory extends Component {
                     </CardActions>
                     <br />
                 </Card>
-                <Card className={classes.card} >
+                <Card className={classes.card} style={{background: this.myColor(1)}} onClick={() => {this.toggleColor(1)}}>
                     <CardContent>
                         <Typography>
                             <br />
@@ -93,7 +117,7 @@ class SiteTypeCategory extends Component {
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
-                                // onClick={() => this.props.selectSiteCategory('office/storage')}
+                                onClick={() => this.props.selectSiteCategory('office/storage')}
                                 >
                                 Select
                             </Button>
@@ -101,7 +125,7 @@ class SiteTypeCategory extends Component {
                     </CardActions>
                     <br />
                 </Card>
-                <Card className={classes.card} >
+                <Card className={classes.card} style={{background: this.myColor(2)}} onClick={() => {this.toggleColor(2)}}>
                     <CardContent>
                         <Typography>
                             <br />
@@ -120,7 +144,7 @@ class SiteTypeCategory extends Component {
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
-                                // onClick={() => this.props.selectSiteCategory('food/water/shelter')}
+                                onClick={() => this.props.selectSiteCategory('food/water/shelter')}
                                 >
                                 Select
                             </Button>
@@ -128,7 +152,7 @@ class SiteTypeCategory extends Component {
                     </CardActions>
                     <br />
                 </Card>
-                <Card className={classes.card} >
+                <Card className={classes.card} style={{background: this.myColor(3)}} onClick={() => {this.toggleColor(3)}}>
                     <CardContent>
                         <Typography>
                             <br />
@@ -147,7 +171,7 @@ class SiteTypeCategory extends Component {
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
-                                // onClick={() => this.props.selectSiteCategory('communications')}
+                                onClick={() => this.props.selectSiteCategory('communications')}
                                 >
                                 Select
                             </Button>
