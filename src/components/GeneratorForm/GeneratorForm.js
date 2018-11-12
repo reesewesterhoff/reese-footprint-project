@@ -43,15 +43,12 @@ class GeneratorForm extends Component {
     render() {
         return (
             <div>
-                <h1>Generator Form</h1>
-
                 <h5>Do you have a generator(s)? Check box for 'yes'.</h5>
                 <input
                     type="checkbox"
                     checked={this.state.showGenerator}
                     onChange={this.handleGeneratorToggle}
                 />
-                <form onSubmit={this.handleAddGenerator}>
                     {this.state.showGenerator === true ? (
                         <React.Fragment>
                             <input
@@ -77,11 +74,15 @@ class GeneratorForm extends Component {
                             null
                         )}
 
-                    <input type="submit" />
-                </form>
-
-
-                {JSON.stringify(this.state, null, 2)}
+                    <button
+                        onClick={this.handleAddGenerator}
+                    >
+                    {this.state.showGenerator ? (
+                        'Add Generator'
+                    ) : (
+                        'alajklsdhf'
+                    )}
+                    </button>
             </div>
 
         )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import GeneratorForm from '../GeneratorForm/GeneratorForm';
 
 class AddSite extends Component {
 
@@ -41,7 +42,7 @@ class AddSite extends Component {
                         <input type="text" placeholder="Site Name" value={this.state.siteName} onChange={this.handleChange('siteName')} />
                         <input type="text" placeholder="Funding Start Date" value={this.state.fundStartDate} onChange={this.handleChange('fundStartDate')} />
                         <input type="text" placeholder="Funding End Date" value={this.state.fundEndDate} onChange={this.handleChange('fundEndDate')} />
-                        <input type="text" placeholder="Monthly Budget" value={this.state.monthlyBudget} onChange={this.handleChange('monthlyBudget')} />
+                        <GeneratorForm />
                         <input type="submit" value="Submit" />
                 </form>
                 
