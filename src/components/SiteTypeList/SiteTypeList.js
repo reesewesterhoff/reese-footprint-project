@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import SiteTypeItem from '../SiteTypeItem/SiteTypeItem';
 import { connect } from 'react-redux';
+import SiteTypeCategory from '../SiteTypeCategory/SiteTypeCategory';
+
 
 class SiteTypeList extends Component {
 
@@ -16,17 +18,10 @@ class SiteTypeList extends Component {
     render() {
         return (
             <div>
-                <h1>Choose Site Type</h1>
-                <select>
-                    <option value=''>---Select A Site---</option>
-                    {this.props.siteTypes.map(site => {
-                        return <option value={site.id} key={site.id}>
-                            {site.type}
-                        </option>
-                        }
-                    )}
-                    
-                </select>
+                <h1>Choose Site Category And Type</h1>
+                <div>
+                    <SiteTypeCategory />
+                </div>
                 {this.props.siteTypes.map(site => {
                     return  <SiteTypeItem 
                                 site={site}
@@ -35,10 +30,12 @@ class SiteTypeList extends Component {
                             />
                     }      
                 )}
+
             </div>
         );
     }
 }
+
 
 
 const mapStateToProps = state => {
