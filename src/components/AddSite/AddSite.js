@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GeneratorForm from '../GeneratorForm/GeneratorForm';
 
+
 class AddSite extends Component {
 
     state = {
@@ -42,15 +43,15 @@ class AddSite extends Component {
                 </p>
 
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" placeholder="Site Name" value={this.state.siteName} onChange={this.handleChange('siteName')} /><br/>
+                    <input type="text" placeholder="Site Name" value={this.state.siteName} onChange={this.handleChange('siteName')} /><br />
                     <label htmlFor={this.state.fundStartDate}>Funding Start Date</label>
-                    <input type="date" placeholder="Funding Start Date" value={this.state.fundStartDate} onChange={this.handleChange('fundStartDate')} />
+                    <input type="date" placeholder="Funding Start Date" value={this.state.fundStartDate} onChange={this.handleChange('fundStartDate')} /><br />
                     <label htmlFor={this.state.fundEndDate}>Funding End Date</label>
                     <input type="date" placeholder="Funding End Date" value={this.state.fundEndDate} onChange={this.handleChange('fundEndDate')} />
                     <GeneratorForm />
                     <input type="submit" value="Submit" />
+
                 </form>
-                {JSON.stringify(this.props.state.sites, null, 2)}
             </div>
 
         );
@@ -58,7 +59,7 @@ class AddSite extends Component {
 }
 
 const mapStateToProps = state => ({
-    state: state,
+    sites: state.sites,
     generator: state.generator,
 });
 

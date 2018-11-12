@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import GeneratorList from '../GeneratorList/GeneratorList';
 
 class GeneratorForm extends Component {
 
@@ -65,7 +66,7 @@ class GeneratorForm extends Component {
                         <select value={this.state.newGenerator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
                             <option value="">--Select Energy Unit--</option>
                             <option value="kVA">kVA</option>
-                            <option value="kWh">kWh</option>
+                            <option value="kW">kW</option>
                         </select>
                         <br />
                         <label htmlFor={this.state.newGenerator.monthlyCost}>Monthly Fuel Cost</label>
@@ -80,6 +81,11 @@ class GeneratorForm extends Component {
                         >
                             Add Generator
                     </button>
+                    {this.props.sites.generatorSize !== null ? (
+                        <GeneratorList />
+                    ) : (
+                            null
+                        )}
                     </React.Fragment>
                 ) : (
                         null
@@ -93,6 +99,7 @@ class GeneratorForm extends Component {
 }
 
 const mapStateToProps = state => ({
+    sites: state.sites,
     generator: state.generator,
 });
 
