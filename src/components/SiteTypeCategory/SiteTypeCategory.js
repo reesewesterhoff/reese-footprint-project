@@ -45,10 +45,6 @@ class SiteTypeCategory extends Component {
         active: null,
     }
 
-    // getInitialState = () => {
-    //     return { active: null}
-    //   }
-
     toggleColor = (position) => {
         if (this.state.active === position) {
           this.setState({active : null})
@@ -59,7 +55,7 @@ class SiteTypeCategory extends Component {
       
       myColor = (position) => {
         if (this.state.active === position) {
-          return "blue";
+          return "LawnGreen";
         }
         return "";
       }
@@ -85,8 +81,7 @@ class SiteTypeCategory extends Component {
                     </CardContent>
                     <CardActions>
                         <div className={classes.button}>
-                            <Button 
-                                 
+                            <Button      
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
@@ -112,8 +107,7 @@ class SiteTypeCategory extends Component {
                     </CardContent>
                     <CardActions>
                         <div className={classes.button}>
-                            <Button 
-                                 
+                            <Button                                
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
@@ -139,8 +133,7 @@ class SiteTypeCategory extends Component {
                     </CardContent>
                     <CardActions>
                         <div className={classes.button}>
-                            <Button 
-                                 
+                            <Button                  
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
@@ -166,8 +159,7 @@ class SiteTypeCategory extends Component {
                     </CardContent>
                     <CardActions>
                         <div className={classes.button}>
-                            <Button 
-                                 
+                            <Button                    
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
