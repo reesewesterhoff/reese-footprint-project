@@ -37,7 +37,7 @@ class MapPage extends Component {
             onClick={this.handleClick}
         />
 
-      </div>
+      </div> 
     );
   }
 }
