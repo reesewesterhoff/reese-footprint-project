@@ -20,7 +20,7 @@ class AddSite extends Component {
     handleSubmit = event => {
         event.preventDefault();
         this.props.dispatch({
-            type: 'ADD_SITE', payload: {...this.state, ...this.props.generator}
+            type: 'ADD_SITE', payload: { ...this.state, ...this.props.generator }
         });
         this.setState({
             siteName: '',
@@ -42,11 +42,13 @@ class AddSite extends Component {
                 </p>
 
                 <form onSubmit={this.handleSubmit}>
-                        <input type="text" placeholder="Site Name" value={this.state.siteName} onChange={this.handleChange('siteName')} />
-                        <input type="date" placeholder="Funding Start Date" value={this.state.fundStartDate} onChange={this.handleChange('fundStartDate')} />
-                        <input type="date" placeholder="Funding End Date" value={this.state.fundEndDate} onChange={this.handleChange('fundEndDate')} />
-                        <GeneratorForm />
-                        <input type="submit" value="Submit" />
+                    <input type="text" placeholder="Site Name" value={this.state.siteName} onChange={this.handleChange('siteName')} /><br/>
+                    <label htmlFor={this.state.fundStartDate}>Funding Start Date</label>
+                    <input type="date" placeholder="Funding Start Date" value={this.state.fundStartDate} onChange={this.handleChange('fundStartDate')} />
+                    <label htmlFor={this.state.fundEndDate}>Funding End Date</label>
+                    <input type="date" placeholder="Funding End Date" value={this.state.fundEndDate} onChange={this.handleChange('fundEndDate')} />
+                    <GeneratorForm />
+                    <input type="submit" value="Submit" />
                 </form>
                 {JSON.stringify(this.props.state.sites, null, 2)}
             </div>
@@ -58,7 +60,7 @@ class AddSite extends Component {
 const mapStateToProps = state => ({
     state: state,
     generator: state.generator,
-  });
-  
+});
+
 
 export default connect(mapStateToProps)(AddSite);

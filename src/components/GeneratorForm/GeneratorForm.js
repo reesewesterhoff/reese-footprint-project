@@ -36,7 +36,6 @@ class GeneratorForm extends Component {
             payload: this.state.newGenerator,
         });
         this.setState({
-            showGenerator: false,
             newGenerator: {
                 generatorSize: 0,
                 energyUnit: '',
@@ -56,18 +55,20 @@ class GeneratorForm extends Component {
                 />
                 {this.state.showGenerator === true ? (
                     <React.Fragment>
+                        <label htmlFor={this.state.newGenerator.generatorSize}>Generator Size</label>
                         <input
                             type="number"
-                            placeholder="Generator Size"
                             value={this.state.newGenerator.generatorSize}
                             onChange={this.handleChangeFor('generatorSize')}
                         />
+                        <label htmlFor={this.state.newGenerator.energyUnit}>Generator Unit</label>
                         <select value={this.state.newGenerator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
                             <option value="">--Select Energy Unit--</option>
                             <option value="kVA">kVA</option>
                             <option value="kWh">kWh</option>
                         </select>
                         <br />
+                        <label htmlFor={this.state.newGenerator.monthlyCost}>Monthly Fuel Cost</label>
                         <input
                             type="number"
                             placeholder="Monthly Fuel Cost"

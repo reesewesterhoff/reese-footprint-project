@@ -68,11 +68,6 @@ class App extends Component {
             />
             <Route
               exact
-              path="/generator"
-              component={GeneratorForm}
-            />
-            <Route
-              exact
               path="/site_type"
               component={SiteTypeList}
             />
