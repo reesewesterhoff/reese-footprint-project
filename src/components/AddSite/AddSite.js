@@ -6,24 +6,27 @@ class AddSite extends Component {
 
     state = {
         siteName: '',
-        fundStartDate: '',
-        fundEndDate: '',
-        monthlyBudget: '',
+        fundStartDate: new Date(),
+        fundEndDate: new Date(),
     }
 
-    handleChange = (property) => (event) => {
+    handleChange = property => event => {
         this.setState({
             ...this.state,
             [property]: event.target.value
         })
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = event => {
         event.preventDefault();
         this.props.dispatch({
-            type: 'ADD_SITE', payload: this.state
-        })
-        
+            type: 'ADD_SITE', payload: {...this.state, ...this.props.generator}
+        });
+        this.setState({
+            siteName: '',
+            fundStartDate: '',
+            fundEndDate: '',
+        });
     }
 
     render() {
@@ -40,12 +43,12 @@ class AddSite extends Component {
 
                 <form onSubmit={this.handleSubmit}>
                         <input type="text" placeholder="Site Name" value={this.state.siteName} onChange={this.handleChange('siteName')} />
-                        <input type="text" placeholder="Funding Start Date" value={this.state.fundStartDate} onChange={this.handleChange('fundStartDate')} />
-                        <input type="text" placeholder="Funding End Date" value={this.state.fundEndDate} onChange={this.handleChange('fundEndDate')} />
+                        <input type="date" placeholder="Funding Start Date" value={this.state.fundStartDate} onChange={this.handleChange('fundStartDate')} />
+                        <input type="date" placeholder="Funding End Date" value={this.state.fundEndDate} onChange={this.handleChange('fundEndDate')} />
                         <GeneratorForm />
                         <input type="submit" value="Submit" />
                 </form>
-                
+                {JSON.stringify(this.props.state.sites, null, 2)}
             </div>
 
         );
@@ -54,6 +57,7 @@ class AddSite extends Component {
 
 const mapStateToProps = state => ({
     state: state,
+    generator: state.generator,
   });
   
 

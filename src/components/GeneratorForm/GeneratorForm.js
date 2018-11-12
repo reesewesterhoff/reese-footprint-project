@@ -5,10 +5,10 @@ class GeneratorForm extends Component {
 
     state = {
         showGenerator: false,
-        generator: {
-            size: '',
-            monthlyCost: 0,
+        newGenerator: {
+            generatorSize: 0,
             energyUnit: '',
+            monthlyCost: 0,
         }
     }
 
@@ -22,8 +22,8 @@ class GeneratorForm extends Component {
     handleChangeFor = property => event => {
         this.setState({
             ...this.state,
-            generator: {
-                ...this.state.generator,
+            newGenerator: {
+                ...this.state.newGenerator,
                 [property]: event.target.value,
             },
         });
@@ -33,7 +33,7 @@ class GeneratorForm extends Component {
         event.preventDefault();
         this.props.dispatch({
             type: 'ADD_GENERATOR',
-            payload: this.state.generator,
+            payload: this.state.newGenerator,
         });
         this.setState({
             showGenerator: false,
@@ -52,12 +52,12 @@ class GeneratorForm extends Component {
                 {this.state.showGenerator === true ? (
                     <React.Fragment>
                         <input
-                            type="text"
+                            type="number"
                             placeholder="Generator Size"
-                            value={this.state.generator.size}
-                            onChange={this.handleChangeFor('size')}
+                            value={this.state.newGenerator.generatorSize}
+                            onChange={this.handleChangeFor('generatorSize')}
                         />
-                        <select value={this.state.generator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
+                        <select value={this.state.newGenerator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
                             <option value="">--Select Energy Unit--</option>
                             <option value="kVA">kVA</option>
                             <option value="kWh">kWh</option>
@@ -66,7 +66,7 @@ class GeneratorForm extends Component {
                         <input
                             type="number"
                             placeholder="Monthly Fuel Cost"
-                            value={this.state.generator.monthlyCost}
+                            value={this.state.newGenerator.monthlyCost}
                             onChange={this.handleChangeFor('monthlyCost')}
                         />
                         <button
