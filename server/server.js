@@ -11,6 +11,7 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const siteTypesRouter = require('./routes/site.types.router');
+const emailRouter = require('./routes/email.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -23,9 +24,16 @@ app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+ });
+
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/sitetypes', siteTypesRouter);
+app.use('/email', emailRouter);
 
 // Serve static files
 app.use(express.static('build'));
