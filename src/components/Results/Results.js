@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {Bar, Line} from 'react-chartjs-2';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
+let start = '2014-12-30T18:06:17.762Z';
+let end = '2020-01-05T18:06:17.762Z';
 
 class Results extends Component {
 
@@ -12,22 +15,28 @@ class Results extends Component {
             message: '',
         },
         data: {
-            labels: [2015, 2016, 2017, 2018, 2019, 2020],
+            // labels: [2015, 2016, 2017, 2018, 2019, 2020],
             datasets: [{
                 label: 'Time to cover initial investment',
-                data: [24000, 19000, 14000, 9000, 4000, 1000], //these values will be set dynamically when user enters info
+                data: [{x: start, y: this.props.state.selectedSite.total_price || 25000},{x: end, y: 0}], //these values will be set dynamically when user enters info
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)'
                 ],
                 borderColor: [
                     'rgba(54, 162, 235, 1)'
                 ],
-                borderWidth: 1
+                borderWidth: 1,
+              
             },{
                 label: 'Solar energy savings',
-                data: [1000, 5000, 10000, 11000, 20000, 27000],
+                data: [{
+                    x: start, 
+                    y:1000},{
+                    x: end,
+                    y: 27000
+                }],
                 backgroundColor: [
-                    'green'
+                    'rgba(100, 100, 300, 0.4)'
                 ],
                 borderColor: [
                     'green'
@@ -35,7 +44,12 @@ class Results extends Component {
                 borderWidth: 1
             },{
                 label: 'Cost of Diesel',
-                data: [5000, 12000, 19000, 26000, 33000, 40000],
+                data: [{
+                    x: start, 
+                    y:0},{
+                    x: end,
+                    y: this.props.state.dieselCalculation || 30000
+                }],
                 backgroundColor: [
                     'grey'
                 ],
@@ -47,11 +61,22 @@ class Results extends Component {
         },
         options: {
             scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+                xAxes: [{
+                    type: 'time',
+                    unitStepSize: 1,
+                    time: {
+                        unit: 'year',
+                        max: '2020-01-05T18:06:17.762Z',
+                        min: '2014-12-30T18:06:17.762Z',
+                        suggestedMin: '2017-12-30T18:06:17.762Z',
+                    },
+                    distribution: 'linear'
+                }],
+                // yAxes: [{
+                //     ticks: {
+                //         suggestedMin: '2017-12-30T18:06:17.762Z'
+                //     }
+                // }]
             }
         }
     }
@@ -83,8 +108,13 @@ class Results extends Component {
                 <input placeholder="Message" type="text"  onChange={this.handleChange('message')}/>
                 <input type="submit" value="Contact the experts" />
             </form>
+            <pre>{JSON.stringify(this.props.state, null, 2)}</pre>
         </div>)
     }
 }
 
-export default Results;
+const mapStateToProps = (state) => {
+    return {state};
+}
+
+export default connect(mapStateToProps)(Results);
