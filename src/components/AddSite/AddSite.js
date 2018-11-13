@@ -3,17 +3,58 @@ import { connect } from 'react-redux';
 import GeneratorForm from '../GeneratorForm/GeneratorForm';
 import SiteTypeList from '../SiteTypeList/SiteTypeList';
 import Results from '../Results/Results';
+import Map from '../Map/Map'
+import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import './AddSite.css'
+
+const styles = theme => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    formControl: {
+        margin: theme.spacing.unit,
+    },
+    button: {
+        margin: theme.spacing.unit,
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+    },
+});
 
 
 class AddSite extends Component {
 
     state = {
         siteName: '',
-        fundStartDate: new Date(),
-        fundEndDate: new Date(),
+        fundStartDate: '',
+        fundEndDate: '',
+        location: {
+            lat: 0,
+            lng: 0,
+        },
+        mapClicked: false,
     }
 
+    handleClick = (event) => {
+        this.setState({
+            location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
+            mapClicked: true,
+        });
+        console.log('You clicked on', this.state.location);
+    }
 
+    handleToggleOpen = () => {
+        this.setState({
+            isOpen: !this.state.isOpen,
+        });
+    };
 
     handleChange = property => event => {
         this.setState({
@@ -31,43 +72,104 @@ class AddSite extends Component {
             siteName: '',
             fundStartDate: '',
             fundEndDate: '',
+            location: {
+                lat: 0,
+                lng: 0,
+            }
         });
     }
 
     render() {
+
+        const { classes } = this.props;
+
         return (
 
             <div>
-                <h2 className="heading">Add Site</h2>
+                <h2 className="heading">Transition Tool</h2>
 
                 <div className="subHeading">
-                    <h3>This is a calculator that allows you to input your site information to do a cost-benefit</h3> 
+                    <h3>This is a calculator that allows you to input your site information to do a cost-benefit</h3>
                     <h3>comparison of using diesel energy generators to solar alternatives.</h3>
                 </div>
 
-                <form onSubmit={this.handleSubmit}>
-                    <input type="text" placeholder="Site Name" value={this.state.siteName} onChange={this.handleChange('siteName')} /><br />
-                    <label htmlFor={this.state.fundStartDate}>Funding Start Date</label>
-                    <input type="date" placeholder="Funding Start Date" value={this.state.fundStartDate} onChange={this.handleChange('fundStartDate')} /><br />
-                    <label htmlFor={this.state.fundEndDate}>Funding End Date</label>
-                    <input type="date" placeholder="Funding End Date" value={this.state.fundEndDate} onChange={this.handleChange('fundEndDate')} />
+                <div className="siteForm">
+                    <div className="siteName">
+                        <TextField
+                            id="standard-name"
+                            label="Site Name"
+                            className={classes.textField}
+                            value={this.state.siteName}
+                            onChange={this.handleChange('siteName')}
+                            margin="normal"
+                            required
+                        />
+                    </div>
+                    
+                        <TextField
+                            id="date"
+                            label="Funding Start Date"
+                            type="date"
+                            onChange={this.handleChange('fundStartDate')}
+                            className={classes.textField}
+                            value={this.state.fundStartDate}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            required
+                        />
+                        <TextField
+                            id="date"
+                            label="Funding End Date"
+                            type="date"
+                            onChange={this.handleChange('fundEndDate')}
+                            className={classes.textField}
+                            value={this.state.fundEndDate}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            required
+                        />
+
                     <GeneratorForm />
-                    <input type="submit" value="Submit" />
-                </form>
+                    <h4>Enter Country and click on map below to set site location.</h4>
+                    <h4>Latitude: {this.state.location.lat} <br></br> Longitude {this.state.location.lng}</h4>
+                    <Button onClick={this.handleSubmit} variant="contained" color="primary" className={classes.button}>
+                        Add Site
+                        </Button>
+                    <Map
+                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
+                        loadingElement={<div style={{ height: `100%` }} />}
+                        containerElement={<div style={{ height: `45vh`, width: '45vh', paddingLeft: '28%' }} />}
+                        mapElement={<div style={{ height: `100%` }} />}
+                        isMarkerShown={this.state.isMarkerShown}
+                        onMarkerClick={this.handleMarkerClick}
+                        handleToggleOpen={this.handleToggleOpen}
+                        isOpen={this.state.isOpen}
+                        onClick={this.handleClick}
+                        location={this.state.location}
+                        handleClick={this.handleClick}
+                        location={this.state.location}
+                        mapClicked={this.state.mapClicked}
+                    />
+
+                </div>
+
+
                 <br />
                 {
                     this.props.sites.length === 0 ?
-                    null
-                :
-                    <SiteTypeList />
+                        null
+                        :
+                        <SiteTypeList />
                 }
                 <br />
                 <br />
                 {
                     this.props.selectedSite.id ?
-                    <Results />
-                :
-                    null
+                        <Results />
+                        :
+                        null
                 }
                 <br />
                 <br />
@@ -83,5 +185,8 @@ const mapStateToProps = state => ({
     selectedSite: state.selectedSite,
 });
 
+AddSite.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
-export default connect(mapStateToProps)(AddSite);
+export default withStyles(styles)(connect(mapStateToProps)(AddSite));

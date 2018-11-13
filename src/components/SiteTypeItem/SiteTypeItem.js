@@ -13,7 +13,7 @@ import Zoom from '@material-ui/core/Zoom';
 
 const styles = {
     card: {
-        marginTop: 40,
+        marginTop: 15,
         width: 220,
         height: 310,
         textAlign: 'center',

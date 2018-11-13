@@ -1,35 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
 import RouterIcon from '@material-ui/icons/Router';
+import SiteTypeCategoryCard from '../SiteTypeCategoryCard/SiteTypeCategoryCard';
+import WavesIcon from '@material-ui/icons/Waves';
+import SecurityIcon from '@material-ui/icons/Security';
+import HomeIcon from '@material-ui/icons/Home';
+import StoreIcon from '@material-ui/icons/Store';
 
 // jss styles
 const styles = {
-    card: {
-        marginTop: 75,
-        width: 280,
-        maxHeight: 400,
-        textAlign: 'center',
-    },
-    pos: {
-        marginBottom: 12,
-    },
     icon: {
-        margin: 2,
-        fontSize: 100,
+        fontSize: 70,
         textAlign: 'center',
-    },
-    button: {
-        width: '100%',
-        margin: 'auto',
     },
     cardDiv: {
         display: 'flex',
@@ -65,112 +51,73 @@ class SiteTypeCategory extends Component {
 
         const { classes } = this.props;
 
+        const hospitalIcon = <LocalHospitalIcon className={classes.icon} />
+        const waterIcon = <WavesIcon className={classes.icon} />
+        const commsIcon = <RouterIcon className={classes.icon} />
+        const opsIcon = <SecurityIcon className={classes.icon} />
+        const adminIcon = <BusinessCenterIcon className={classes.icon} />
+        const shelterIcon = <HomeIcon className={classes.icon} />
+        const foodIcon = <RestaurantIcon className={classes.icon} />
+        const logsIcon = <StoreIcon className={classes.icon} />
+
         return (
             <div className={classes.cardDiv}>
-                <Card className={classes.card} style={{background: this.myColor(0)}} onClick={() => {this.toggleColor(0)}}>
-                    <CardContent>
-                        <Typography>
-                            <br />
-                            <LocalHospitalIcon className={classes.icon} />
-                        </Typography>
-                        <Typography variant="h5">
-                            <br />
-                            Medical/Emergency
-                        </Typography>
-                        <br />
-                    </CardContent>
-                    <CardActions>
-                        <div className={classes.button}>
-                            <Button      
-                                size="large" 
-                                variant="outlined" 
-                                color="primary" 
-                                onClick={() => this.props.selectSiteCategory('emergency/medical')}
-                                >
-                                Select
-                            </Button>
-                        </div>
-                    </CardActions>
-                    <br />
-                </Card>
-                <Card className={classes.card} style={{background: this.myColor(1)}} onClick={() => {this.toggleColor(1)}}>
-                    <CardContent>
-                        <Typography>
-                            <br />
-                            <BusinessCenterIcon className={classes.icon} />
-                        </Typography>
-                        <Typography variant="h5">
-                            <br />
-                            Office/Storage
-                        </Typography>
-                        <br />
-                    </CardContent>
-                    <CardActions>
-                        <div className={classes.button}>
-                            <Button                                
-                                size="large" 
-                                variant="outlined" 
-                                color="primary" 
-                                onClick={() => this.props.selectSiteCategory('office/storage')}
-                                >
-                                Select
-                            </Button>
-                        </div>
-                    </CardActions>
-                    <br />
-                </Card>
-                <Card className={classes.card} style={{background: this.myColor(2)}} onClick={() => {this.toggleColor(2)}}>
-                    <CardContent>
-                        <Typography>
-                            <br />
-                            <RestaurantIcon className={classes.icon} />
-                        </Typography>
-                        <Typography variant="h5">
-                            <br />
-                            Food/Water/Shelter
-                        </Typography>
-                        <br />
-                    </CardContent>
-                    <CardActions>
-                        <div className={classes.button}>
-                            <Button                  
-                                size="large" 
-                                variant="outlined" 
-                                color="primary" 
-                                onClick={() => this.props.selectSiteCategory('food/water/shelter')}
-                                >
-                                Select
-                            </Button>
-                        </div>
-                    </CardActions>
-                    <br />
-                </Card>
-                <Card className={classes.card} style={{background: this.myColor(3)}} onClick={() => {this.toggleColor(3)}}>
-                    <CardContent>
-                        <Typography>
-                            <br />
-                            <RouterIcon className={classes.icon} />
-                        </Typography>
-                        <Typography variant="h5">
-                            <br />
-                            Communications
-                        </Typography>
-                        <br />
-                    </CardContent>
-                    <CardActions>
-                        <div className={classes.button}>
-                            <Button                    
-                                size="large" 
-                                variant="outlined" 
-                                color="primary" 
-                                onClick={() => this.props.selectSiteCategory('communications')}
-                                >
-                                Select
-                            </Button>
-                        </div>
-                    </CardActions>
-                    <br />
-                </Card>
+                <SiteTypeCategoryCard 
+                    icon={hospitalIcon}
+                    title="Health"
+                    selectSiteCategory={this.props.selectSiteCategory}
+                    color={{background: this.myColor(0)}} 
+                    toggleColor={() => {this.toggleColor(0)}}
+                />
+                <SiteTypeCategoryCard 
+                    icon={waterIcon}
+                    title="Water"
+                    selectSiteCategory={this.props.selectSiteCategory}
+                    color={{background: this.myColor(1)}} 
+                    toggleColor={() => {this.toggleColor(1)}}
+                />
+                <SiteTypeCategoryCard 
+                    icon={commsIcon}
+                    title="Comms"
+                    selectSiteCategory={this.props.selectSiteCategory}
+                    color={{background: this.myColor(2)}} 
+                    toggleColor={() => {this.toggleColor(2)}}
+                />
+                <SiteTypeCategoryCard 
+                    icon={opsIcon}
+                    title="Ops"
+                    selectSiteCategory={this.props.selectSiteCategory}
+                    color={{background: this.myColor(3)}} 
+                    toggleColor={() => {this.toggleColor(3)}}
+                />
+                <SiteTypeCategoryCard 
+                    icon={shelterIcon}
+                    title="Shelter"
+                    selectSiteCategory={this.props.selectSiteCategory}
+                    color={{background: this.myColor(4)}} 
+                    toggleColor={() => {this.toggleColor(4)}}
+                />
+                <SiteTypeCategoryCard 
+                    icon={foodIcon}
+                    title="Food"
+                    selectSiteCategory={this.props.selectSiteCategory}
+                    color={{background: this.myColor(5)}} 
+                    toggleColor={() => {this.toggleColor(5)}}
+                />
+                <SiteTypeCategoryCard 
+                    icon={adminIcon}
+                    title="Admin"
+                    selectSiteCategory={this.props.selectSiteCategory}
+                    color={{background: this.myColor(6)}} 
+                    toggleColor={() => {this.toggleColor(6)}}
+                />
+                <SiteTypeCategoryCard 
+                    icon={logsIcon}
+                    title="Logs"
+                    selectSiteCategory={this.props.selectSiteCategory}
+                    color={{background: this.myColor(7)}} 
+                    toggleColor={() => {this.toggleColor(7)}}
+                />
             </div>
         );
     }

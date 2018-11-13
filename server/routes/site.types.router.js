@@ -7,8 +7,10 @@ const router = express.Router();
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
-    pool.query(`SELECT * FROM "site_type";`)
+router.get('/:category', (req, res) => {
+    console.log('req.params.category', req.params.category);
+    
+    pool.query(`SELECT * FROM "site_type" WHERE "category"=$1;`, [req.params.category])
     .then(results => {
         res.send(results.rows);
     }).catch(error => {

@@ -29,7 +29,7 @@ class SiteTypeList extends Component {
 
     selectSiteCategory = (category) => {
         console.log(category);
-        this.props.dispatch({ type: 'FETCH_SITE_TYPES' });
+        this.props.dispatch({ type: 'FETCH_SITE_TYPES', payload: category });
     }
 
     render() {

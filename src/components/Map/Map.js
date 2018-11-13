@@ -10,17 +10,13 @@ class Map extends React.Component {
   state = {
     bounds: null,
     center: {
-      lat: 45, lng: 49
+      lat: 40, lng: 45
     },
     isMarkerShown: false,
     showInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
     windowPosition: null,
-    location: {
-      lat: 0,
-      lng: 0,
-    },
     mapClicked: false,
   }
 
@@ -30,7 +26,7 @@ class Map extends React.Component {
     this.setState({
       bounds: null,
       center: {
-        lat: 45, lng: 49
+        lat: 40, lng: 45
       },
       markers: [],
       onMapMounted: ref => {
@@ -70,16 +66,6 @@ class Map extends React.Component {
     })
   }
 
-  handleClick = (event) => {
-    this.setState({
-        location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
-        mapClicked: true,
-    });
-    console.log('You clicked on', this.state);
-    console.log(this.state.location);
-    
-}
-
   componentDidMount() {
     this.delayedShowMarker()
   }
@@ -97,7 +83,7 @@ class Map extends React.Component {
           ref={this.state.onMapMounted}
           defaultZoom={1}
           center={this.state.center}
-          onClick={this.handleClick}
+          onClick={this.props.handleClick}
           onBoundsChanged={this.props.onBoundsChanged}>
           <SearchBox
             ref={this.state.onSearchBoxMounted}
@@ -123,13 +109,8 @@ class Map extends React.Component {
               }}
             />
           </SearchBox>
-
-          {/*  Display Markers with InfoWindows */}
-
-          {/* End Markers Display */}
-        {this.state.mapClicked && <Marker position={this.state.location} />}
+        {this.props.mapClicked && <Marker position={this.props.location} />}
         </GoogleMap>
-        <h4>Latitude: {this.state.location.lat} Longitude {this.state.location.lng}</h4>
       </div>
     );
   }
