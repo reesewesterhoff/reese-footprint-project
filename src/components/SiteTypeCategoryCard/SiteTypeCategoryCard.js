@@ -10,9 +10,9 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
     card: {
-        marginTop: 75,
-        width: 280,
-        height: 320,
+        marginTop: 20,
+        width: 260,
+        height: 275,
         textAlign: 'center',
     },
     button: {

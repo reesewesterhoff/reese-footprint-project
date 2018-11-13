@@ -14,8 +14,7 @@ import StoreIcon from '@material-ui/icons/Store';
 // jss styles
 const styles = {
     icon: {
-        margin: 2,
-        fontSize: 100,
+        fontSize: 70,
         textAlign: 'center',
     },
     cardDiv: {
