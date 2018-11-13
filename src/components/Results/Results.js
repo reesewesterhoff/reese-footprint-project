@@ -83,9 +83,11 @@ class Results extends Component {
 
     render() {
         return (<div>
-            <h1>Results</h1>
+
+            <h2 className="heading">Results</h2>
             <button onClick={this.handleCalculation}>Get Diesel Cost Estimate</button>
             <Line data={this.state.data} options={this.state.options} />
+
             <form onSubmit={this.handleSubmit}>
                 <input placeholder="Name" type="text" onChange={this.handleChange('name')} />
                 <input placeholder="Email" type="text" onChange={this.handleChange('email')} />
