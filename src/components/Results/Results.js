@@ -3,8 +3,10 @@ import { Bar, Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
+
 let start = '2014-12-30T18:06:17.762Z';
 let end = '2020-01-05T18:06:17.762Z';
+
 
 class Results extends Component {
 
@@ -31,6 +33,7 @@ class Results extends Component {
                 borderColor: [
                     'rgba(54, 162, 235, 1)'
                 ],
+
                 borderWidth: 1,
 
             }, {
@@ -99,11 +102,22 @@ class Results extends Component {
         })
     }
 
+    handleCalculation = event => {
+        event.preventDefault();
+        this.props.dispatch({
+            type: 'RUN_DIESEL_CALCULATION',
+            payload: this.props.state.sites,
+        });
+    }
+
 
     render() {
         return (<div>
-            <h1>Results</h1>
+            <h2 className="heading">Results</h2>
+            <button onClick={this.handleCalculation}>Get Diesel Cost Estimate</button>
             <Line data={this.state.data} options={this.state.options} />
+
+
             <form onSubmit={this.handleSubmit}>
                 <input placeholder="Name" type="text" onChange={this.handleChange('name')} />
                 <input placeholder="Email" type="text" onChange={this.handleChange('email')} />
@@ -119,5 +133,6 @@ class Results extends Component {
 const mapStateToProps = (state) => {
     return { state };
 }
+
 
 export default connect(mapStateToProps)(Results);

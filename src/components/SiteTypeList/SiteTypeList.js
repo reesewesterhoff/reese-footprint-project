@@ -11,6 +11,7 @@ const styles = {
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-evenly',
+        margin: 10,
     }
 }
 
@@ -37,7 +38,8 @@ class SiteTypeList extends Component {
 
         return (
             <div>
-                <h1>Choose Site Category And Type</h1>
+                <h2 className="heading">Select Site Category</h2>
+                <h3 className="subHeading">Scroll down to see site type options</h3>
                 <div>
                     <SiteTypeCategory
                         selectSiteCategory={this.selectSiteCategory}

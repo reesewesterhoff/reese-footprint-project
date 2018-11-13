@@ -15,7 +15,7 @@ import RouterIcon from '@material-ui/icons/Router';
 const styles = {
     card: {
         marginTop: 75,
-        width: 350,
+        width: 280,
         maxHeight: 400,
         textAlign: 'center',
     },
@@ -45,10 +45,6 @@ class SiteTypeCategory extends Component {
         active: null,
     }
 
-    // getInitialState = () => {
-    //     return { active: null}
-    //   }
-
     toggleColor = (position) => {
         if (this.state.active === position) {
           this.setState({active : null})
@@ -59,7 +55,7 @@ class SiteTypeCategory extends Component {
       
       myColor = (position) => {
         if (this.state.active === position) {
-          return "blue";
+          return "LawnGreen";
         }
         return "";
       }
@@ -77,7 +73,7 @@ class SiteTypeCategory extends Component {
                             <br />
                             <LocalHospitalIcon className={classes.icon} />
                         </Typography>
-                        <Typography variant="h4">
+                        <Typography variant="h5">
                             <br />
                             Medical/Emergency
                         </Typography>
@@ -85,8 +81,7 @@ class SiteTypeCategory extends Component {
                     </CardContent>
                     <CardActions>
                         <div className={classes.button}>
-                            <Button 
-                                 
+                            <Button      
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
@@ -104,7 +99,7 @@ class SiteTypeCategory extends Component {
                             <br />
                             <BusinessCenterIcon className={classes.icon} />
                         </Typography>
-                        <Typography variant="h4">
+                        <Typography variant="h5">
                             <br />
                             Office/Storage
                         </Typography>
@@ -112,8 +107,7 @@ class SiteTypeCategory extends Component {
                     </CardContent>
                     <CardActions>
                         <div className={classes.button}>
-                            <Button 
-                                 
+                            <Button                                
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
@@ -131,7 +125,7 @@ class SiteTypeCategory extends Component {
                             <br />
                             <RestaurantIcon className={classes.icon} />
                         </Typography>
-                        <Typography variant="h4">
+                        <Typography variant="h5">
                             <br />
                             Food/Water/Shelter
                         </Typography>
@@ -139,8 +133,7 @@ class SiteTypeCategory extends Component {
                     </CardContent>
                     <CardActions>
                         <div className={classes.button}>
-                            <Button 
-                                 
+                            <Button                  
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
@@ -158,7 +151,7 @@ class SiteTypeCategory extends Component {
                             <br />
                             <RouterIcon className={classes.icon} />
                         </Typography>
-                        <Typography variant="h4">
+                        <Typography variant="h5">
                             <br />
                             Communications
                         </Typography>
@@ -166,8 +159,7 @@ class SiteTypeCategory extends Component {
                     </CardContent>
                     <CardActions>
                         <div className={classes.button}>
-                            <Button 
-                                 
+                            <Button                    
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 

@@ -22,6 +22,7 @@ import SiteTypeList from '../SiteTypeList/SiteTypeList';
 import Results from '../Results/Results';
 import MapPage from '../MapPage/MapPage';
 import ProjectPage from '../ProjectPage/ProjectPage';
+import SavedSitePage from '../SavedSitePage/SavedSitePage';
 
 import './App.css';
 
@@ -66,6 +67,12 @@ class App extends Component {
               exact
               path="/project"
               component={ProjectPage}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/saved_site"
+              component={SavedSitePage}
             />
 
             <Route
