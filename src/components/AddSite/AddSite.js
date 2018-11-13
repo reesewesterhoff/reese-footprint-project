@@ -38,7 +38,7 @@ class AddSite extends Component {
         return (
 
             <div>
-                <h1 className="heading">Add Site</h1>
+                <h2 className="heading">Add Site</h2>
 
                 <div className="subHeading">
                     <h3>This is a calculator that allows you to input your site information to do a cost-benefit</h3> 

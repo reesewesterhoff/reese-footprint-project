@@ -38,7 +38,7 @@ class SiteTypeList extends Component {
 
         return (
             <div>
-                <h1 className="heading">Select Site Category</h1>
+                <h2 className="heading">Select Site Category</h2>
                 <h3 className="subHeading">Scroll down to see site type options</h3>
                 <div>
                     <SiteTypeCategory
