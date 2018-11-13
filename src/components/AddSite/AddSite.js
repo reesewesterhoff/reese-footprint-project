@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GeneratorForm from '../GeneratorForm/GeneratorForm';
+import SiteTypeList from '../SiteTypeList/SiteTypeList';
+import Results from '../Results/Results';
 
 
 class AddSite extends Component {
@@ -10,6 +12,8 @@ class AddSite extends Component {
         fundStartDate: new Date(),
         fundEndDate: new Date(),
     }
+
+
 
     handleChange = property => event => {
         this.setState({
@@ -34,13 +38,12 @@ class AddSite extends Component {
         return (
 
             <div>
-                <h1>Add Site</h1>
+                <h1 className="heading">Add Site</h1>
 
-                <p>
-                    This is a calculator that allows you to input your site information
-                    to do a cost-benefit comparison of using diesel energy generators
-                    to solar alternatives.
-                </p>
+                <div className="subHeading">
+                    <h3>This is a calculator that allows you to input your site information to do a cost-benefit</h3> 
+                    <h3>comparison of using diesel energy generators to solar alternatives.</h3>
+                </div>
 
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" placeholder="Site Name" value={this.state.siteName} onChange={this.handleChange('siteName')} /><br />
@@ -50,8 +53,24 @@ class AddSite extends Component {
                     <input type="date" placeholder="Funding End Date" value={this.state.fundEndDate} onChange={this.handleChange('fundEndDate')} />
                     <GeneratorForm />
                     <input type="submit" value="Submit" />
-
                 </form>
+                <br />
+                {
+                    this.props.sites.length === 0 ?
+                    null
+                :
+                    <SiteTypeList />
+                }
+                <br />
+                <br />
+                {
+                    this.props.selectedSite.id ?
+                    <Results />
+                :
+                    null
+                }
+                <br />
+                <br />
             </div>
 
         );
@@ -61,6 +80,7 @@ class AddSite extends Component {
 const mapStateToProps = state => ({
     sites: state.sites,
     generator: state.generator,
+    selectedSite: state.selectedSite,
 });
 
 
