@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import TextField from '@material-ui/core/TextField';
 
 
 let start = '2014-12-30T18:06:17.762Z';
@@ -11,11 +12,9 @@ let end = '2020-01-05T18:06:17.762Z';
 class Results extends Component {
 
     state = {
-        messageToBeSent: {
-            name: '',
-            email: '',
-            message: '',
-        },
+        name: '',
+        email: '',
+        message: '',
         data: {
             // labels: [2015, 2016, 2017, 2018, 2019, 2020],
             datasets: [{
@@ -59,7 +58,7 @@ class Results extends Component {
                     y: 0
                 }, {
                     x: this.props.state.sites.length ? this.props.state.sites[0].fundEndDate : end,
-                    y: this.props.state.dieselCalculation.totalDieselCost|| 30000
+                    y: this.props.state.dieselCalculation.totalDieselCost || 30000
                 }],
                 backgroundColor: [
                     'grey'
@@ -87,16 +86,23 @@ class Results extends Component {
     }
 
     handleChange = (property) => (event) => {
-        this.setState({ messageToBeSent: { ...this.state.messageToBeSent, [property]: event.target.value } });
+        this.setState({ [property]: event.target.value });
+        console.log('event', event.target.value);
+
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        console.log(`${this.state.messageToBeSent.name} is sending 
-            from ${this.state.messageToBeSent.email} the following message: ${this.state.messageToBeSent.message}`);
-        axios.post('/email', { content: this.state.messageToBeSent, data: this.state.data.datasets.map(dataset => dataset.data) }
+        // console.log(`${this.state.messageToBeSent.name} is sending 
+        //     from ${this.state.messageToBeSent.email} the following message: ${this.state.messageToBeSent.message}`);
+        axios.post('/email', { content: { name: this.state.name, email: this.state.email, message: this.state.message }, data: this.state.data.datasets.map(dataset => dataset.data) }
         ).then((response) => {
             console.log('Response is:', response.data);
+            this.setState({
+                name: '',
+                email: '',
+                message: '',
+            });
         }).catch((error) => {
             console.log('Error in POST:', error);
         })
@@ -119,13 +125,13 @@ class Results extends Component {
 
 
             <form onSubmit={this.handleSubmit}>
-                <input placeholder="Name" type="text" onChange={this.handleChange('name')} />
-                <input placeholder="Email" type="text" onChange={this.handleChange('email')} />
-                <input placeholder="Message" type="text" onChange={this.handleChange('message')} />
+                <TextField required placeholder="Name" type="text" onChange={this.handleChange('name')} value={this.state.name} />
+                <TextField required placeholder="Email" type="text" onChange={this.handleChange('email')} value={this.state.email} />
+                <TextField placeholder="Message" type="text" onChange={this.handleChange('message')} value={this.state.message} />
                 <input type="submit" value="Contact the experts" />
             </form>
-            {/* <pre>{JSON.stringify(this.props.state, null, 2)}</pre>
-            <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(this.props.state, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(this.state.messageToBeSent, null, 2)}</pre> */}
         </div>)
     }
 }
