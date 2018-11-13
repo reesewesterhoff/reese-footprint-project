@@ -14,8 +14,8 @@ import Zoom from '@material-ui/core/Zoom';
 const styles = {
     card: {
         marginTop: 40,
-        width: 250,
-        height: 320,
+        width: 220,
+        height: 310,
         textAlign: 'center',
         backgroundColor: 'Aqua',
     },
@@ -44,7 +44,7 @@ class SiteTypeItem extends Component {
                             <Typography>
                                 <LocalHospitalIcon className={classes.icon} />
                             </Typography>
-                            <Typography variant="h5">
+                            <Typography variant="h6">
                                 {this.props.site.type}
                             </Typography>
                             <br />
