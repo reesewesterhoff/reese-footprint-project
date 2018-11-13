@@ -59,7 +59,7 @@ class Results extends Component {
                     y: 0
                 }, {
                     x: this.props.state.sites.length ? this.props.state.sites[0].fundEndDate : end,
-                    y: this.props.state.dieselCalculation.totalDieselCost|| 30000
+                    y: this.props.state.dieselCalculation.totalDieselCost || 35000
                 }],
                 backgroundColor: [
                     'grey'
@@ -114,7 +114,6 @@ class Results extends Component {
     render() {
         return (<div>
             <h2 className="heading">Results</h2>
-            {/* <button onClick={this.handleCalculation}>Get Diesel Cost Estimate</button> */}
             <Line data={this.state.data} options={this.state.options} />
 
 
@@ -124,8 +123,8 @@ class Results extends Component {
                 <input placeholder="Message" type="text" onChange={this.handleChange('message')} />
                 <input type="submit" value="Contact the experts" />
             </form>
-            {/* <pre>{JSON.stringify(this.props.state, null, 2)}</pre>
-            <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(this.props.state, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(this.state.messageToBeSent, null, 2)}</pre> */}
         </div>)
     }
 }
