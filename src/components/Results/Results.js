@@ -59,7 +59,7 @@ class Results extends Component {
                     y: 0
                 }, {
                     x: this.props.state.sites.length ? this.props.state.sites[0].fundEndDate : end,
-                    y: this.props.state.dieselCalculation || 30000
+                    y: this.props.state.dieselCalculation.totalDieselCost|| 30000
                 }],
                 backgroundColor: [
                     'grey'
@@ -102,19 +102,19 @@ class Results extends Component {
         })
     }
 
-    handleCalculation = event => {
-        event.preventDefault();
-        this.props.dispatch({
-            type: 'RUN_DIESEL_CALCULATION',
-            payload: this.props.state.sites,
-        });
-    }
+    // handleCalculation = event => {
+    //     event.preventDefault();
+    //     this.props.dispatch({
+    //         type: 'RUN_DIESEL_CALCULATION',
+    //         payload: this.props.state.sites,
+    //     });
+    // }
 
 
     render() {
         return (<div>
             <h2 className="heading">Results</h2>
-            <button onClick={this.handleCalculation}>Get Diesel Cost Estimate</button>
+            {/* <button onClick={this.handleCalculation}>Get Diesel Cost Estimate</button> */}
             <Line data={this.state.data} options={this.state.options} />
 
 
