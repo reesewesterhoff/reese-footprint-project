@@ -15,7 +15,7 @@ import RouterIcon from '@material-ui/icons/Router';
 const styles = {
     card: {
         marginTop: 75,
-        width: 350,
+        width: 280,
         maxHeight: 400,
         textAlign: 'center',
     },
@@ -73,7 +73,7 @@ class SiteTypeCategory extends Component {
                             <br />
                             <LocalHospitalIcon className={classes.icon} />
                         </Typography>
-                        <Typography variant="h4">
+                        <Typography variant="h5">
                             <br />
                             Medical/Emergency
                         </Typography>
@@ -99,7 +99,7 @@ class SiteTypeCategory extends Component {
                             <br />
                             <BusinessCenterIcon className={classes.icon} />
                         </Typography>
-                        <Typography variant="h4">
+                        <Typography variant="h5">
                             <br />
                             Office/Storage
                         </Typography>
@@ -125,7 +125,7 @@ class SiteTypeCategory extends Component {
                             <br />
                             <RestaurantIcon className={classes.icon} />
                         </Typography>
-                        <Typography variant="h4">
+                        <Typography variant="h5">
                             <br />
                             Food/Water/Shelter
                         </Typography>
@@ -151,7 +151,7 @@ class SiteTypeCategory extends Component {
                             <br />
                             <RouterIcon className={classes.icon} />
                         </Typography>
-                        <Typography variant="h4">
+                        <Typography variant="h5">
                             <br />
                             Communications
                         </Typography>
