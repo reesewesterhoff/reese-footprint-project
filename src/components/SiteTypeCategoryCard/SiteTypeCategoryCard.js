@@ -25,8 +25,6 @@ const styles = {
 class SiteTypeCategoryCard extends Component {
 
 
-
-
     render() {
 
         const { classes } = this.props;
