@@ -10,7 +10,7 @@ class Map extends React.Component {
   state = {
     bounds: null,
     center: {
-      lat: 40, lng: 45
+      lat: 45, lng: 49
     },
     isMarkerShown: false,
     showInfoWindow: false,
@@ -30,7 +30,7 @@ class Map extends React.Component {
     this.setState({
       bounds: null,
       center: {
-        lat: 40, lng: 45
+        lat: 45, lng: 49
       },
       markers: [],
       onMapMounted: ref => {
