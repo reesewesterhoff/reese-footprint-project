@@ -12,67 +12,56 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
   card: {
-      marginTop: 40,
-      width: 250,
-      height: 320,
-      textAlign: 'center',
-      backgroundColor: 'goldenrod',
+    marginTop: 40,
+    width: 250,
+    height: 320,
+    textAlign: 'center',
+    backgroundColor: 'goldenrod',
   },
   icon: {
-      margin: 2,
-      fontSize: 60,
-      textAlign: 'center',
+    margin: 2,
+    fontSize: 60,
+    textAlign: 'center',
   },
   button: {
-      width: '100%',
-      margin: 'auto',
+    width: '100%',
+    margin: 'auto',
   },
 };
-  
-  class ProjectPage extends Component {
-    
+
+class ProjectPage extends Component {
+
 
   render() {
 
     const { classes } = this.props;
 
     return (
-      <div >
+      <div>
+
         <h1 className="projectHeader">Project</h1>
-
-          <div className="card">
-            <a href='http://localhost:3000/#/map'>
-            <img src="http://www.uhhospitals.org/~/media/UH/Images/locations/uh-chagrin-highlands-health-center.jpg" alt="Avatar" />
-            <div className="container">
-              <h4><b>Urgent Care Clinic</b></h4> 
-              <p>Est. Power Needs</p>
-              <p>10kWh/day</p>
-            </div>
+        <div className="siteCard">
+          <Card className={classes.card} >
+            <a href='http://localhost:3000/#/saved_site'>
+              <CardContent>
+                <Typography>
+                  <img
+                    src="http://www.uhhospitals.org/~/media/UH/Images/locations/uh-chagrin-highlands-health-center.jpg"
+                    alt="hospital"
+                    className={classes.icon} />
+                </Typography>
+                <Typography variant="h5">
+                  Urgent Care Clinic
+                        </Typography>
+                <br />
+                <Typography>
+                  Power Needs: 10kWh/day
+                  Storage:  30kWh
+                        </Typography>
+              </CardContent>
             </a>
-          </div>
-          <div className="siteCard">
-            <Card className={classes.card} >
-            <a href='http://localhost:3000/#/map'>
-                    <CardContent>
-                        <Typography>
-                            <img  
-                            src="http://www.uhhospitals.org/~/media/UH/Images/locations/uh-chagrin-highlands-health-center.jpg"
-                            alt="hospital"
-                            className={classes.icon} />
-                        </Typography>
-                        <Typography variant="h5">
-                            Urgent Care Clinic
-                        </Typography>
-                        <br />
-                        <Typography>
-                            Power Needs: 10kWh/day
-                            Storage:  30kWh
-                        </Typography>
-                    </CardContent>
-                    </a>
-              </Card>
-
-          </div>
+          </Card>
+        </div>
       </div>
     );
   }
