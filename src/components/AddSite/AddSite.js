@@ -43,6 +43,7 @@ class AddSite extends Component {
             lng: 0,
         },
         mapClicked: false,
+        address: '',
     }
 
     handleClick = (event) => {
