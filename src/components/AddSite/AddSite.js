@@ -4,11 +4,14 @@ import GeneratorForm from '../GeneratorForm/GeneratorForm';
 import SiteTypeList from '../SiteTypeList/SiteTypeList';
 import Results from '../Results/Results';
 import Map from '../Map/Map'
+import Geocode from "react-geocode";
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import './AddSite.css'
+// Set Google Maps API Key
+Geocode.setApiKey("AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68");
 
 const styles = theme => ({
     container: {
@@ -43,11 +46,25 @@ class AddSite extends Component {
     }
 
     handleClick = (event) => {
+
         this.setState({
             location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
             mapClicked: true,
         });
         console.log('You clicked on', this.state.location);
+        // Get Address from Lat/Long Coordinates
+        Geocode.fromLatLng(this.state.location.lat, this.state.location.lng).then(
+            response => {
+              const address = response.results[0].formatted_address;
+              console.log(address);
+              this.setState({
+                address: address,
+            })
+            },
+            error => {
+              console.error(error);
+            }
+          );
     }
 
     handleToggleOpen = () => {
