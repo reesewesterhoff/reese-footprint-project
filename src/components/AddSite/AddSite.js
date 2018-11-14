@@ -111,7 +111,6 @@ class AddSite extends Component {
                         onClick={this.handleClick}
                         location={this.state.location}
                         handleClick={this.handleClick}
-                        location={this.state.location}
                         mapClicked={this.state.mapClicked}
                     />
                     <br />
