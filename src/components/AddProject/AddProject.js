@@ -19,15 +19,19 @@ const styles = theme => ({
 
 class AddProject extends Component {
 
+    
+
     render() {
 
-        return (
+        const { classes } = this.props;
 
-            <div>
-                <h1>Add Project</h1>
-            </div>
+            return (
 
-        );
+                <div>
+                    <h1>Add Project</h1>
+                </div>
+
+            );
     }
 }
 
@@ -35,6 +39,8 @@ const mapStateToProps = state => ({
     state: state,
 });
 
-
+AddProject.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(connect(mapStateToProps)(AddProject));
