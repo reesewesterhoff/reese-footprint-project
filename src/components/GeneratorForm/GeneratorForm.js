@@ -5,8 +5,8 @@ import GeneratorList from '../GeneratorList/GeneratorList';
 class GeneratorForm extends Component {
 
     state = {
-        generator: false,
-        noGenerator: false,
+        generator: false, // property relating to if the user DOES have a generator
+        noGenerator: false, // property relating to if the user DOES NOT have a generator
         newGenerator: {
             generatorSize: '',
             energyUnit: '',
@@ -20,6 +20,7 @@ class GeneratorForm extends Component {
             ...this.state,
             noGenerator: false,
             generator: !this.state.generator,
+            energyBudget: '',
         });
     }
 
@@ -28,6 +29,11 @@ class GeneratorForm extends Component {
             ...this.state,
             generator: false,
             noGenerator: !this.state.noGenerator,
+            newGenerator: {
+                generatorSize: '',
+                energyUnit: '',
+                monthlyCost: '',
+             },
         })
     }
 
@@ -45,11 +51,6 @@ class GeneratorForm extends Component {
         this.setState({
             ...this.state,
              energyBudget: event.target.value,
-             newGenerator: {
-                generatorSize: '',
-                energyUnit: '',
-                monthlyCost: '',
-             },
         });
     }
 
@@ -73,7 +74,7 @@ class GeneratorForm extends Component {
         this.props.dispatch({
             type: 'ADD_ENERGY_BUDGET',
             payload: this.state.energyBudget
-        })
+        });
     }
 
     render() {
