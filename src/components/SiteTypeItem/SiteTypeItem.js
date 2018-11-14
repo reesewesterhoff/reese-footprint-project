@@ -17,7 +17,7 @@ const styles = {
         width: 220,
         height: 310,
         textAlign: 'center',
-        backgroundColor: 'Aqua',
+        backgroundColor: 'AliceBlue',
     },
     icon: {
         margin: 2,
