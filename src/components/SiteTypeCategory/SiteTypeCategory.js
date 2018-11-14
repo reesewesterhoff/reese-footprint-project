@@ -41,7 +41,7 @@ class SiteTypeCategory extends Component {
       
       myColor = (position) => {
         if (this.state.active === position) {
-          return "LawnGreen";
+          return "MediumAquaMarine";
         }
         return "";
       }
