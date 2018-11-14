@@ -51,9 +51,10 @@ input {
 .heading {
    text-align: center;
    margin: 40px;
+   color: darkslategray;
 }
 
 .subHeading {
     text-align: center;
-    color: darkslategray;
+    color: rgb(139, 141, 141);
 }

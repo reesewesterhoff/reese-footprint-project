@@ -94,18 +94,41 @@ class AddSite extends Component {
                 </div>
 
                 <div className="siteForm">
-                    <div className="siteName">
-                        <TextField
-                            id="standard-name"
-                            label="Site Name"
-                            className={classes.textField}
-                            value={this.state.siteName}
-                            onChange={this.handleChange('siteName')}
-                            margin="normal"
-                            required
-                        />
-                    </div>
-                    
+                <br />
+                <br />
+                    <h4>Enter Country and click on map below to set site location.</h4>
+                    <h4>Latitude: {this.state.location.lat} <br></br> Longitude {this.state.location.lng}</h4>
+
+                    <Map
+                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
+                        loadingElement={<div style={{ height: `100%` }} />}
+                        containerElement={<div style={{ height: `45vh`, width: '45vh', margin: 'auto' }} />}
+                        mapElement={<div style={{ height: `100%` }} />}
+                        isMarkerShown={this.state.isMarkerShown}
+                        onMarkerClick={this.handleMarkerClick}
+                        handleToggleOpen={this.handleToggleOpen}
+                        isOpen={this.state.isOpen}
+                        onClick={this.handleClick}
+                        location={this.state.location}
+                        handleClick={this.handleClick}
+                        location={this.state.location}
+                        mapClicked={this.state.mapClicked}
+                    />
+                    <br />
+                    <br />
+                    <form onSubmit={this.handleSubmit}>
+                        <div>
+                            <TextField
+                                id="standard-name"
+                                label="Site Name"
+                                className={classes.textField}
+                                value={this.state.siteName}
+                                required
+                                onChange={this.handleChange('siteName')}
+                                margin="normal"
+                            />
+                        </div>
+                        <br />
                         <TextField
                             id="date"
                             label="Funding Start Date"
@@ -130,29 +153,17 @@ class AddSite extends Component {
                             }}
                             required
                         />
-
-                    <GeneratorForm />
-                    <h4>Enter Country and click on map below to set site location.</h4>
-                    <h4>Latitude: {this.state.location.lat} <br></br> Longitude {this.state.location.lng}</h4>
-                    <Button onClick={this.handleSubmit} variant="contained" color="primary" className={classes.button}>
-                        Add Site
+                        <br />
+                        <br />
+                        <br />
+                        <GeneratorForm />
+                        <br />
+                        <br />
+                        <Button value="submit" type="submit" variant="contained" color="primary" className={classes.button}>
+                            Add Site
                         </Button>
-                    <Map
-                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
-                        loadingElement={<div style={{ height: `100%` }} />}
-                        containerElement={<div style={{ height: `45vh`, width: '45vh', paddingLeft: '28%' }} />}
-                        mapElement={<div style={{ height: `100%` }} />}
-                        isMarkerShown={this.state.isMarkerShown}
-                        onMarkerClick={this.handleMarkerClick}
-                        handleToggleOpen={this.handleToggleOpen}
-                        isOpen={this.state.isOpen}
-                        onClick={this.handleClick}
-                        location={this.state.location}
-                        handleClick={this.handleClick}
-                        location={this.state.location}
-                        mapClicked={this.state.mapClicked}
-                    />
-
+                        <br />
+                    </form>
                 </div>
 
 
