@@ -14,7 +14,7 @@ import Zoom from '@material-ui/core/Zoom';
 const styles = {
     card: {
         marginTop: 15,
-        width: 220,
+        width: 260,
         height: 310,
         textAlign: 'center',
         backgroundColor: 'AliceBlue',
@@ -41,17 +41,23 @@ class SiteTypeItem extends Component {
                 <Tooltip TransitionComponent={Zoom} title={this.props.site.description} enterDelay={200} leaveDelay={100}>
                     <Card className={classes.card} >
                         <CardContent>
-                            <Typography>
+                            {/* <Typography>
                                 <LocalHospitalIcon className={classes.icon} />
-                            </Typography>
+                            </Typography> */}
                             <Typography variant="h6">
-                                {this.props.site.type}
+                                <strong>{this.props.site.type}</strong>
                             </Typography>
-                            <br />
-                            <Typography>
-                                Power Needs: {this.props.site.power_need} kWh/day
-                                Storage: {this.props.site.battery_bank} kWh
-                        </Typography>
+                            <div>
+                                <p>Power Needs: {this.props.site.power_need} kWh/day</p>
+                                <p>Panel Array: {this.props.site.solar_panel} kW</p>
+                                <p>Storage: {this.props.site.battery_bank} kWh</p>
+                                {
+                                    this.props.site.generator ?
+                                        <p>Generator: {this.props.site.generator} kW</p>
+                                        :
+                                        <p>Generator: None</p>
+                                }
+                            </div>
                         </CardContent>
                         <CardActions>
                             <div className={classes.button}>
