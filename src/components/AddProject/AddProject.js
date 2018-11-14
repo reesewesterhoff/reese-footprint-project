@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     container: {
@@ -24,6 +25,14 @@ class AddProject extends Component {
     state = {
         projectName: '',
         user_id: this.props.user.id,
+        country: '',
+    }
+
+    handleChange = property => event => {
+        this.setState({
+            ...this.state,
+            [property]: event.target.value
+        })
     }
 
     render() {
@@ -34,6 +43,24 @@ class AddProject extends Component {
 
                 <div>
                     <h1 className="heading">Add Project</h1>
+                            <TextField
+                                id="standard-name"
+                                label="Project Name"
+                                className={classes.textField}
+                                value={this.state.projectName}
+                                required
+                                onChange={this.handleChange('projectName')}
+                                margin="normal"
+                            />
+                            <TextField
+                                id="standard-name"
+                                label="Project Country"
+                                className={classes.textField}
+                                value={this.state.country}
+                                required
+                                onChange={this.handleChange('country')}
+                                margin="normal"
+                            />
                 </div>
 
             );
