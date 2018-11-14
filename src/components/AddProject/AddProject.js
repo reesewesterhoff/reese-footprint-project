@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
     container: {
@@ -19,7 +21,10 @@ const styles = theme => ({
 
 class AddProject extends Component {
 
-    
+    state = {
+        projectName: '',
+        user_id: this.props.user.id,
+    }
 
     render() {
 
@@ -28,7 +33,7 @@ class AddProject extends Component {
             return (
 
                 <div>
-                    <h1>Add Project</h1>
+                    <h1 className="heading">Add Project</h1>
                 </div>
 
             );
@@ -37,6 +42,7 @@ class AddProject extends Component {
 
 const mapStateToProps = state => ({
     state: state,
+    user: state.user,
 });
 
 AddProject.propTypes = {
