@@ -58,9 +58,7 @@ class Results extends Component {
                     y: 0
                 }, {
                     x: this.props.state.sites.length ? this.props.state.sites[0].fundEndDate : end,
-
                     y: this.props.state.dieselCalculation.totalDieselCost || 35000
-
                 }],
                 backgroundColor: [
                     'grey'
@@ -89,15 +87,20 @@ class Results extends Component {
 
     handleChange = (property) => (event) => {
         this.setState({ [property]: event.target.value });
-        console.log('event', event.target.value);
 
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // console.log(`${this.state.messageToBeSent.name} is sending 
-        //     from ${this.state.messageToBeSent.email} the following message: ${this.state.messageToBeSent.message}`);
-        axios.post('/email', { content: { name: this.state.name, email: this.state.email, message: this.state.message }, data: this.state.data.datasets.map(dataset => dataset.data) }
+        axios.post('/email', { content: { name: this.state.name, email: this.state.email, message: this.state.message },
+            siteName: this.props.state.sites[0].siteName,
+            fundStartDate: this.props.state.sites[0].fundStartDate,
+            fundEndDate: this.props.state.sites[0].fundEndDate,
+            location: this.props.state.sites[0].location,
+            generator: this.props.state.generator[0],
+            selectedSite: this.props.state.selectedSite.type,
+            totalDieselCost: this.props.state.dieselCalculation.totalDieselCost,
+            address: this.props.state.sites[0].address}
         ).then((response) => {
             console.log('Response is:', response.data);
             this.setState({
@@ -110,13 +113,6 @@ class Results extends Component {
         })
     }
 
-    // handleCalculation = event => {
-    //     event.preventDefault();
-    //     this.props.dispatch({
-    //         type: 'RUN_DIESEL_CALCULATION',
-    //         payload: this.props.state.sites,
-    //     });
-    // }
 
 
     render() {
@@ -132,7 +128,7 @@ class Results extends Component {
                 <input type="submit" value="Contact the experts" />
             </form>
             {/* <pre>{JSON.stringify(this.props.state, null, 2)}</pre> */}
-            {/* <pre>{JSON.stringify(this.state.messageToBeSent, null, 2)}</pre> */}
+            {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
         </div>)
     }
 }

@@ -2,50 +2,15 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const nodemailer = require('nodemailer');
-// const creds = require('../config/config');
 
-// let transporter;
-
-// let transporter = nodemailer.createTransport({
-//     host: 'smtp.ethereal.email',
-//     port: 587,
-//     secure: false, // true for 465, false for other ports
-//     auth: {
-//         user: 'gzcj6it73x35sln3@ethereal.email', // generated ethereal user
-//         pass: 'd33QbvJwAtbXeVQTw7' // generated ethereal password
-//     }
-// });
-
-// let transporter = nodemailer.createTransport({
-//     host: 'smtp.dispostable.com',
-//     port: 587,
-//     secure: false, // true for 465, false for other ports
-// });
 
 let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     auth: {
-        user: 'footprintproject.io@gmail.com', // generated ethereal user
-        pass: 'f00tpr1ntpr0ject.10' // generated ethereal password
+        user: 'footprintproject.io@gmail.com', // gmail account
+        pass: 'f00tpr1ntpr0ject.10' // gmail account password
     }
 });
-
-/*
-nodemailer.createTestAccount((err, account) => {
-    // create reusable transporter object using the default SMTP transport
-    transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-            user: 'gzcj6it73x35sln3@ethereal.email', // generated ethereal user
-            pass: 'd33QbvJwAtbXeVQTw7' // generated ethereal password
-        }
-    });
-
-});
-*/
-
 
 // verify connection configuration
 transporter.verify(function(error, success) {
@@ -63,7 +28,17 @@ router.post('/', (req, res, next) => {
     var name = req.body.content.name
     var email = req.body.content.email
     var message = req.body.content.message
-    var content = `name: ${name} \n email: ${email} \n message: ${message} \n data: ${req.body.data}`
+    var content = `name: ${name} \n 
+      email: ${email} \n 
+      message: ${message} \n 
+      siteName: ${req.body.siteName} \n
+      address: ${req.body.address} \n
+      fundStartDate: ${req.body.fundStartDate}, \n
+      fundEndDate: ${req.body.fundEndDate}, \n
+      location: ${JSON.stringify(req.body.location)}, \n
+      generator: ${JSON.stringify(req.body.generator)}, \n
+      selectedSite: ${req.body.selectedSite}, \n
+      totalDieselCost: $${req.body.totalDieselCost.toLocaleString()}`
   
     var mail = {
       from: name,
