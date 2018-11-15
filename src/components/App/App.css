@@ -58,3 +58,8 @@ input {
     text-align: center;
     color: rgb(139, 141, 141);
 }
+
+.siteDescription {
+    line-height: 0.75;
+    font-size: 14px;
+}
