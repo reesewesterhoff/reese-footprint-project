@@ -7,6 +7,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 class GeneratorForm extends Component {
 
@@ -102,27 +104,43 @@ class GeneratorForm extends Component {
                 <br />
                 {this.state.generator === true ? (
                     <React.Fragment>
-                        <InputLabel htmlFor={this.state.newGenerator.generatorSize}>Generator Size</InputLabel>
-                        <Input
-                            type="text"
-                            placeholder="Enter Load Size"
-                            value={this.state.newGenerator.generatorSize}
-                            onChange={this.handleChangeFor('generatorSize')}
-                        />
-                        <InputLabel htmlFor={this.state.newGenerator.energyUnit}>Generator Energy Unit</InputLabel>
-                        <Select value={this.state.newGenerator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
-                            <MenuItem value="">--Select Energy Unit--</MenuItem>
-                            <MenuItem value="kVA">kVA</MenuItem>
-                            <MenuItem value="kW">kW</MenuItem>
-                        </Select>
+                        <FormControl>
+                            {/* <InputLabel htmlFor={this.state.newGenerator.generatorSize}>Generator Size</InputLabel> */}
+                            <Input
+                                type="text"
+                                placeholder="Enter Load Size"
+                                value={this.state.newGenerator.generatorSize}
+                                onChange={this.handleChangeFor('generatorSize')}
+                                style={{margin: 10}}
+                            />
+                            <FormHelperText>Generator Size</FormHelperText>
+                        </FormControl>
+                        <FormControl>
+                            {/* <InputLabel htmlFor={this.state.newGenerator.energyUnit}>--Select Energy Unit--</InputLabel> */}
+                            <Select 
+                                value={this.state.newGenerator.energyUnit} 
+                                onChange={this.handleChangeFor('energyUnit')} 
+                                style={{margin: 10}}
+                                label="--Select Energy Unit--"
+                            >
+                                <MenuItem value="" disabled>--Select Energy Unit--</MenuItem>
+                                <MenuItem value="kVA">kVA</MenuItem>
+                                <MenuItem value="kW">kW</MenuItem>
+                            </Select>
+                            <FormHelperText>Generator Energy Unit</FormHelperText>
+                        </FormControl>
                         <br />
-                        <InputLabel htmlFor={this.state.newGenerator.monthlyCost}>Monthly Fuel Cost (USD $)</InputLabel>
-                        <Input
-                            type="text"
-                            placeholder="Monthly Fuel Cost"
-                            value={this.state.newGenerator.monthlyCost}
-                            onChange={this.handleChangeFor('monthlyCost')}
-                        />
+                        <FormControl>
+                            {/* <InputLabel htmlFor={this.state.newGenerator.monthlyCost}>Monthly Fuel Cost (USD $)</InputLabel> */}
+                            <Input
+                                type="text"
+                                placeholder="USD $"
+                                value={this.state.newGenerator.monthlyCost}
+                                onChange={this.handleChangeFor('monthlyCost')}
+                                style={{margin: 10}}
+                            />
+                            <FormHelperText>Monthly Fuel Cost</FormHelperText>
+                        </FormControl>
                         <Button
                             variant="raised"
                             color="primary"
@@ -141,13 +159,17 @@ class GeneratorForm extends Component {
                     )}
                 {this.state.noGenerator === true ? (
                     <React.Fragment>
-                        <InputLabel htmlFor={this.state.energyBudget}>Monthly Energy Budget (USD $)</InputLabel>
-                        <Input
-                            type="text"
-                            placeholder="Enter a monthly energy budget"
-                            value={this.state.energyBudget}
-                            onChange={this.handleChangeForEnergy}
-                        />
+                        <FormControl>
+                            {/* <InputLabel htmlFor={this.state.energyBudget}>Monthly Energy Budget (USD $)</InputLabel> */}
+                            <Input
+                                type="text"
+                                placeholder="USD $"
+                                value={this.state.energyBudget}
+                                onChange={this.handleChangeForEnergy}
+                                style={{margin: 10}}
+                            />
+                            <FormHelperText>Monthly Energy Budget</FormHelperText>
+                        </FormControl>
                         <Button
                             variant="raised"
                             color="primary"
