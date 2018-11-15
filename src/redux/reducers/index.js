@@ -7,6 +7,7 @@ import sites from './addSiteReducer';
 import generator from './generatorReducer';
 import selectedSite from './selectedSiteReducer';
 import dieselCalculation from './calculationReducer';
+import projectsReducer from './projectsReducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   generator, // will have the list of generators the user has added to their site
   selectedSite,
   dieselCalculation, // will have the total amount of $ spent on diesel fuel over period of time
+  projectsReducer, // will have all of the projects associated with a user
 });
 
 export default rootReducer;
