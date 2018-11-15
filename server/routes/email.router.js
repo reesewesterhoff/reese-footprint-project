@@ -8,7 +8,7 @@ let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     auth: {
         user: 'footprintproject.io@gmail.com', // gmail account
-        pass: 'f00tpr1ntpr0ject.10' // gmail account password
+        pass: process.env.PASSWORD // gmail account password
     }
 });
 
