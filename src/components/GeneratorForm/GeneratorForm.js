@@ -102,8 +102,8 @@ class GeneratorForm extends Component {
                     />
                 </div>
                 <br />
-                {this.state.generator === true ? (
-                    <React.Fragment>
+                {this.state.generator === true && (
+                    <>
                         <FormControl style={{ margin: 10 }}>
                             {/* <InputLabel htmlFor={this.state.newGenerator.generatorSize}>Generator Size</InputLabel> */}
                             <Input
@@ -144,17 +144,11 @@ class GeneratorForm extends Component {
                         >
                             Add Generator
                     </Button>
-                        {this.props.generator !== [] ? (
-                            <GeneratorList />
-                        ) : (
-                                null
-                            )}
-                    </React.Fragment>
-                ) : (
-                        null
-                    )}
-                {this.state.noGenerator === true ? (
-                    <React.Fragment>
+                        {this.props.generator.length > 0 && <GeneratorList />}
+                    </>
+                )}
+                {this.state.noGenerator === true && (
+                    <>
                         <FormControl style={{ margin: 10 }}>
                             {/* <InputLabel htmlFor={this.state.energyBudget}>Monthly Energy Budget (USD $)</InputLabel> */}
                             <Input
@@ -172,10 +166,8 @@ class GeneratorForm extends Component {
                         >
                             Add Monthly Energy Budget
                     </Button>
-                    </React.Fragment>
-                ) : (
-                        null
-                    )}
+                    </>
+                )}
             </div>
 
         )
