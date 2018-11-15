@@ -34,7 +34,8 @@ class AddProject extends Component {
             type: 'ADD_PROJECT', payload: this.state
         });
         this.setState({
-            
+            projectName: '',
+            country: '',
         });
     }
 
