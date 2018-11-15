@@ -49,6 +49,7 @@ CREATE TABLE "person" (
 CREATE TABLE "projects" (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR(255),
+    "country" VARCHAR(255),
     "user_id" INT REFERENCES "person"
 );
 

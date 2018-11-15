@@ -22,6 +22,8 @@ import Results from '../Results/Results';
 import MapPage from '../MapPage/MapPage';
 import ProjectPage from '../ProjectPage/ProjectPage';
 import SavedSitePage from '../SavedSitePage/SavedSitePage';
+import AddProject from '../AddProject/AddProject';
+import UserDashboard from '../UserDashboard/UserDashboard';
 
 import './App.css';
 
@@ -60,6 +62,18 @@ class App extends Component {
               exact
               path="/info"
               component={InfoPage}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/dashboard"
+              component={UserDashboard}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/add_project"
+              component={AddProject}
             />
 
             <ProtectedRoute
