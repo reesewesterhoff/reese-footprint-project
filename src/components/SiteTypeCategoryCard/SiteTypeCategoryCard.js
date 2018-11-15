@@ -12,7 +12,7 @@ const styles = {
     card: {
         marginTop: 20,
         width: 260,
-        height: 275,
+        height: 210,
         textAlign: 'center',
     },
     button: {
@@ -34,14 +34,11 @@ class SiteTypeCategoryCard extends Component {
                 <Card className={classes.card} style={this.props.color} onClick={this.props.toggleColor}>
                     <CardContent>
                         <Typography>
-                            <br />
                             {this.props.icon}
                         </Typography>
                         <Typography variant="h5">
-                            <br />
                             {this.props.title}
                         </Typography>
-                        <br />
                     </CardContent>
                     <CardActions>
                         <div className={classes.button}>
