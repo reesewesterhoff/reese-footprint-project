@@ -36,45 +36,44 @@ class SiteTypeItem extends Component {
         const { classes } = this.props;
 
         return (
-            <div>
-                <Tooltip TransitionComponent={Zoom} title={this.props.site.description} enterDelay={200} leaveDelay={100}>
-                    <Card className={classes.card} >
-                        <CardContent>
-                            <Typography>
-                                {this.props.icon} 
-                            </Typography>
-                            {/* <br /> */}
-                            <Typography variant="h6">
-                                <strong>{this.props.site.type}</strong>
-                            </Typography>
-                            <br />
-                            <div>
-                                <p className="siteDescription">Power Needs: {this.props.site.power_need} kWh/day</p>
-                                <p className="siteDescription">Panel Array: {this.props.site.solar_panel} kW</p>
-                                <p className="siteDescription">Storage: {this.props.site.battery_bank} kWh</p>
-                                {
-                                    this.props.site.generator ?
-                                        <p className="siteDescription">Generator: {this.props.site.generator} kW</p>
-                                        :
-                                        <p className="siteDescription">Generator: None</p>
-                                }
-                            </div>
-                        </CardContent>
-                        <CardActions>
-                            <div className={classes.button}>
-                                <Button
-                                    size="large"
-                                    variant="outlined"
-                                    color="primary"
-                                    onClick={() => this.props.selectSite(this.props.site)}
-                                >
-                                    Select This Site
-                            </Button>
-                            </div>
-                        </CardActions>
+            <div className="toolTip">
+                <span className="toolTipText">{this.props.site.description}</span>
+                <Card className={classes.card} >
+                    <CardContent>
+                        <Typography>
+                            {this.props.icon}
+                        </Typography>
+                        {/* <br /> */}
+                        <Typography variant="h6">
+                            <strong>{this.props.site.type}</strong>
+                        </Typography>
                         <br />
-                    </Card>
-                </Tooltip>
+                        <div>
+                            <p className="siteDescription">Power Needs: {this.props.site.power_need} kWh/day</p>
+                            <p className="siteDescription">Panel Array: {this.props.site.solar_panel} kW</p>
+                            <p className="siteDescription">Storage: {this.props.site.battery_bank} kWh</p>
+                            {
+                                this.props.site.generator ?
+                                    <p className="siteDescription">Generator: {this.props.site.generator} kW</p>
+                                    :
+                                    <p className="siteDescription">Generator: None</p>
+                            }
+                        </div>
+                    </CardContent>
+                    <CardActions>
+                        <div className={classes.button}>
+                            <Button
+                                size="large"
+                                variant="outlined"
+                                color="primary"
+                                onClick={() => this.props.selectSite(this.props.site)}
+                            >
+                                Select This Site
+                            </Button>
+                        </div>
+                    </CardActions>
+                    <br />
+                </Card>
             </div>
         );
     }

@@ -31,7 +31,7 @@ class SiteTypeCategoryCard extends Component {
 
         return(
             <div>
-                <Card className={classes.card} style={this.props.color} onClick={this.props.toggleColor}>
+                <Card className={classes.card} style={this.props.color}>
                     <CardContent>
                         <Typography>
                             {this.props.icon}
@@ -46,7 +46,7 @@ class SiteTypeCategoryCard extends Component {
                                 size="large" 
                                 variant="outlined" 
                                 color="primary" 
-                                onClick={() => this.props.selectSiteCategory(this.props.title)}
+                                onClick={() => {this.props.selectSiteCategory(this.props.title); this.props.toggleColor()}}
                                 >
                                 Select
                             </Button>
