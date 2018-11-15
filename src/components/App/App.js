@@ -17,7 +17,6 @@ import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import AddSite from '../AddSite/AddSite';
-import GeneratorForm from '../GeneratorForm/GeneratorForm';
 import SiteTypeList from '../SiteTypeList/SiteTypeList';
 import Results from '../Results/Results';
 import MapPage from '../MapPage/MapPage';

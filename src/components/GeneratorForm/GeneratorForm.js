@@ -5,19 +5,36 @@ import GeneratorList from '../GeneratorList/GeneratorList';
 class GeneratorForm extends Component {
 
     state = {
-        showGenerator: false,
+        generator: false, // property relating to if the user DOES have a generator
+        noGenerator: false, // property relating to if the user DOES NOT have a generator
         newGenerator: {
-            generatorSize: 0,
+            generatorSize: '',
             energyUnit: '',
-            monthlyCost: 0,
-        }
+            monthlyCost: '',
+        },
+        energyBudget: '',
     }
 
-    handleGeneratorToggle = () => {
+    handleHasGeneratorToggle = () => {
         this.setState({
             ...this.state,
-            showGenerator: !this.state.showGenerator
+            noGenerator: false,
+            generator: !this.state.generator,
+            energyBudget: '',
         });
+    }
+
+    handleNoGeneratorToggle = () => {
+        this.setState({
+            ...this.state,
+            generator: false,
+            noGenerator: !this.state.noGenerator,
+            newGenerator: {
+                generatorSize: '',
+                energyUnit: '',
+                monthlyCost: '',
+             },
+        })
     }
 
     handleChangeFor = property => event => {
@@ -30,6 +47,13 @@ class GeneratorForm extends Component {
         });
     }
 
+    handleChangeForEnergy = event => {
+        this.setState({
+            ...this.state,
+             energyBudget: event.target.value,
+        });
+    }
+
     handleAddGenerator = event => {
         event.preventDefault();
         this.props.dispatch({
@@ -38,40 +62,59 @@ class GeneratorForm extends Component {
         });
         this.setState({
             newGenerator: {
-                generatorSize: 0,
+                generatorSize: '',
                 energyUnit: '',
-                monthlyCost: 0,
+                monthlyCost: '',
             }
+        });
+    }
+
+    handleAddEnergyBudget = event => {
+        event.preventDefault();
+        this.props.dispatch({
+            type: 'ADD_ENERGY_BUDGET',
+            payload: this.state.energyBudget
         });
     }
 
     render() {
         return (
             <div>
-                <label htmlFor={this.state.showGenerator.toString()}>Do you have a generator(s)? Check box for 'yes'.</label>
-                <input
-                    type="checkbox"
-                    checked={this.state.showGenerator}
-                    onChange={this.handleGeneratorToggle}
-                /><br/>
-                {this.state.showGenerator === true ? (
+                <div>
+                    <p>Do you currently have a generator?</p>
+                    <label htmlFor={this.state.generator.toString()}>Yes</label>
+                    <input
+                        type="checkbox"
+                        checked={this.state.generator}
+                        onChange={this.handleHasGeneratorToggle}
+                    />
+                    <label htmlFor={this.state.noGenerator.toString()}>No</label>
+                    <input
+                        type="checkbox"
+                        checked={this.state.noGenerator}
+                        onChange={this.handleNoGeneratorToggle}
+                    />
+                </div>
+                <br />
+                {this.state.generator === true ? (
                     <React.Fragment>
                         <label htmlFor={this.state.newGenerator.generatorSize}>Generator Size</label>
                         <input
-                            type="number"
+                            type="text"
+                            placeholder="Enter Load Size"
                             value={this.state.newGenerator.generatorSize}
                             onChange={this.handleChangeFor('generatorSize')}
                         />
-                        <label htmlFor={this.state.newGenerator.energyUnit}>Generator Unit</label>
+                        <label htmlFor={this.state.newGenerator.energyUnit}>Generator Energy Unit</label>
                         <select value={this.state.newGenerator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
                             <option value="">--Select Energy Unit--</option>
                             <option value="kVA">kVA</option>
                             <option value="kW">kW</option>
                         </select>
                         <br />
-                        <label htmlFor={this.state.newGenerator.monthlyCost}>Monthly Fuel Cost</label>
+                        <label htmlFor={this.state.newGenerator.monthlyCost}>Monthly Fuel Cost (USD $)</label>
                         <input
-                            type="number"
+                            type="text"
                             placeholder="Monthly Fuel Cost"
                             value={this.state.newGenerator.monthlyCost}
                             onChange={this.handleChangeFor('monthlyCost')}
@@ -81,11 +124,29 @@ class GeneratorForm extends Component {
                         >
                             Add Generator
                     </button>
-                    {this.props.sites.generatorSize !== null ? (
-                        <GeneratorList />
-                    ) : (
-                            null
-                        )}
+                        {this.props.sites.generatorSize !== null ? (
+                            <GeneratorList />
+                        ) : (
+                                null
+                            )}
+                    </React.Fragment>
+                ) : (
+                        null
+                    )}
+                {this.state.noGenerator === true ? (
+                    <React.Fragment>
+                        <label htmlFor={this.state.energyBudget}>Monthly Energy Budget (USD $)</label>
+                        <input
+                            type="text"
+                            placeholder="Enter a monthly energy budget"
+                            value={this.state.energyBudget}
+                            onChange={this.handleChangeForEnergy}
+                        />
+                        <button
+                            onClick={this.handleAddEnergyBudget}
+                        >
+                            Add Monthly Energy Budget
+                    </button>
                     </React.Fragment>
                 ) : (
                         null
