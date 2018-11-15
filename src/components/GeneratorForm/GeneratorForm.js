@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GeneratorList from '../GeneratorList/GeneratorList';
+import Input from '@material-ui/core/Input';
+import Checkbox from '@material-ui/core/Checkbox';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 class GeneratorForm extends Component {
 
@@ -33,7 +41,7 @@ class GeneratorForm extends Component {
                 generatorSize: '',
                 energyUnit: '',
                 monthlyCost: '',
-             },
+            },
         })
     }
 
@@ -50,7 +58,7 @@ class GeneratorForm extends Component {
     handleChangeForEnergy = event => {
         this.setState({
             ...this.state,
-             energyBudget: event.target.value,
+            energyBudget: event.target.value,
         });
     }
 
@@ -82,15 +90,13 @@ class GeneratorForm extends Component {
             <div>
                 <div>
                     <p>Do you currently have a generator?</p>
-                    <label htmlFor={this.state.generator.toString()}>Yes</label>
-                    <input
-                        type="checkbox"
+                    <InputLabel htmlFor={this.state.generator.toString()}>Yes</InputLabel>
+                    <Checkbox
                         checked={this.state.generator}
                         onChange={this.handleHasGeneratorToggle}
                     />
-                    <label htmlFor={this.state.noGenerator.toString()}>No</label>
-                    <input
-                        type="checkbox"
+                    <InputLabel htmlFor={this.state.noGenerator.toString()}>No</InputLabel>
+                    <Checkbox
                         checked={this.state.noGenerator}
                         onChange={this.handleNoGeneratorToggle}
                     />
@@ -98,33 +104,47 @@ class GeneratorForm extends Component {
                 <br />
                 {this.state.generator === true ? (
                     <React.Fragment>
-                        <label htmlFor={this.state.newGenerator.generatorSize}>Generator Size</label>
-                        <input
-                            type="text"
-                            placeholder="Enter Load Size"
-                            value={this.state.newGenerator.generatorSize}
-                            onChange={this.handleChangeFor('generatorSize')}
-                        />
-                        <label htmlFor={this.state.newGenerator.energyUnit}>Generator Energy Unit</label>
-                        <select value={this.state.newGenerator.energyUnit} onChange={this.handleChangeFor('energyUnit')}>
-                            <option value="">--Select Energy Unit--</option>
-                            <option value="kVA">kVA</option>
-                            <option value="kW">kW</option>
-                        </select>
+                        <FormControl style={{ margin: 10 }}>
+                            {/* <InputLabel htmlFor={this.state.newGenerator.generatorSize}>Generator Size</InputLabel> */}
+                            <Input
+                                type="text"
+                                placeholder="Enter Load Size"
+                                value={this.state.newGenerator.generatorSize}
+                                onChange={this.handleChangeFor('generatorSize')}
+                            />
+                            <FormHelperText>Generator Size</FormHelperText>
+                        </FormControl>
+                        <FormControl style={{ margin: 10 }}>
+                            {/* <InputLabel htmlFor={this.state.newGenerator.energyUnit}>--Select Energy Unit--</InputLabel> */}
+                            <Select
+                                value={this.state.newGenerator.energyUnit}
+                                onChange={this.handleChangeFor('energyUnit')}
+                            >
+                                <MenuItem value="" disabled>--Select Energy Unit--</MenuItem>
+                                <MenuItem value="kVA">kVA</MenuItem>
+                                <MenuItem value="kW">kW</MenuItem>
+                            </Select>
+                            <FormHelperText>Generator Energy Unit</FormHelperText>
+                        </FormControl>
                         <br />
-                        <label htmlFor={this.state.newGenerator.monthlyCost}>Monthly Fuel Cost (USD $)</label>
-                        <input
-                            type="text"
-                            placeholder="Monthly Fuel Cost"
-                            value={this.state.newGenerator.monthlyCost}
-                            onChange={this.handleChangeFor('monthlyCost')}
-                        />
-                        <button
+                        <FormControl style={{ margin: 10 }}>
+                            {/* <InputLabel htmlFor={this.state.newGenerator.monthlyCost}>Monthly Fuel Cost (USD $)</InputLabel> */}
+                            <Input
+                                type="text"
+                                placeholder="USD $"
+                                value={this.state.newGenerator.monthlyCost}
+                                onChange={this.handleChangeFor('monthlyCost')}
+                            />
+                            <FormHelperText>Monthly Fuel Cost</FormHelperText>
+                        </FormControl>
+                        <Button
+                            variant="contained"
+                            color="primary"
                             onClick={this.handleAddGenerator}
                         >
                             Add Generator
-                    </button>
-                        {this.props.sites.generatorSize !== null ? (
+                    </Button>
+                        {this.props.generator !== [] ? (
                             <GeneratorList />
                         ) : (
                                 null
@@ -135,18 +155,23 @@ class GeneratorForm extends Component {
                     )}
                 {this.state.noGenerator === true ? (
                     <React.Fragment>
-                        <label htmlFor={this.state.energyBudget}>Monthly Energy Budget (USD $)</label>
-                        <input
-                            type="text"
-                            placeholder="Enter a monthly energy budget"
-                            value={this.state.energyBudget}
-                            onChange={this.handleChangeForEnergy}
-                        />
-                        <button
+                        <FormControl style={{ margin: 10 }}>
+                            {/* <InputLabel htmlFor={this.state.energyBudget}>Monthly Energy Budget (USD $)</InputLabel> */}
+                            <Input
+                                type="text"
+                                placeholder="USD $"
+                                value={this.state.energyBudget}
+                                onChange={this.handleChangeForEnergy}
+                            />
+                            <FormHelperText>Monthly Energy Budget</FormHelperText>
+                        </FormControl>
+                        <Button
+                            variant="contained"
+                            color="primary"
                             onClick={this.handleAddEnergyBudget}
                         >
                             Add Monthly Energy Budget
-                    </button>
+                    </Button>
                     </React.Fragment>
                 ) : (
                         null
