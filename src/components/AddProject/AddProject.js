@@ -28,6 +28,16 @@ class AddProject extends Component {
         country: '',
     }
 
+    handleSubmit = event => {
+        event.preventDefault();
+        this.props.dispatch({
+            type: 'ADD_PROJECT', payload: this.state
+        });
+        this.setState({
+            
+        });
+    }
+
     handleChange = property => event => {
         this.setState({
             ...this.state,
@@ -43,6 +53,7 @@ class AddProject extends Component {
 
                 <div>
                     <h1 className="heading">Add Project</h1>
+                        <form onSubmit={this.handleSubmit} >
                             <TextField
                                 id="standard-name"
                                 label="Project Name"
@@ -61,6 +72,10 @@ class AddProject extends Component {
                                 onChange={this.handleChange('country')}
                                 margin="normal"
                             />
+                            <Button value="submit" type="submit" variant="contained" color="primary" className={classes.button}>
+                                Add Project
+                            </Button>
+                        </form>
                 </div>
 
             );
