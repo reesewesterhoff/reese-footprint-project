@@ -6,8 +6,10 @@ const router = express.Router();
  * GET Projects route 
  */
 router.get('/:id', (req, res) => {
-    const query = `SELECT * FROM "projects";`
-    pool.query(query)
+    const query = `SELECT projects.name, projects.country FROM "projects"
+    INNER JOIN person ON person.id = projects.user_id
+    WHERE person.id = $1;`;
+    pool.query(query, [req.params.id])
     .then(results => {
         res.send(results.rows);
     })
