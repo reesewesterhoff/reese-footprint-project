@@ -25,10 +25,10 @@ transporter.verify(function(error, success) {
  * POST route
  */
 router.post('/', (req, res, next) => {
-    var name = req.body.content.name
-    var email = req.body.content.email
-    var message = req.body.content.message
-    var content = `name: ${name} \n 
+    const name = req.body.content.name
+    const email = req.body.content.email
+    const message = req.body.content.message
+    const content = `name: ${name} \n 
       email: ${email} \n 
       message: ${message} \n 
       siteName: ${req.body.siteName} \n
@@ -40,7 +40,7 @@ router.post('/', (req, res, next) => {
       selectedSite: ${req.body.selectedSite}, \n
       totalDieselCost: $${req.body.totalDieselCost.toLocaleString()}`
   
-    var mail = {
+    const mail = {
       from: name,
       to: 'footprintproject.io@gmail.com',  //Change to email address that you want to receive messages on
       subject: 'Solar Estimate',
@@ -49,9 +49,7 @@ router.post('/', (req, res, next) => {
   
     transporter.sendMail(mail, (err, data) => {
       if (err) {
-        res.json({
-          msg: 'fail'
-        })
+        res.sendStatus(500)
       } else {
         res.json({
           msg: 'success'

@@ -13,7 +13,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 class GeneratorForm extends Component {
 
     state = {
-        generator: false, // property relating to if the user DOES have a generator
+        hasGenerator: false, // property relating to if the user DOES have a generator
         noGenerator: false, // property relating to if the user DOES NOT have a generator
         energyUsage: {
             generatorSize: '',
@@ -24,23 +24,13 @@ class GeneratorForm extends Component {
 
     handleHasGeneratorToggle = () => {
         this.setState({
-            ...this.state,
-            noGenerator: false,
-            generator: !this.state.generator,
-        });
-    }
-
-    handleNoGeneratorToggle = () => {
-        this.setState({
-            ...this.state,
-            generator: false,
-            noGenerator: !this.state.noGenerator,
+            hasGenerator: !this.state.hasGenerator,
             energyUsage: {
                 generatorSize: '',
                 energyUnit: '',
                 monthlyCost: '',
-            },
-        })
+            }
+        });
     }
 
     handleChangeFor = property => event => {
@@ -53,7 +43,7 @@ class GeneratorForm extends Component {
         });
     }
 
-    handleAddGenerator = event => {
+    handleAddEnergyUsage = event => {
         event.preventDefault();
         this.props.dispatch({
             type: 'ADD_GENERATOR',
@@ -68,32 +58,24 @@ class GeneratorForm extends Component {
         });
     }
 
-    handleAddEnergyBudget = event => {
-        event.preventDefault();
-        this.props.dispatch({
-            type: 'ADD_ENERGY_BUDGET',
-            payload: this.state.energyBudget
-        });
-    }
-
     render() {
         return (
             <div>
                 <div>
                     <p>Do you currently have a generator?</p>
-                    <InputLabel htmlFor={this.state.generator.toString()}>Yes</InputLabel>
+                    <InputLabel htmlFor={this.state.hasGenerator.toString()}>Yes</InputLabel>
                     <Checkbox
-                        checked={this.state.generator}
+                        checked={this.state.hasGenerator}
                         onChange={this.handleHasGeneratorToggle}
                     />
-                    <InputLabel htmlFor={this.state.noGenerator.toString()}>No</InputLabel>
+                    {/* <InputLabel htmlFor={this.state.noGenerator.toString()}>No</InputLabel>
                     <Checkbox
                         checked={this.state.noGenerator}
                         onChange={this.handleNoGeneratorToggle}
-                    />
+                    /> */}
                 </div>
                 <br />
-                {this.state.generator === true && (
+                {this.state.hasGenerator === true && (
                     <>
                         <FormControl style={{ margin: 10 }}>
                             {/* <InputLabel htmlFor={this.state.energyUsage.generatorSize}>Generator Size</InputLabel> */}
@@ -131,21 +113,21 @@ class GeneratorForm extends Component {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={this.handleAddGenerator}
+                            onClick={this.handleAddEnergyUsage}
                         >
                             Add Generator
                     </Button>
                         {this.props.generator.length > 0 && <GeneratorList />}
                     </>
                 )}
-                {this.state.noGenerator === true && (
+                {this.state.hasGenerator === false && (
                     <>
                         <FormControl style={{ margin: 10 }}>
                             {/* <InputLabel htmlFor={this.state.energyBudget}>Monthly Energy Budget (USD $)</InputLabel> */}
                             <Input
                                 type="text"
                                 placeholder="USD $"
-                                value={this.state.energyBudget}
+                                value={this.state.energyUsage.monthlyCost}
                                 onChange={this.handleChangeFor('monthlyCost')}
                             />
                             <FormHelperText>Monthly Energy Budget</FormHelperText>
@@ -153,7 +135,7 @@ class GeneratorForm extends Component {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={this.handleAddEnergyBudget}
+                            onClick={this.handleAddEnergyUsage}
                         >
                             Add Monthly Energy Budget
                     </Button>
