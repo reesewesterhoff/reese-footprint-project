@@ -135,7 +135,7 @@ class Results extends Component {
                 message={<span id="message-id">Email Sent</span>}
                 autoHideDuration={2000}
                 onClose={() => this.setState({open: false})}/>
-            <pre>{JSON.stringify(this.props, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
         </div>)
     }
 }
