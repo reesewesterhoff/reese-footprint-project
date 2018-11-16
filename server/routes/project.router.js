@@ -7,7 +7,9 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * GET Projects route 
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
+
     const query = `SELECT projects.id, "name", "country" FROM "projects"
+
     INNER JOIN person ON person.id = projects.user_id
     WHERE person.id = $1;`; //The user_id is stored in the "projects" table, so we
     //don't need the "person" table in this query

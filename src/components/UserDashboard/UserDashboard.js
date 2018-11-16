@@ -10,25 +10,39 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
     button: {
-        margin: theme.spacing.unit,
+        width: '100%',
+        margin: 'auto',
+    },
+    cardDiv: {
+        marginTop: '5%',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
     },
     card: {
-        maxWidth: 150,
-      },
-      media: {
-        height: 140,
-      },
+        width: '20vmin',
+        height: '30vmin',
+        margin: 10,
+    },
+    media: {
+        height: '15vmin',
+    },
 });
 
 class UserDashboard extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'GET_PROJECTS', payload: { id: this.props.user.id } });
+    }
+
+    // selectProject () => {
+
+    // }
+
+    handleAddProject = () => {
+        this.props.history.push('/add_project')
     }
 
     render() {
@@ -40,15 +54,27 @@ class UserDashboard extends Component {
 
             <div>
                 <h1 className="heading">Dashboard</h1>
-                <h2 className="subHeading">Projects</h2>
+                <h2 className="subHeading">Projects 
+                    <br></br>
+                    <br></br>
+                    <Button  
+                    onClick={this.handleAddProject}
+                    size="large"
+                    variant="contained"
+                    color="primary">
+                    Add Project
+                    </Button>
+                </h2>
                 <div>
-                    {!this.props.projects ? <p>loading...</p> : 
-                    <div>
 
+                    {!this.props.projects.length ? <h3 className="heading">Add a project to get started!</h3> 
+                    
+                    :
+                        <div>
+                    <div className={classes.cardDiv}>
+                        {this.props.projects.map(project =>
+                            <Card className={classes.card}>
 
-                    </div>}
-                        {this.props.projects.map(project => 
-                            <Card className={classes.card} key={project.id}>
                                 <CardMedia
                                     className={classes.media}
                                     image="http://vibrance.co/clarity/img/Project-Icon.png"
@@ -63,9 +89,25 @@ class UserDashboard extends Component {
                                         {project.country}
                                     </Typography>
                                 </CardContent>
+                                <CardActions>
+                                    <div className={classes.button}>
+                                        <Button
+                                            size="large"
+                                            variant="outlined"
+                                            color="secondary"
+                                            // onClick={() => this.props.selectSite(this.props.site)}
+                                        >
+                                            Select Project
+                                        </Button>
+                                    </div>
+                                </CardActions>
                             </Card>
                         )}
-                    
+                    </div>
+
+                        </div>}
+
+
                 </div>
 
             </div>

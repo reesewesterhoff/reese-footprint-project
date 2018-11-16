@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
     container: {
@@ -37,6 +38,7 @@ class AddProject extends Component {
             projectName: '',
             country: '',
         });
+        this.props.history.push('/dashboard')
     }
 
     handleChange = property => event => {
@@ -92,4 +94,4 @@ AddProject.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(connect(mapStateToProps)(AddProject));
+export default withRouter(withStyles(styles)(connect(mapStateToProps)(AddProject)));
