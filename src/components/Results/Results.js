@@ -6,10 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 // import { stat } from 'fs';
 
-
 let start = '2014-12-30T18:06:17.762Z';
 let end = '2020-01-05T18:06:17.762Z';
-
 
 class Results extends Component {
 
@@ -34,15 +32,12 @@ class Results extends Component {
         }
     }
 
-    handleChange = (property) => (event) => {
-        this.setState({ [property]: event.target.value });
+    handleChange = property => event => this.setState({ [property]: event.target.value });
 
-    }
-
-    handleSubmit = (event) => {
+    handleSubmit = property => event => {
         event.preventDefault();
         axios.post('/email', {
-            content: { name: this.state.name, email: this.state.email, message: this.state.message },
+            content: { name: this.state.name, email: this.state.email, subject: property, message: this.state.message },
             siteName: this.props.sites[0].siteName,
             fundStartDate: this.props.sites[0].fundStartDate,
             fundEndDate: this.props.sites[0].fundEndDate,
@@ -51,8 +46,7 @@ class Results extends Component {
             selectedSite: this.props.selectedSite.type,
             totalDieselCost: this.props.dieselCalculation.totalDieselCost,
             address: this.props.sites[0].address
-        }
-        ).then((response) => {
+        }).then(response => {
             console.log('Response is:', response.data);
             this.setState({
                 open: true,
@@ -60,9 +54,7 @@ class Results extends Component {
                 email: '',
                 message: '',
             });
-        }).catch((error) => {
-            console.log('Error in POST:', error);
-        })
+        }).catch(error => console.log('Error in POST:', error))
     }
 
 
@@ -133,7 +125,7 @@ class Results extends Component {
                 <h3>Total Savings: ${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price)}</h3> :
                 <h3>Monthly budget needed: ${parseInt(this.props.selectedSite.total_price / this.props.dieselCalculation.timeline)}</h3>}
 
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit('testing')}>
                 <TextField required placeholder="Name" type="text" onChange={this.handleChange('name')} value={this.state.name} />
                 <TextField required placeholder="Email" type="text" onChange={this.handleChange('email')} value={this.state.email} />
                 <TextField placeholder="Message" type="text" onChange={this.handleChange('message')} value={this.state.message} />
@@ -144,19 +136,16 @@ class Results extends Component {
                 autoHideDuration={2000}
                 onClose={() => this.setState({open: false})}/>
             <pre>{JSON.stringify(this.props, null, 2)}</pre>
-            {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
         </div>)
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        sites: state.sites,
-        selectedSite: state.selectedSite,
-        dieselCalculation: state.dieselCalculation,
-        generator: state.generator
-    };
-}
+const mapStateToProps = state => ({
+    sites: state.sites,
+    selectedSite: state.selectedSite,
+    dieselCalculation: state.dieselCalculation,
+    generator: state.generator
+});
 
 
 export default connect(mapStateToProps)(Results);

@@ -46,8 +46,7 @@ class AddSite extends Component {
         address: '',
     }
 
-    handleClick = (event) => {
-
+    handleClick = event => {
         this.setState({
             location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
             mapClicked: true,
@@ -65,7 +64,6 @@ class AddSite extends Component {
             error => {
                 console.error(error);
                 alert('There was an error, please refresh or contact us');
-
             }
         );
     }
@@ -187,22 +185,14 @@ class AddSite extends Component {
                         <br />
                     </form>
                 </div>
-
-
                 <br />
                 {
-                    this.props.sites.length === 0 ?
-                        null
-                        :
-                        <SiteTypeList />
+                    this.props.sites.length !== 0 && <SiteTypeList />
                 }
                 <br />
                 <br />
                 {
-                    this.props.selectedSite.id ?
-                        <Results />
-                        :
-                        null
+                    this.props.selectedSite.id && <Results />
                 }
                 <br />
                 <br />

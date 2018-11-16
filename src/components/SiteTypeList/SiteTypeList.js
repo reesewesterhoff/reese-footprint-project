@@ -23,25 +23,22 @@ const styles = {
     },
 }
 
-
 class SiteTypeList extends Component {
 
     state = {
         icon: '',
     }
 
-    selectSite = (site) => {
-        this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
-    }
+    selectSite = site => this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
 
-    selectSiteCategory = async (category) => {
+    selectSiteCategory = async category => {
         await this.props.dispatch({ type: 'FETCH_SITE_TYPES', payload: category });
         this.setState({
             icon: this.chooseIcon(category),
         });    
     }
 
-    chooseIcon = (iconCategory) => {
+    chooseIcon = iconCategory => {
         switch (iconCategory) {
             case 'Health':
                 return <LocalHospitalIcon />
