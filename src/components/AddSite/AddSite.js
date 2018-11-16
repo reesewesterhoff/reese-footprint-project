@@ -86,17 +86,26 @@ class AddSite extends Component {
         this.props.dispatch({
             type: 'ADD_SITE', payload: { ...this.state, siteGenerators: this.props.generator }
         });
-        this.setState({
-            siteName: '',
-            fundStartDate: '',
-            fundEndDate: '',
-            location: {
-                lat: 0,
-                lng: 0,
-            }
-        });
+        // this.setState({
+        //     siteName: '',
+        //     fundStartDate: '',
+        //     fundEndDate: '',
+        //     location: {
+        //         lat: 0,
+        //         lng: 0,
+        //     }
+        // });
         // add toast
         // store inputs in redux to clear inputs after successful post
+    }
+
+    addSiteToProject = () => {
+        this.props.dispatch({type: 'ADD_SITE', 
+        payload: {state: this.state, 
+            project_id: this.props.project_id || 1, 
+            site_type_id: this.props.selectedSite.id,
+            energy_budget: this.props.generator.map(obj=>parseInt(obj.monthlyCost)
+                ).reduce((total,current) => total + current)}});
     }
 
     render() {
@@ -178,14 +187,14 @@ class AddSite extends Component {
                         <br />
                         <br />
                         <Button value="submit" type="submit" variant="contained" color="primary" className={classes.button}>
-                            Add Site
+                            Choose Solar Grid
                         </Button>
                         <br />
                     </form>
                 </div>
                 <br />
                 {
-                    this.props.sites.length !== 0 && <SiteTypeList />
+                    this.props.sites.length > 0 && <SiteTypeList />
                 }
                 <br />
                 <br />
@@ -194,6 +203,11 @@ class AddSite extends Component {
                 }
                 <br />
                 <br />
+                {this.props.user.id && this.props.selectedSite.id && <Button value="submit" 
+                    type="submit" variant="contained" color="primary" 
+                    className={classes.button} onClick={this.addSiteToProject}>
+                    Add Site to Project
+                    </Button>}
             </div>
 
         );
@@ -204,6 +218,7 @@ const mapStateToProps = state => ({
     sites: state.sites,
     generator: state.generator,
     selectedSite: state.selectedSite,
+    user: state.user,
 });
 
 AddSite.propTypes = {
