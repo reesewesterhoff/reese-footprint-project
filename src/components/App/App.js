@@ -98,7 +98,7 @@ class App extends Component {
               path="/site_type"
               component={SiteTypeList}
             />
-            <Route
+            <Route // Do we still need this route if the link has been removed from the nav bar? it shouldn't be necessary if it being rendered only when the site type is selected.
               exact
               path="/results"
               component={Results}

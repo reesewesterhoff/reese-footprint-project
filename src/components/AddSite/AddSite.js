@@ -46,8 +46,7 @@ class AddSite extends Component {
         address: '',
     }
 
-    handleClick = (event) => {
-
+    handleClick = event => {
         this.setState({
             location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
             mapClicked: true,
@@ -56,16 +55,16 @@ class AddSite extends Component {
         // Get Address from Lat/Long Coordinates
         Geocode.fromLatLng(this.state.location.lat, this.state.location.lng).then(
             response => {
-              const address = response.results[0].formatted_address;
-              console.log(address);
-              this.setState({
-                address: address,
-            })
+                const address = response.results[0].formatted_address;
+                console.log(address);
+                this.setState({
+                    address: address,
+                })
             },
             error => {
-              console.error(error);
+                console.error(error);
             }
-          );
+        );
     }
 
     handleToggleOpen = () => {
@@ -107,13 +106,15 @@ class AddSite extends Component {
                 <h2 className="heading">Transition Tool</h2>
 
                 <div className="subHeading">
-                    <h3>This is a calculator that allows you to input your site information to do a cost-benefit</h3>
-                    <h3>comparison of using diesel energy generators to solar alternatives.</h3>
+                    <h3>This tool is for users with off-grid power needs who are exploring on-site solar plus storage.</h3>
+                    <h3>Based on the length of your project, monthly power budgets and site electrical loads, solar plus storage may be the right option for you!</h3>
+                    {/* <h3>This is a calculator that allows you to input your site information to do a cost-benefit</h3>
+                    <h3>comparison of using diesel energy generators to solar alternatives.</h3> */}
                 </div>
 
                 <div className="siteForm">
-                <br />
-                <br />
+                    <br />
+                    <br />
                     <h4>Enter Country and click on map below to set site location.</h4>
                     <h4>Latitude: {this.state.location.lat} <br></br> Longitude {this.state.location.lng}</h4>
 
@@ -182,22 +183,14 @@ class AddSite extends Component {
                         <br />
                     </form>
                 </div>
-
-
                 <br />
                 {
-                    this.props.sites.length === 0 ?
-                        null
-                        :
-                        <SiteTypeList />
+                    this.props.sites.length !== 0 && <SiteTypeList />
                 }
                 <br />
                 <br />
                 {
-                    this.props.selectedSite.id ?
-                        <Results />
-                        :
-                        null
+                    this.props.selectedSite.id && <Results />
                 }
                 <br />
                 <br />

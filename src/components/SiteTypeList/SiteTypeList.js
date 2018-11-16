@@ -23,7 +23,6 @@ const styles = {
     },
 }
 
-
 class SiteTypeList extends Component {
 
     state = {

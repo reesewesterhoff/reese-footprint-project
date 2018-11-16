@@ -37,9 +37,9 @@ router.post('/', (req, res, next) => {
       Funding Start Date: ${req.body.fundStartDate}, \n
       Funding End Date: ${req.body.fundEndDate}, \n
       Location: ${JSON.stringify(req.body.location)}, \n
-      Generator: ${JSON.stringify(req.body.generator)}, \n
+      Generator(s)/Energy Budget: ${JSON.stringify(req.body.generator)}, \n
       Selected Site Type: ${req.body.selectedSite}, \n
-      Total Diesel Cost: $${req.body.totalDieselCost.toLocaleString()}`
+      Total Diesel Cost over Project Timeline: $${req.body.totalDieselCost.toLocaleString()}`
   
     const mail = {
       from: name,

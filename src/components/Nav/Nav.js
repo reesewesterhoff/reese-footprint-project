@@ -50,9 +50,6 @@ const Nav = (props) => (
       <Link className="nav-link" to="/site_type">
         Site Type
       </Link>
-      <Link className="nav-link" to="/results">
-        Results
-      </Link>
       <Link className="nav-link" to="/map">
         Map
       </Link>
