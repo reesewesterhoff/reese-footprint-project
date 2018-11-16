@@ -9,7 +9,8 @@ function* setResults() {
         const startDate = moment(sites[0].fundStartDate);
         const endDate = moment(sites[0].fundEndDate);
         const timeline = endDate.diff(startDate,'months');
-        const timeToPayOff = selectedSite.total_price/generators[0].monthlyCost;
+        const timeToPayOff = selectedSite.total_price
+                /( generators.map(generator=>parseInt(generator.monthlyCost)).reduce((total,current)=>total+current) );
         const payOffDate = startDate.add(timeToPayOff,'months');
         const payOffInTime = payOffDate.isBefore(endDate);
         console.log('selectedSite',selectedSite, 'generators',generators);

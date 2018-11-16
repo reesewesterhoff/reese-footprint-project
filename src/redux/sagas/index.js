@@ -5,7 +5,7 @@ import userSaga from './userSaga';
 import siteTypesSaga from './siteTypesSaga';
 import setResultsSaga from './setResultsSaga';
 import projectSaga from './projectSaga';
-// import addSiteSaga from './addSiteSaga';
+import addSiteSaga from './addSiteSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -22,6 +22,6 @@ export default function* rootSaga() {
     siteTypesSaga(),
     setResultsSaga(),
     projectSaga(),
-    // addSiteSaga(),
+    addSiteSaga(),
   ]);
 }

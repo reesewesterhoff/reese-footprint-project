@@ -48,7 +48,7 @@ class UserDashboard extends Component {
 
                     </div>}
                         {this.props.projects.map(project => 
-                            <Card className={classes.card} >
+                            <Card className={classes.card} key={project.id}>
                                 <CardMedia
                                     className={classes.media}
                                     image="http://vibrance.co/clarity/img/Project-Icon.png"
