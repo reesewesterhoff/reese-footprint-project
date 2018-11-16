@@ -5,9 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { connect } from 'react-redux';
-import axios from 'axios';
-
 
 function getModalStyle() {
   const top = 50
@@ -36,15 +33,7 @@ const styles = theme => ({
 
 class FloatingModal extends Component {
   state = {
-    open: false,
-  };
-
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
+    open: this.props.modalOpen,
   };
 
   render() {
@@ -54,7 +43,7 @@ class FloatingModal extends Component {
       <span>
         <Button
           className={classes.button}
-          onClick={this.handleOpen}
+          onClick={this.props.handleModalToggle}
           variant="outlined"
           color={this.props.color}
         >
@@ -63,8 +52,8 @@ class FloatingModal extends Component {
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={this.props.modalOpen}
+          onClose={this.props.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title">
