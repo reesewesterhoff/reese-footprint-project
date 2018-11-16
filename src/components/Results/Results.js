@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
 
 let start = '2014-12-30T18:06:17.762Z';
 let end = '2020-01-05T18:06:17.762Z';
@@ -31,10 +34,10 @@ class Results extends Component {
 
     handleChange = property => event => this.setState({ [property]: event.target.value });
 
-    handleSubmit = property => event => {
+    handleSubmit = () => event => {
         event.preventDefault();
         axios.post('/email', {
-            content: { name: this.state.name, email: this.state.email, subject: property, message: this.state.message },
+            content: { name: this.state.name, email: this.state.email, message: this.state.message },
             siteName: this.props.sites[0].siteName,
             fundStartDate: this.props.sites[0].fundStartDate,
             fundEndDate: this.props.sites[0].fundEndDate,
@@ -114,8 +117,15 @@ class Results extends Component {
 
         return (<div>
             <h2 className="heading">Results</h2>
-            <div style={{maxWidth: "90%", margin: "auto"}}>
-            <Line data={{ datasets: datasets }} options={this.state.options} />
+            <div style={{ maxWidth: "90%", margin: "auto" }}>
+                <Line data={{ datasets: datasets }} options={this.state.options} />
+            </div>
+            <div className="subHeading">
+                <p>
+                    This is an estimate of what the costs/benefits of using solar power at your site. There are purchase, lease, and renting options available.
+                    Please click the "Contact The Experts" button to send your estimate and email address to a Footprint Project representative. We will contact
+                    promptly with more details and information about how to make your project sustainable!
+                </p>
             </div>
             <h3>Time to pay off: {parseInt(this.props.dieselCalculation.timeToPayOff)} months</h3>
             {this.props.dieselCalculation.payOffInTime ?
