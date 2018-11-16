@@ -3,6 +3,7 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
 // import { stat } from 'fs';
 
 
@@ -13,6 +14,7 @@ let end = '2020-01-05T18:06:17.762Z';
 class Results extends Component {
 
     state = {
+        open: false,
         name: '',
         email: '',
         message: '',
@@ -53,6 +55,7 @@ class Results extends Component {
         ).then((response) => {
             console.log('Response is:', response.data);
             this.setState({
+                open: true,
                 name: '',
                 email: '',
                 message: '',
@@ -122,7 +125,9 @@ class Results extends Component {
 
         return (<div>
             <h2 className="heading">Results</h2>
+            <div style={{maxWidth: "90%", margin: "auto"}}>
             <Line data={{ datasets: datasets }} options={this.state.options} />
+            </div>
             <h3>Time to pay off: {parseInt(this.props.dieselCalculation.timeToPayOff)} months</h3>
             {this.props.dieselCalculation.payOffInTime ?
                 <h3>Total Savings: ${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price)}</h3> :
@@ -134,6 +139,10 @@ class Results extends Component {
                 <TextField placeholder="Message" type="text" onChange={this.handleChange('message')} value={this.state.message} />
                 <input type="submit" value="Contact the experts" />
             </form>
+            <Snackbar open={this.state.open} 
+                message={<span id="message-id">Email Sent</span>}
+                autoHideDuration={2000}
+                onClose={() => this.setState({open: false})}/>
             <pre>{JSON.stringify(this.props, null, 2)}</pre>
             {/* <pre>{JSON.stringify(this.state, null, 2)}</pre> */}
         </div>)
