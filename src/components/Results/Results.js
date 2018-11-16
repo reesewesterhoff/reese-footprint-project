@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
-import { stat } from 'fs';
+// import { stat } from 'fs';
 
 
 let start = '2014-12-30T18:06:17.762Z';
