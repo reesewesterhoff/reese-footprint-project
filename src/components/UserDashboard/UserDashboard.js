@@ -10,19 +10,25 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
     button: {
-        margin: theme.spacing.unit,
+        width: '100%',
+        margin: 'auto',
+    },
+    cardDiv: {
+        marginTop: '5%',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
     },
     card: {
-        maxWidth: 150,
-      },
-      media: {
-        height: 140,
-      },
+        width: '20vmin',
+        height: '30vmin',
+        margin: 10,
+    },
+    media: {
+        height: '15vmin',
+    },
 });
 
 class UserDashboard extends Component {
@@ -42,13 +48,13 @@ class UserDashboard extends Component {
                 <h1 className="heading">Dashboard</h1>
                 <h2 className="subHeading">Projects</h2>
                 <div>
-                    {!this.props.projects ? <p>loading...</p> : 
-                    <div>
+                    {!this.props.projects ? <p>loading...</p> :
+                        <div>
 
-
-                    </div>}
-                        {this.props.projects.map(project => 
-                            <Card className={classes.card} >
+                        </div>}
+                    <div className={classes.cardDiv}>
+                        {this.props.projects.map(project =>
+                            <Card className={classes.card}>
                                 <CardMedia
                                     className={classes.media}
                                     image="http://vibrance.co/clarity/img/Project-Icon.png"
@@ -63,9 +69,23 @@ class UserDashboard extends Component {
                                         {project.country}
                                     </Typography>
                                 </CardContent>
+                                <CardActions>
+                                    <div className={classes.button}>
+                                        <Button
+                                            size="large"
+                                            variant="outlined"
+                                            color="secondary"
+                                            // onClick={() => this.props.selectSite(this.props.site)}
+                                        >
+                                            Select Project
+                                        </Button>
+                                    </div>
+                                </CardActions>
                             </Card>
                         )}
-                    
+                    </div>
+
+
                 </div>
 
             </div>
