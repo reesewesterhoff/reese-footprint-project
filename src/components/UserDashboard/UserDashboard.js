@@ -37,6 +37,14 @@ class UserDashboard extends Component {
         this.props.dispatch({ type: 'GET_PROJECTS', payload: { id: this.props.user.id } });
     }
 
+    // selectProject () => {
+
+    // }
+
+    handleAddProject = () => {
+        this.props.history.push('/add_project')
+    }
+
     render() {
 
 
@@ -46,12 +54,22 @@ class UserDashboard extends Component {
 
             <div>
                 <h1 className="heading">Dashboard</h1>
-                <h2 className="subHeading">Projects</h2>
+                <h2 className="subHeading">Projects 
+                    <br></br>
+                    <br></br>
+                    <Button  
+                    onClick={this.handleAddProject}
+                    size="large"
+                    variant="contained"
+                    color="primary">
+                    Add Project
+                    </Button>
+                </h2>
                 <div>
-                    {!this.props.projects ? <p>loading...</p> :
+                    {!this.props.projects.length ? <h3 className="heading">Add a project to get started!</h3> 
+                    
+                    :
                         <div>
-
-                        </div>}
                     <div className={classes.cardDiv}>
                         {this.props.projects.map(project =>
                             <Card className={classes.card}>
@@ -84,6 +102,8 @@ class UserDashboard extends Component {
                             </Card>
                         )}
                     </div>
+
+                        </div>}
 
 
                 </div>
