@@ -2,15 +2,18 @@ import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
 
 function* addProject(action) {
+  try{
     yield call(axios.post, '/projects', action.payload);
-      yield put({ type: 'SET_PROJECTS', payload: action.payload });
+    yield call(getProjects(action));
+  }catch(error){
+    console.log('Error adding project:',error);
+  }
 }
 
 function* getProjects(action) {
     try {
-      const projects = yield axios.get(`/projects/${action.payload.id}` )
+      const projects = yield axios.get(`/projects` )
       yield put({ type: 'SET_PROJECTS', payload: projects.data });
-      
     } catch (error) {
       console.log('error getting projects:', error);
     }
