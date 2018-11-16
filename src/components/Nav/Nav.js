@@ -42,8 +42,6 @@ const Nav = (props) => (
         About
       </Link>
 
-
-      
       <Link className="nav-link" to="/add_site">
         Add Site
       </Link>
