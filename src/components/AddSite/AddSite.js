@@ -63,6 +63,7 @@ class AddSite extends Component {
             },
             error => {
                 console.error(error);
+                alert('There was an error, please refresh or contact us');
             }
         );
     }
@@ -94,6 +95,8 @@ class AddSite extends Component {
                 lng: 0,
             }
         });
+        // add toast
+        // store inputs in redux to clear inputs after successful post
     }
 
     render() {
@@ -106,35 +109,15 @@ class AddSite extends Component {
                 <h2 className="heading">Transition Tool</h2>
 
                 <div className="subHeading">
-                    <h3>This tool is for users with off-grid power needs who are exploring on-site solar plus storage.</h3>
-                    <h3>Based on the length of your project, monthly power budgets and site electrical loads, solar plus storage may be the right option for you!</h3>
-                    {/* <h3>This is a calculator that allows you to input your site information to do a cost-benefit</h3>
-                    <h3>comparison of using diesel energy generators to solar alternatives.</h3> */}
+                    <h3>This tool is for users with off-grid power needs who are exploring on-site solar plus storage. </h3>
+                    <h3>Based on the length of your project, monthly power budgets and site electrical loads,</h3>
+                    <h3>solar plus storage may be the right option for you!</h3>
                 </div>
 
                 <div className="siteForm">
-                    <br />
-                    <br />
-                    <h4>Enter Country and click on map below to set site location.</h4>
-                    <h4>Latitude: {this.state.location.lat} <br></br> Longitude {this.state.location.lng}</h4>
 
-                    <Map
-                        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
-                        loadingElement={<div style={{ height: `100%` }} />}
-                        containerElement={<div style={{ height: `45vh`, width: '45vh', margin: 'auto' }} />}
-                        mapElement={<div style={{ height: `100%` }} />}
-                        isMarkerShown={this.state.isMarkerShown}
-                        onMarkerClick={this.handleMarkerClick}
-                        handleToggleOpen={this.handleToggleOpen}
-                        isOpen={this.state.isOpen}
-                        onClick={this.handleClick}
-                        location={this.state.location}
-                        handleClick={this.handleClick}
-                        mapClicked={this.state.mapClicked}
-                    />
-                    <br />
-                    <br />
                     <form onSubmit={this.handleSubmit}>
+                    <h4 id="siteFormHeader">Enter Site Information</h4>
                         <div>
                             <TextField
                                 id="standard-name"
@@ -171,6 +154,25 @@ class AddSite extends Component {
                             }}
                             required
                         />
+                        <div className="map">
+                            <h4>Search by Country and click on map below to set site location.</h4>
+                            <h4>Latitude: {this.state.location.lat} <br></br> Longitude: {this.state.location.lng}</h4>
+
+                            <Map
+                                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
+                                loadingElement={<div style={{ height: `100%` }} />}
+                                containerElement={<div style={{ height: `80vmin`, width: '80vmin', margin: 'auto', }} />}
+                                mapElement={<div style={{ height: `100%` }} />}
+                                isMarkerShown={this.state.isMarkerShown}
+                                onMarkerClick={this.handleMarkerClick}
+                                handleToggleOpen={this.handleToggleOpen}
+                                isOpen={this.state.isOpen}
+                                onClick={this.handleClick}
+                                location={this.state.location}
+                                handleClick={this.handleClick}
+                                mapClicked={this.state.mapClicked}
+                            />
+                        </div>
                         <br />
                         <br />
                         <br />

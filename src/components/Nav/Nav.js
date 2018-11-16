@@ -42,16 +42,8 @@ const Nav = (props) => (
         About
       </Link>
 
-
-      
       <Link className="nav-link" to="/add_site">
         Add Site
-      </Link>
-      <Link className="nav-link" to="/site_type">
-        Site Type
-      </Link>
-      <Link className="nav-link" to="/map">
-        Map
       </Link>
     </div>
   </div>

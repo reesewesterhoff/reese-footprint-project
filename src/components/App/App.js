@@ -19,7 +19,6 @@ import InfoPage from '../InfoPage/InfoPage';
 import AddSite from '../AddSite/AddSite';
 import SiteTypeList from '../SiteTypeList/SiteTypeList';
 import Results from '../Results/Results';
-import MapPage from '../MapPage/MapPage';
 import ProjectPage from '../ProjectPage/ProjectPage';
 import SavedSitePage from '../SavedSitePage/SavedSitePage';
 import AddProject from '../AddProject/AddProject';
@@ -102,11 +101,6 @@ class App extends Component {
               exact
               path="/results"
               component={Results}
-            />
-            <Route
-              exact
-              path="/map"
-              component={MapPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
