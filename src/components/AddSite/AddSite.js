@@ -107,15 +107,13 @@ class AddSite extends Component {
 
             <div>
                 <h2 className="heading">Transition Tool</h2>
-
                 <div className="subHeading">
-                    <h3>This tool is for users with off-grid power needs who are exploring on-site solar plus storage. </h3>
-                    <h3>Based on the length of your project, monthly power budgets and site electrical loads,</h3>
-                    <h3>solar plus storage may be the right option for you!</h3>
+                    <h3>This tool is for users with off-grid power needs who are exploring on-site solar plus storage. 
+                        Based on the length of your project, monthly power budgets and site electrical loads,
+                        solar plus storage may be the right option for you!</h3>
                 </div>
-
                 <div className="siteForm">
-
+                <br />
                     <form onSubmit={this.handleSubmit}>
                     <h4 id="siteFormHeader">Enter Site Information</h4>
                         <div>

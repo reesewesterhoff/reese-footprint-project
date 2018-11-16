@@ -57,6 +57,8 @@ input {
 .subHeading {
     text-align: center;
     color: rgb(139, 141, 141);
+    width: 70%;
+    margin: auto;
 }
 
 .siteDescription {
