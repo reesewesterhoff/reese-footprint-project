@@ -9,3 +9,11 @@ form {
 .siteName {
     margin: auto;
 }
+
+.container {
+    display: flex;
+}
+
+#siteFormHeader {
+    margin: 0;
+}
