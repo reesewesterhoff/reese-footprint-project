@@ -14,7 +14,6 @@ class GeneratorForm extends Component {
 
     state = {
         hasGenerator: false, // property relating to if the user DOES have a generator
-        noGenerator: false, // property relating to if the user DOES NOT have a generator
         energyUsage: {
             generatorSize: '',
             energyUnit: '',
