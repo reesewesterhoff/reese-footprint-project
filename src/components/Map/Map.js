@@ -81,29 +81,39 @@ class Map extends React.Component {
       <div>
         <GoogleMap
           ref={this.state.onMapMounted}
-          defaultZoom={1}
+          defaultZoom={2.2}
           center={this.state.center}
           onClick={this.props.handleClick}
-          onBoundsChanged={this.props.onBoundsChanged}>
-          <SearchBox
-            ref={this.state.onSearchBoxMounted}
-            bounds={this.state.bounds}
-            controlPosition={google.maps.ControlPosition.TOP_LEFT}
+          onBoundsChanged={this.props.onBoundsChanged}
+          defaultOptions={{
+            // these following 7 options turn certain controls off see link below
+            streetViewControl: false,
+            scaleControl: false,
+            mapTypeControl: false,
+            panControl: false,
+            // zoomControl: false,
+            rotateControl: false,
+            fullscreenControl: false}}>
+              < SearchBox
+            ref={ this.state.onSearchBoxMounted }
+            bounds={ this.state.bounds }
+            controlPosition={ google.maps.ControlPosition.TOP_LEFT }
             
-            onPlacesChanged={this.state.onPlacesChanged}>
+            onPlacesChanged={ this.state.onPlacesChanged } >
             <input
               type="text"
               placeholder="Enter Site Location"
               style={{
                 boxSizing: `border-box`,
                 border: `1px solid transparent`,
-                width: `240px`,
-                height: `32px`,
-                marginTop: `27px`,
+                width: `80%`,
+                height: `6%`,
+                marginTop: `5%`,
+                marginLeft: '10%',
                 padding: `0 12px`,
                 borderRadius: `3px`,
                 boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-                fontSize: `14px`,
+                fontSize: `2vmin`,
                 outline: `none`,
                 textOverflow: `ellipses`,
               }}
