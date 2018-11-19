@@ -31,11 +31,16 @@ const styles = {
 
 class SiteTypeItem extends Component {
 
+    componentDidMount() {
+        
+    }
+
     render() {
 
         const { classes } = this.props;
 
         return (
+            
             <div className="toolTip">
                 <span className="toolTipText">{this.props.site.description}</span>
                 <Card className={classes.card} >

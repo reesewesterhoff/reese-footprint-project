@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GeneratorList from '../GeneratorList/GeneratorList';
 import Input from '@material-ui/core/Input';
-import Checkbox from '@material-ui/core/Checkbox';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
@@ -11,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Snackbar from '@material-ui/core/Snackbar';
 
 class GeneratorForm extends Component {
 
@@ -21,6 +21,7 @@ class GeneratorForm extends Component {
             energyUnit: '',
             monthlyCost: '',
         },
+        snackbarOpen: false,
     }
 
     handleHasGeneratorToggle = () => {
@@ -55,7 +56,8 @@ class GeneratorForm extends Component {
                 generatorSize: '',
                 energyUnit: '',
                 monthlyCost: '',
-            }
+            },
+            snackbarOpen: true,
         });
     }
 
@@ -66,7 +68,7 @@ class GeneratorForm extends Component {
                     <InputLabel htmlFor={this.state.hasGenerator.toString()}>Do you currently have a generator?</InputLabel>
                     <FormControlLabel
                         control={
-                            <Switch 
+                            <Switch
                                 checked={this.state.hasGenerator}
                                 onChange={this.handleHasGeneratorToggle}
                                 value="hasGenerator"
@@ -76,10 +78,9 @@ class GeneratorForm extends Component {
                     />
                 </div>
                 <br />
-                {this.state.hasGenerator === true && (
+                {this.state.hasGenerator && (
                     <>
                         <FormControl style={{ margin: 10 }}>
-                            {/* <InputLabel htmlFor={this.state.energyUsage.generatorSize}>Generator Size</InputLabel> */}
                             <Input
                                 type="text"
                                 placeholder="Enter Load Size"
@@ -89,7 +90,6 @@ class GeneratorForm extends Component {
                             <FormHelperText>Generator Size</FormHelperText>
                         </FormControl>
                         <FormControl style={{ margin: 10 }}>
-                            {/* <InputLabel htmlFor={this.state.energyUsage.energyUnit}>--Select Energy Unit--</InputLabel> */}
                             <Select
                                 value={this.state.energyUsage.energyUnit}
                                 onChange={this.handleChangeFor('energyUnit')}
@@ -102,7 +102,6 @@ class GeneratorForm extends Component {
                         </FormControl>
                         <br />
                         <FormControl style={{ margin: 10 }}>
-                            {/* <InputLabel htmlFor={this.state.energyUsage.monthlyCost}>Monthly Fuel Cost (USD $)</InputLabel> */}
                             <Input
                                 type="text"
                                 placeholder="USD $"
@@ -121,17 +120,16 @@ class GeneratorForm extends Component {
                         {this.props.generator.length > 0 && <GeneratorList />}
                     </>
                 )}
-                {this.state.hasGenerator === false && (
+                {!this.state.hasGenerator && (
                     <>
                         <FormControl style={{ margin: 10 }}>
-                            {/* <InputLabel htmlFor={this.state.energyBudget}>Monthly Energy Budget (USD $)</InputLabel> */}
                             <Input
                                 type="text"
                                 placeholder="USD $"
                                 value={this.state.energyUsage.monthlyCost}
                                 onChange={this.handleChangeFor('monthlyCost')}
                             />
-                            <FormHelperText>Monthly Energy Budget</FormHelperText>
+                            <FormHelperText>Total Monthly Energy Budget</FormHelperText>
                         </FormControl>
                         <Button
                             variant="contained"
@@ -140,8 +138,15 @@ class GeneratorForm extends Component {
                         >
                             Add Monthly Energy Budget
                     </Button>
+                        {this.props.generator.length > 0 && <GeneratorList />}
                     </>
                 )}
+                <Snackbar
+                    open={this.state.snackbarOpen}
+                    message={<span id="message-id">Energy Budget Added</span>}
+                    autoHideDuration={2000}
+                    onClose={() => this.setState({ snackbarOpen: false })}
+                />
             </div>
         )
     }

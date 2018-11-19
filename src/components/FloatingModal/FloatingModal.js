@@ -86,6 +86,7 @@ class FloatingModal extends Component {
                   type="text"
                   label="Message"
                   variant="outlined"
+                  multiline
                   value={this.props.state.message}
                   onChange={this.props.handleChangeFor('message')}
                 />

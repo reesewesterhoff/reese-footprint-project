@@ -38,3 +38,7 @@ a {
     transform: scale(1.05);
     cursor: grab;
 }
+
+.sitesCards {
+    display: flex;
+}
