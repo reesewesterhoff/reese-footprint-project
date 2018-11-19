@@ -26,12 +26,22 @@ const styles = theme => ({
     button: {
         margin: theme.spacing.unit,
     },
-    card: {
-        maxWidth: 150,
-      },
-      media: {
-        height: 140,
-      },
+    cardDiv: {
+      marginTop: '5%',
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-evenly',
+  },
+  card: {
+      width: '30vmin',
+      height: '40vmin',
+      margin: 10,
+      textAlign: 'center',
+  },
+  media: {
+      height: '10vmin',
+  },
 });
 
 class ProjectPage extends Component {
@@ -86,8 +96,8 @@ class ProjectPage extends Component {
 
                     </div>}
 
-                      {!this.props.sitesByProject.length ? <p>loading...</p> : 
-                      <div>
+                      {!this.props.sitesByProject.length ? <h4>Add a site to get started!</h4> : 
+                      <div className={classes.cardDiv}>
                       
                         {this.props.sitesByProject.map((site, index) => 
                             <Card className={classes.card} key={index}>
@@ -116,7 +126,7 @@ class ProjectPage extends Component {
                                             color="secondary"
                                             onClick={() => this.selectSite(index)}
                                         >
-                                            Select Project
+                                            Select Site
                                         </Button>
                                     </div>
                                 </CardActions>
