@@ -12,6 +12,10 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
+import Results from '../Results/Results';
+import scrollToComponent from 'react-scroll-to-component';
+import Snackbar from '@material-ui/core/Snackbar';
+
 
 const styles = {
     card: {
@@ -27,15 +31,24 @@ class SiteTypeList extends Component {
 
     state = {
         icon: '',
+        snackbarOpen: false,
     }
 
-    selectSite = site => this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
+    selectSite = site => {
+        this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
+        setTimeout(() => scrollToComponent(this.results, { offset: 0, align: 'top', duration: 750 }), 200);
+        this.setState({ 
+            ...this.state,
+            snackbarOpen: true, 
+        });
+    }
 
-    selectSiteCategory = async category => {
-        await this.props.dispatch({ type: 'FETCH_SITE_TYPES', payload: category });
+    selectSiteCategory = category => {
+        this.props.dispatch({ type: 'FETCH_SITE_TYPES', payload: category });
         this.setState({
             icon: this.chooseIcon(category),
-        });    
+        });
+        setTimeout(() => scrollToComponent(this.siteTypeItem, { offset: 0, align: 'top', duration: 750 }), 200);
     }
 
     chooseIcon = iconCategory => {
@@ -74,6 +87,7 @@ class SiteTypeList extends Component {
                         selectSiteCategory={this.selectSiteCategory}
                     />
                 </div>
+                <section className='siteTypeItem' ref={(section) => { this.siteTypeItem = section; }}>
                 <div className={classes.card}>
                     {this.props.siteTypes.map(site => {
                         return <SiteTypeItem
@@ -84,6 +98,23 @@ class SiteTypeList extends Component {
                         />
                     }
                     )}
+                </div>
+                </section>
+                <br />
+                {
+                    this.props.selectedSite.id &&
+                    <section className='results' ref={(section) => { this.results = section; }}>
+                        <Results />
+                    </section>
+                }
+                <br />
+                <div>
+                    <Snackbar
+                        open={this.state.snackbarOpen}
+                        message={<span id="message-id">Site Selected</span>}
+                        autoHideDuration={2000}
+                        onClose={() => this.setState({ snackbarOpen: false })}
+                    />
                 </div>
             </div>
         );
@@ -98,6 +129,7 @@ SiteTypeList.propTypes = {
 const mapStateToProps = state => {
     return {
         siteTypes: state.siteTypes,
+        selectedSite: state.selectedSite,
     }
 }
 

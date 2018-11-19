@@ -9,7 +9,8 @@ import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import './AddSite.css'
+import './AddSite.css';
+import scrollToComponent from 'react-scroll-to-component';
 // Set Google Maps API Key
 Geocode.setApiKey("AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68");
 
@@ -86,6 +87,7 @@ class AddSite extends Component {
         this.props.dispatch({
             type: 'ADD_SITE', payload: { ...this.state, siteGenerators: this.props.generator }
         });
+        setTimeout(() => scrollToComponent(this.siteTypeList, { offset: 0, align: 'top', duration: 750 }), 200);
         // this.setState({
         //     siteName: '',
         //     fundStartDate: '',
@@ -124,14 +126,14 @@ class AddSite extends Component {
             <div>
                 <h2 className="heading">Transition Tool</h2>
                 <div className="subHeading">
-                    <h3>This tool is for users with off-grid power needs who are exploring on-site solar plus storage. 
+                    <h3>This tool is for users with off-grid power needs who are exploring on-site solar plus storage.
                         Based on the length of your project, monthly power budgets and site electrical loads,
                         solar plus storage may be the right option for you!</h3>
                 </div>
                 <div className="siteForm">
-                <br />
+                    <br />
                     <form onSubmit={this.handleSubmit}>
-                    <h4 id="siteFormHeader">Enter Site Information</h4>
+                        <h4 id="siteFormHeader">Enter Site Information</h4>
                         <div>
                             <TextField
                                 id="standard-name"
@@ -197,21 +199,22 @@ class AddSite extends Component {
                             Choose Solar Grid
                         </Button>
                         <br />
+                        <br />
+                        <br />
+                        <br />
                     </form>
                 </div>
                 <br />
                 {
-                    this.props.sites.length > 0 && <SiteTypeList />
+
+                    this.props.sites.length > 0 &&
+                    <section className='siteTypeList' ref={(section) => { this.siteTypeList = section; }}>
+                        <SiteTypeList />
+                    </section>
                 }
                 <br />
-                <br />
-                {
-                    this.props.selectedSite.id && <Results />
-                }
-                <br />
-                <br />
-                {this.props.user.id && this.props.selectedSite.id && <Button value="submit" 
-                    type="submit" variant="contained" color="primary" 
+                {this.props.user.id && this.props.selectedSite.id && <Button value="submit"
+                    type="submit" variant="contained" color="primary"
                     className={classes.button} onClick={this.addSiteToProject}>
                     Add Site to Project
                     </Button>}
