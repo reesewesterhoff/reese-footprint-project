@@ -107,6 +107,8 @@ class AddSite extends Component {
             energy_budget: this.props.generator.map(obj=>parseInt(obj.monthlyCost)
                 ).reduce((total,current) => total + current)}});
         if (this.props.user.id && this.props.selectedSite.id) {
+            const id = this.props.projectId;
+            this.props.dispatch({ type: 'GET_SITES_BY_PROJECT', payload: id })
             this.props.history.push('/project');
         }
     }

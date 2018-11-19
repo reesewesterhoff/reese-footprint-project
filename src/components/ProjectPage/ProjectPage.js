@@ -9,6 +9,14 @@ import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import SavedSitePage from '../SavedSitePage/SavedSitePage';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
+import RestaurantIcon from '@material-ui/icons/Restaurant';
+import RouterIcon from '@material-ui/icons/Router';
+import WavesIcon from '@material-ui/icons/Waves';
+import SecurityIcon from '@material-ui/icons/Security';
+import HomeIcon from '@material-ui/icons/Home';
+import StoreIcon from '@material-ui/icons/Store';
 
 const styles = theme => ({
     container: {
@@ -78,6 +86,9 @@ class ProjectPage extends Component {
 
                     </div>}
 
+                      {!this.props.sitesByProject.length ? <p>loading...</p> : 
+                      <div>
+                      
                         {this.props.sitesByProject.map((site, index) => 
                             <Card className={classes.card} key={index}>
 
@@ -111,7 +122,8 @@ class ProjectPage extends Component {
                                 </CardActions>
                             </Card>
                         )}
-
+                        </div>
+                        }
                         {this.state.currentIndex < 0 ? <p>Choose a site!</p> :
                         <SavedSitePage
                         index={this.state.currentIndex}
