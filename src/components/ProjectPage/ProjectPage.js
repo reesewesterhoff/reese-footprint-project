@@ -40,7 +40,7 @@ class ProjectPage extends Component {
                 <h1 className="heading">Dashboard</h1>
                 <h2 className="subHeading">Projects</h2>
                 <div>
-                    {!this.props.projects ? <p>loading...</p> : 
+                    {!this.props.sitesByProject ? <p>loading...</p> : 
                     <div>
 
 
