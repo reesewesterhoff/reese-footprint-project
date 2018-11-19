@@ -204,6 +204,7 @@ const mapStateToProps = state => ({
     sites: state.sites,
     generator: state.generator,
     selectedSite: state.selectedSite,
+    projectId: state.project_id,
 });
 
 AddSite.propTypes = {

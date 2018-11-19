@@ -37,4 +37,34 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+/**
+ * GET Project route
+ */
+router.get('/:id', (req, res) => {
+    const query = `SELECT * FROM "projects" WHERE "id" = $1;`
+    pool.query(query, [req.params.id ])
+    .then(results => {
+        res.send(results.rows);
+    })
+    .catch(error => {
+        console.log('ERROR with GET project:',error);
+        res.sendStatus(500);
+    })
+});
+
+/**
+ * GET Sites by Project route
+ */
+router.get('/sites/:id', (req, res) => {
+    const query = `SELECT * FROM "sites" WHERE "project_id" = $1;`
+    pool.query(query, [req.params.id ])
+    .then(results => {
+        res.send(results.rows);
+    })
+    .catch(error => {
+        console.log('ERROR with GET sites by project:',error);
+        res.sendStatus(500);
+    })
+});
+
 module.exports = router;

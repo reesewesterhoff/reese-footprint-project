@@ -38,10 +38,11 @@ class UserDashboard extends Component {
     }
 
     selectProject = (id) => {
-        this.props.dispatch({
-            type: 'SELECT_PROJECT', payload: id,
-        })
+        this.props.dispatch({ type: 'SELECT_PROJECT', payload: id })
         console.log('project id:', id);
+        
+        this.props.dispatch({ type: 'GET_PROJECT', payload: id })
+        this.props.dispatch({ type: 'GET_SITES_BY_PROJECT', payload: id })
         
     }
 
