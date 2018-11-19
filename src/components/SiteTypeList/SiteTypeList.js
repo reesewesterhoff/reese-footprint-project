@@ -14,7 +14,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
 import Results from '../Results/Results';
 import scrollToComponent from 'react-scroll-to-component';
-
+import Snackbar from '@material-ui/core/Snackbar';
 
 
 const styles = {
@@ -31,11 +31,16 @@ class SiteTypeList extends Component {
 
     state = {
         icon: '',
+        snackbarOpen: false,
     }
 
     selectSite = site => {
         this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
         setTimeout(() => scrollToComponent(this.results, { offset: 0, align: 'top', duration: 750 }), 200);
+        this.setState({ 
+            ...this.state,
+            snackbarOpen: true, 
+        });
     }
 
     selectSiteCategory = category => {
@@ -104,6 +109,15 @@ class SiteTypeList extends Component {
                 }
                 <br />
             </div >
+                <div>
+                    <Snackbar
+                        open={this.state.snackbarOpen}
+                        message={<span id="message-id">Site Selected</span>}
+                        autoHideDuration={2000}
+                        onClose={() => this.setState({ snackbarOpen: false })}
+                    />
+                </div>
+            </div>
         );
     }
 }
