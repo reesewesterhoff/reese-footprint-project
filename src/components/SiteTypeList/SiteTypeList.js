@@ -12,6 +12,10 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
+import Results from '../Results/Results';
+import scrollToComponent from 'react-scroll-to-component';
+
+
 
 const styles = {
     card: {
@@ -29,13 +33,17 @@ class SiteTypeList extends Component {
         icon: '',
     }
 
-    selectSite = site => this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
+    selectSite = site => {
+        this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
+        setTimeout(() => scrollToComponent(this.results, { offset: 0, align: 'top', duration: 750 }), 200);
+    }
 
-    selectSiteCategory = async category => {
-        await this.props.dispatch({ type: 'FETCH_SITE_TYPES', payload: category });
+    selectSiteCategory = category => {
+        this.props.dispatch({ type: 'FETCH_SITE_TYPES', payload: category });
         this.setState({
             icon: this.chooseIcon(category),
-        });    
+        });
+        setTimeout(() => scrollToComponent(this.siteTypeItem, { offset: 0, align: 'top', duration: 750 }), 200);
     }
 
     chooseIcon = iconCategory => {
@@ -74,6 +82,7 @@ class SiteTypeList extends Component {
                         selectSiteCategory={this.selectSiteCategory}
                     />
                 </div>
+                <section className='siteTypeItem' ref={(section) => { this.siteTypeItem = section; }}>
                 <div className={classes.card}>
                     {this.props.siteTypes.map(site => {
                         return <SiteTypeItem
@@ -85,7 +94,16 @@ class SiteTypeList extends Component {
                     }
                     )}
                 </div>
-            </div>
+                </section>
+                <br />
+                {
+                    this.props.selectedSite.id &&
+                    <section className='results' ref={(section) => { this.results = section; }}>
+                        <Results />
+                    </section>
+                }
+                <br />
+            </div >
         );
     }
 }
@@ -98,6 +116,7 @@ SiteTypeList.propTypes = {
 const mapStateToProps = state => {
     return {
         siteTypes: state.siteTypes,
+        selectedSite: state.selectedSite,
     }
 }
 
