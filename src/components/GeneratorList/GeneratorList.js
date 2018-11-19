@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import GeneratorItem from '../GeneratorItem/GeneratorItem';
 
 class GeneratorList extends Component {
     render() {
+        let totalCost = 0;
+        this.props.generator.map(newGen => totalCost += Number(newGen.monthlyCost));
         return (
             <div>
-                List of Generators:
-                <ul>
-                    {this.props.generator.map(newGen => (
-                        <GeneratorItem 
-                            key={newGen.generatorSize}
-                            newGen={newGen}
-                        />
-                    ))}
-                </ul>
+                Total Monthly Diesel Cost:
+                   ${totalCost.toFixed(2)}
             </div>
         )
     }
