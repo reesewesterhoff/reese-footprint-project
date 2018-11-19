@@ -44,6 +44,10 @@ class ProjectPage extends Component {
     
   }
 
+  handleAddSite = () => {
+    this.props.history.push('/add_site')
+}
+
     render() {
 
 
@@ -55,8 +59,21 @@ class ProjectPage extends Component {
                 <div>
                     {!this.props.project.length ? <p>loading...</p> : 
                     <div>
-                      <h1 className="heading">{this.props.project[0].name}</h1>
-                      <h2 className="subHeading">{this.props.project[0].country}</h2>
+                      <h1 className="heading">{this.props.project[0].name}
+
+                        <pre>
+                          <Button  
+                            onClick={this.handleAddSite}
+                            size="medium"
+                            variant="contained"
+                            color="primary">
+                            Add Site
+                          </Button>
+
+                        </pre>
+
+                      </h1>
+      
 
 
                     </div>}
