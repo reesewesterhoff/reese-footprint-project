@@ -25,7 +25,7 @@ const styles = theme => ({
         flexWrap: 'wrap',
     },
     button: {
-        margin: theme.spacing.unit,
+        margin: 'auto',
     },
     cardDiv: {
       marginTop: '5%',
@@ -35,8 +35,9 @@ const styles = theme => ({
       justifyContent: 'space-evenly',
   },
   card: {
+      paddingTop: '10vmin',
       width: '30vmin',
-      height: '40vmin',
+      height: '30vmin',
       margin: 10,
       textAlign: 'center',
   },
@@ -148,7 +149,7 @@ class ProjectPage extends Component {
                                 </Typography> */}
                                 
                                 <CardContent>
-                                    <Typography variant="h6">
+                                    <Typography variant="h2">
                                         {site.site_name}
                                     </Typography>
                                     <Typography variant="h4">
@@ -171,6 +172,7 @@ class ProjectPage extends Component {
                                             variant="outlined"
                                             color="secondary"
                                             onClick={() => this.selectSite(index)}
+                                            
                                         >
                                             Select Site
                                         </Button>
