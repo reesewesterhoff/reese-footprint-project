@@ -37,13 +37,18 @@ class UserDashboard extends Component {
         this.props.dispatch({ type: 'GET_PROJECTS', payload: { id: this.props.user.id } });
     }
 
-    // selectProject () => {
-
-    // }
+    selectProject = (id) => {
+        this.props.dispatch({
+            type: 'SELECT_PROJECT', payload: id,
+        })
+        console.log('project id:', id);
+        
+    }
 
     handleAddProject = () => {
         this.props.history.push('/add_project')
     }
+
 
     render() {
 
@@ -93,7 +98,7 @@ class UserDashboard extends Component {
                                             size="large"
                                             variant="outlined"
                                             color="secondary"
-                                            // onClick={() => this.props.selectSite(this.props.site)}
+                                            onClick={() => this.selectProject(project.id)}
                                         >
                                             Select Project
                                         </Button>
