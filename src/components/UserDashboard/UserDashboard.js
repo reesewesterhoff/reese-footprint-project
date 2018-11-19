@@ -25,6 +25,7 @@ const styles = theme => ({
         width: '30vmin',
         height: '40vmin',
         margin: 10,
+        textAlign: 'center',
     },
     media: {
         height: '20vmin',
