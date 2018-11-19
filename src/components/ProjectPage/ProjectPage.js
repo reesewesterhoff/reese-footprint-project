@@ -45,7 +45,7 @@ class ProjectPage extends Component {
 
 
                     </div>}
-                        {this.props.sitesByProject.map(project => 
+                        {this.props.sitesByProject.map((site,index) => 
                             <Card className={classes.card} >
                                 <CardMedia
                                     className={classes.media}
@@ -54,12 +54,12 @@ class ProjectPage extends Component {
                                 />
                                 <CardContent>
                                     <Typography variant="h6">
-                                        {project.name}
+                                        {site.name}
                                     </Typography>
                                     <br />
                                     <Typography>
-                                        {project.country}
-                                    </Typography>
+                                        {site.country}
+                                    </Typography> 
                                 </CardContent>
                             </Card>
                         )}
