@@ -72,6 +72,7 @@ class UserDashboard extends Component {
                     </Button>
                 </h2>
                 <div>
+
                     {!this.props.projects.length ? <h3 className="heading">Add a project to get started!</h3> 
                     
                     :
@@ -79,6 +80,7 @@ class UserDashboard extends Component {
                     <div className={classes.cardDiv}>
                         {this.props.projects.map(project =>
                             <Card className={classes.card}>
+
                                 <CardMedia
                                     className={classes.media}
                                     image="http://vibrance.co/clarity/img/Project-Icon.png"
