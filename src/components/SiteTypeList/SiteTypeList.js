@@ -12,6 +12,7 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
+import Snackbar from '@material-ui/core/Snackbar';
 
 const styles = {
     card: {
@@ -27,15 +28,22 @@ class SiteTypeList extends Component {
 
     state = {
         icon: '',
+        snackbarOpen: false,
     }
 
-    selectSite = site => this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
+    selectSite = site => {
+        this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
+        this.setState({ 
+            ...this.state,
+            snackbarOpen: true, 
+        });
+    }
 
     selectSiteCategory = async category => {
         await this.props.dispatch({ type: 'FETCH_SITE_TYPES', payload: category });
         this.setState({
             icon: this.chooseIcon(category),
-        });    
+        });
     }
 
     chooseIcon = iconCategory => {
@@ -84,6 +92,14 @@ class SiteTypeList extends Component {
                         />
                     }
                     )}
+                </div>
+                <div>
+                    <Snackbar
+                        open={this.state.snackbarOpen}
+                        message={<span id="message-id">Site Selected</span>}
+                        autoHideDuration={2000}
+                        onClose={() => this.setState({ snackbarOpen: false })}
+                    />
                 </div>
             </div>
         );
