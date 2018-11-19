@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 const SavedSitesPage = (props) => {
 
+
         let site= props.sites[props.index];
         
         return (
@@ -13,6 +14,7 @@ const SavedSitesPage = (props) => {
                 <h4>End Date: {site.end_date}</h4>
                 <h4>Monthly Energy Budget: {site.energy_budget}</h4>
             </div>
+
 
         );
 }

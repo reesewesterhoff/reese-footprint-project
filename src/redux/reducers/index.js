@@ -11,6 +11,7 @@ import projectsReducer from './projectsReducer';
 import projectId from './projectIdReducer';
 import project from './projectReducer';
 import sitesByProject from './sitesByProjectReducer';
+import allSiteTypes from './allSiteTypesReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   projectId, // will store current selected project id
   project, // will store selected project 
   sitesByProject, // will store sites selected by project id
+  allSiteTypes, // will store site types for logged in users
 });
 
 export default rootReducer;

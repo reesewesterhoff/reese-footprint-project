@@ -20,6 +20,21 @@ router.get('/:category', (req, res) => {
 });
 
 /**
+ * GET route template
+ */
+router.get('/', (req, res) => {
+    console.log('req.params.category', req.params.category);
+    
+    pool.query(`SELECT * FROM "site_type";`)
+    .then(results => {
+        res.send(results.rows);
+    }).catch(error => {
+        console.log('Error getting site types', error);
+        res.sendStatus(500);
+    });
+});
+
+/**
  * POST route template
  */
 router.post('/', (req, res) => {
