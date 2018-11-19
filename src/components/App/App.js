@@ -12,13 +12,7 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
 import AddSite from '../AddSite/AddSite';
-import SiteTypeList from '../SiteTypeList/SiteTypeList';
-import Results from '../Results/Results';
 import ProjectPage from '../ProjectPage/ProjectPage';
 import SavedSitePage from '../SavedSitePage/SavedSitePage';
 import AddProject from '../AddProject/AddProject';
@@ -38,7 +32,7 @@ class App extends Component {
           <Nav />
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/" to="/add_site" />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserDashboard if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
