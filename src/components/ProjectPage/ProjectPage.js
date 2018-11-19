@@ -1,78 +1,83 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './ProjectPage.css'
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 
-const styles = {
-  card: {
-    marginTop: 40,
-    width: 250,
-    height: 320,
-    textAlign: 'center',
-    backgroundColor: 'goldenrod',
-  },
-  icon: {
-    margin: 2,
-    fontSize: 60,
-    textAlign: 'center',
-  },
-  button: {
-    width: '100%',
-    margin: 'auto',
-  },
-};
+const styles = theme => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    button: {
+        margin: theme.spacing.unit,
+    },
+    card: {
+        maxWidth: 150,
+      },
+      media: {
+        height: 140,
+      },
+});
 
 class ProjectPage extends Component {
 
+    // componentDidMount() {
+    //     this.props.dispatch({ type: 'GET_PROJECTS', payload: { id: this.props.user.id } });
+    // }
 
-  render() {
+    render() {
 
-    const { classes } = this.props;
 
-    return (
-      <div>
+        const { classes } = this.props;
 
-        <h1 className="projectHeader">Project</h1>
-        <div className="siteCard">
-          <Card className={classes.card} >
-            <a href='http://localhost:3000/#/saved_site'>
-              <CardContent>
-                <Typography>
-                  <img
-                    src="http://www.uhhospitals.org/~/media/UH/Images/locations/uh-chagrin-highlands-health-center.jpg"
-                    alt="hospital"
-                    className={classes.icon} />
-                </Typography>
-                <Typography variant="h5">
-                  Urgent Care Clinic
-                        </Typography>
-                <br />
-                <Typography>
-                  Power Needs: 10kWh/day
-                  Storage:  30kWh
-                        </Typography>
-              </CardContent>
-            </a>
-          </Card>
-        </div>
-      </div>
-    );
-  }
+        return (
+
+            <div>
+                <h1 className="heading">Dashboard</h1>
+                <h2 className="subHeading">Projects</h2>
+                <div>
+                    {!this.props.sitesByProject ? <p>loading...</p> : 
+                    <div>
+
+
+                    </div>}
+                        {this.props.sitesByProject.map(project => 
+                            <Card className={classes.card} >
+                                <CardMedia
+                                    className={classes.media}
+                                    // image="http://vibrance.co/clarity/img/Project-Icon.png"
+                                    title="Generic Project"
+                                />
+                                <CardContent>
+                                    <Typography variant="h6">
+                                        {project.name}
+                                    </Typography>
+                                    <br />
+                                    <Typography>
+                                        {project.country}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        )}
+                    
+                </div>
+
+            </div>
+
+        );
+    }
 }
 
-ProjectPage.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = state => ({
-  user: state,
+  sitesByProject: state.sitesByProject,
 });
 
-// this allows us to use <App /> in index.js
-// export default connect(mapStateToProps)(ProjectPage);
+ProjectPage.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
 export default withStyles(styles)(connect(mapStateToProps)(ProjectPage));
