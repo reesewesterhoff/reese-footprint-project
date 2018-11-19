@@ -108,7 +108,6 @@ class SiteTypeList extends Component {
                     </section>
                 }
                 <br />
-            </div >
                 <div>
                     <Snackbar
                         open={this.state.snackbarOpen}
