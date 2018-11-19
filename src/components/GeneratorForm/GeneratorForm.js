@@ -120,7 +120,7 @@ class GeneratorForm extends Component {
                         {this.props.generator.length > 0 && <GeneratorList />}
                     </>
                 )}
-                {this.state.hasGenerator === false && (
+                {!this.state.hasGenerator && (
                     <>
                         <FormControl style={{ margin: 10 }}>
                             <Input
