@@ -44,6 +44,7 @@ class AddSite extends Component {
         },
         mapClicked: false,
         address: '',
+        url: ''
     }
 
     handleClick = event => {
@@ -86,17 +87,6 @@ class AddSite extends Component {
         this.props.dispatch({
             type: 'ADD_SITE', payload: { ...this.state, siteGenerators: this.props.generator }
         });
-        // this.setState({
-        //     siteName: '',
-        //     fundStartDate: '',
-        //     fundEndDate: '',
-        //     location: {
-        //         lat: 0,
-        //         lng: 0,
-        //     }
-        // });
-        // add toast
-        // store inputs in redux to clear inputs after successful post
     }
 
     addSiteToProject = () => {
@@ -106,6 +96,11 @@ class AddSite extends Component {
             site_type_id: this.props.selectedSite.id,
             energy_budget: this.props.generator.map(obj=>parseInt(obj.monthlyCost)
                 ).reduce((total,current) => total + current)}});
+    }
+
+    getImageString = (image_string) => {
+        console.log('Animation complete');
+        this.setState({url: image_string});
     }
 
     render() {
@@ -199,7 +194,7 @@ class AddSite extends Component {
                 <br />
                 <br />
                 {
-                    this.props.selectedSite.id && <Results />
+                    this.props.selectedSite.id && <Results getImageString={this.getImageString} />
                 }
                 <br />
                 <br />
@@ -208,6 +203,7 @@ class AddSite extends Component {
                     className={classes.button} onClick={this.addSiteToProject}>
                     Add Site to Project
                     </Button>}
+                    <pre>{JSON.stringify(this.state,null,2)}</pre>
             </div>
 
         );

@@ -16,20 +16,7 @@ class Results extends Component {
         name: '',
         email: '',
         message: '',
-        options: {
-            scales: {
-                xAxes: [{
-                    type: 'time',
-                    unitStepSize: 1,
-                    time: {
-                        unit: 'year',
-                        suggestedMax: '2020-01-05T18:06:17.762Z',
-                        suggestedMin: '2014-12-30T18:06:17.762Z',
-                    },
-                    distribution: 'linear'
-                }],
-            }
-        }
+        url: ''
     }
 
     handleChange = property => event => this.setState({ [property]: event.target.value });
@@ -45,7 +32,7 @@ class Results extends Component {
             generator: this.props.generator[0],
             selectedSite: this.props.selectedSite.type,
             totalDieselCost: this.props.dieselCalculation.totalDieselCost,
-            address: this.props.sites[0].address
+            address: this.props.sites[0].address,
         }).then(response => {
             console.log('Response is:', response.data);
             this.setState({
@@ -57,7 +44,10 @@ class Results extends Component {
         }).catch(error => console.log('Error in POST:', error))
     }
 
-
+    setImageString = () => {
+        this.props.getImageString(this.refs.linegraph.chartInstance.toBase64Image());
+        // this.props.getImageString('testing');
+    }
 
     render() {
         const datasets = [{
@@ -114,11 +104,28 @@ class Results extends Component {
             borderWidth: 1
         }]
 
+        const options = {
+            scales: {
+                xAxes: [{
+                    type: 'time',
+                    unitStepSize: 1,
+                    time: {
+                        unit: 'year',
+                        suggestedMax: '2020-01-05T18:06:17.762Z',
+                        suggestedMin: '2014-12-30T18:06:17.762Z',
+                    },
+                    distribution: 'linear'
+                }],
+            },
+            animation: {
+                onComplete: this.setImageString
+              }
+        };
 
         return (<div>
             <h2 className="heading">Results</h2>
             <div style={{ maxWidth: "90%", margin: "auto" }}>
-                <Line data={{ datasets: datasets }} options={this.state.options} />
+                <Line data={{ datasets: datasets }} options={options} ref="linegraph"  />
             </div>
             <div className="subHeading">
                 <p>

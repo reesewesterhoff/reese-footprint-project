@@ -10,6 +10,7 @@ function* addSite(action) {
             yield axios.post('/projects/sites', action.payload);
         }else{
             yield put({ type: 'SET_SITES', payload: action.payload });
+            //does this do anything?
         }
     }catch(error){
         console.log('Error adding site to project:',error);
