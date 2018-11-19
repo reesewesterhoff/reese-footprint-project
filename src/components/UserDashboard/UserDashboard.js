@@ -22,12 +22,12 @@ const styles = theme => ({
         justifyContent: 'space-evenly',
     },
     card: {
-        width: '20vmin',
-        height: '30vmin',
+        width: '30vmin',
+        height: '40vmin',
         margin: 10,
     },
     media: {
-        height: '15vmin',
+        height: '20vmin',
     },
 });
 
@@ -37,13 +37,19 @@ class UserDashboard extends Component {
         this.props.dispatch({ type: 'GET_PROJECTS', payload: { id: this.props.user.id } });
     }
 
-    // selectProject () => {
-
-    // }
+    selectProject = (id) => {
+        this.props.dispatch({ type: 'SELECT_PROJECT', payload: id })
+        console.log('project id:', id);
+        
+        this.props.dispatch({ type: 'GET_PROJECT', payload: id })
+        this.props.dispatch({ type: 'GET_SITES_BY_PROJECT', payload: id })
+        
+    }
 
     handleAddProject = () => {
         this.props.history.push('/add_project')
     }
+
 
     render() {
 
@@ -84,7 +90,7 @@ class UserDashboard extends Component {
                                     <Typography variant="h6">
                                         {project.name}
                                     </Typography>
-                                    <br />
+                                    {/* <br /> */}
                                     <Typography>
                                         {project.country}
                                     </Typography>
@@ -95,7 +101,7 @@ class UserDashboard extends Component {
                                             size="large"
                                             variant="outlined"
                                             color="secondary"
-                                            // onClick={() => this.props.selectSite(this.props.site)}
+                                            onClick={() => this.selectProject(project.id)}
                                         >
                                             Select Project
                                         </Button>

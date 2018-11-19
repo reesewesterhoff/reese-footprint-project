@@ -218,6 +218,7 @@ const mapStateToProps = state => ({
     sites: state.sites,
     generator: state.generator,
     selectedSite: state.selectedSite,
+    project_id: state.projectId,
     user: state.user,
 });
 

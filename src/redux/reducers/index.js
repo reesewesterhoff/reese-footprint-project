@@ -8,6 +8,9 @@ import generator from './generatorReducer';
 import selectedSite from './selectedSiteReducer';
 import dieselCalculation from './calculationReducer';
 import projectsReducer from './projectsReducer';
+import projectId from './projectIdReducer';
+import project from './projectReducer';
+import sitesByProject from './sitesByProjectReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -25,6 +28,9 @@ const rootReducer = combineReducers({
   selectedSite,
   dieselCalculation, // will have the total amount of $ spent on diesel/energy fuel over period of time
   projectsReducer, // will have all of the projects associated with a user
+  projectId, // will store current selected project id
+  project, // will store selected project 
+  sitesByProject, // will store sites selected by project id
 });
 
 export default rootReducer;

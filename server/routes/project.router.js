@@ -8,7 +8,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
 
-    const query = `SELECT projects.id, "name", "country" FROM "projects"
+    const query = `SELECT projects.name, projects.country, projects.id FROM "projects"
 
     INNER JOIN person ON person.id = projects.user_id
     WHERE person.id = $1;`; //The user_id is stored in the "projects" table, so we
@@ -35,6 +35,37 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     }).catch(error => {
         console.log('Error with project POST to database: ', error);
         res.sendStatus(500)
+    })
+});
+
+
+/**
+ * GET Project route
+ */
+router.get('/:id', (req, res) => {
+    const query = `SELECT * FROM "projects" WHERE "id" = $1;`
+    pool.query(query, [req.params.id ])
+    .then(results => {
+        res.send(results.rows);
+    })
+    .catch(error => {
+        console.log('ERROR with GET project:',error);
+        res.sendStatus(500);
+    })
+});
+
+/**
+ * GET Sites by Project route
+ */
+router.get('/sites/:id', (req, res) => {
+    const query = `SELECT * FROM "sites" WHERE "project_id" = $1;`
+    pool.query(query, [req.params.id ])
+    .then(results => {
+        res.send(results.rows);
+    })
+    .catch(error => {
+        console.log('ERROR with GET sites by project:',error);
+        res.sendStatus(500);
     })
 });
 
