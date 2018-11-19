@@ -9,6 +9,8 @@ import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 class GeneratorForm extends Component {
 
@@ -61,17 +63,17 @@ class GeneratorForm extends Component {
         return (
             <div>
                 <div>
-                    <p>Do you currently have a generator?</p>
-                    <InputLabel htmlFor={this.state.hasGenerator.toString()}>Yes</InputLabel>
-                    <Checkbox
-                        checked={this.state.hasGenerator}
-                        onChange={this.handleHasGeneratorToggle}
+                    <InputLabel htmlFor={this.state.hasGenerator.toString()}>Do you currently have a generator?</InputLabel>
+                    <FormControlLabel
+                        control={
+                            <Switch 
+                                checked={this.state.hasGenerator}
+                                onChange={this.handleHasGeneratorToggle}
+                                value="hasGenerator"
+                            />
+                        }
+                        label={this.state.hasGenerator ? "Yes" : "No"}
                     />
-                    {/* <InputLabel htmlFor={this.state.noGenerator.toString()}>No</InputLabel>
-                    <Checkbox
-                        checked={this.state.noGenerator}
-                        onChange={this.handleNoGeneratorToggle}
-                    /> */}
                 </div>
                 <br />
                 {this.state.hasGenerator === true && (
