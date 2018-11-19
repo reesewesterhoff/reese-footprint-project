@@ -43,6 +43,7 @@ class UserDashboard extends Component {
         
         this.props.dispatch({ type: 'GET_PROJECT', payload: id })
         this.props.dispatch({ type: 'GET_SITES_BY_PROJECT', payload: id })
+        this.props.history.push('/project')
         
     }
 
