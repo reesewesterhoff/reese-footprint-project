@@ -17,6 +17,7 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
+import allSiteTypes from '../../redux/reducers/allSiteTypesReducer';
 
 const styles = theme => ({
     container: {
@@ -40,6 +41,7 @@ const styles = theme => ({
       textAlign: 'center',
   },
   media: {
+    paddingTop: '5vmin',
       height: '10vmin',
   },
 });
@@ -48,10 +50,14 @@ class ProjectPage extends Component {
 
   state = {
     currentIndex: -1,
+    icon: '',
   }
 
   componentDidMount() {
     this.props.dispatch({type: 'FETCH_ALL_SITE_TYPES'});
+    this.setState({
+      icon: this.chooseIcon('Health'),
+  });    
   }
 
   selectSite = (index) => {
@@ -61,6 +67,29 @@ class ProjectPage extends Component {
     })
     
   }
+
+  chooseIcon = iconCategory => {
+    switch (iconCategory) {
+        case 'Health':
+            return <LocalHospitalIcon />
+        case 'Water':
+            return <WavesIcon />
+        case 'Comms':
+            return <RouterIcon />
+        case 'Ops':
+            return <SecurityIcon />
+        case 'Shelter':
+            return <HomeIcon />
+        case 'Food':
+            return <RestaurantIcon />
+        case 'Admin':
+            return <BusinessCenterIcon />
+        case 'Logs':
+            return <StoreIcon />
+        default:
+            return null;
+    }
+}
 
   handleAddSite = () => {
     this.props.history.push('/add_site')
@@ -101,21 +130,38 @@ class ProjectPage extends Component {
                       
                         {this.props.sitesByProject.map((site, index) => 
                             <Card className={classes.card} key={index}>
-
-                                <CardMedia
+                                {/* <CardMedia
                                     className={classes.media}
-                                    // image="http://vibrance.co/clarity/img/Project-Icon.png"
-                                    title="Generic Project"
-                                />
+                                    image=
+                                    {
+                                      this.chooseIcon(
+                                      this.props.allSiteTypes[(site.site_type_id - 1)].category)
+                                      }
+                                    title="Site Icon"
+                                /> */}
+                               
+                                {/* <Typography variant="h4">
+                                  {
+                                      this.chooseIcon(
+                                      this.props.allSiteTypes[(site.site_type_id - 1)].category)
+                                      }
+                                </Typography> */}
+                                
                                 <CardContent>
                                     <Typography variant="h6">
-
                                         {site.site_name}
                                     </Typography>
+                                    <Typography variant="h4">
+                                      {
+                                        this.chooseIcon(
+                                          this.props.allSiteTypes[(site.site_type_id - 1)].category)
+                                      }
                                     <br />
+                                </Typography>
                                     <Typography>
                                         Energy Budget: &nbsp; {site.energy_budget}
                                     </Typography>
+
 
                                 </CardContent>
                                 <CardActions>
@@ -150,7 +196,8 @@ class ProjectPage extends Component {
 const mapStateToProps = state => ({
   sitesByProject: state.sitesByProject,
   state: state,
-  project: state.project
+  project: state.project,
+  allSiteTypes: state.allSiteTypes,
 });
 
 ProjectPage.propTypes = {
