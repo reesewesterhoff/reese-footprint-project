@@ -39,68 +39,34 @@ class App extends Component {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-            {/* Visiting localhost:3000/about will show the about page.
-            This is a route anyone can see, no login necessary */}
-            <Route
-              exact
-              path="/about"
-              component={AboutPage}
-            />
             {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/home will show the UserPage if the user is logged in.
+            Visiting localhost:3000/home will show the UserDashboard if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-            <ProtectedRoute
-              exact
-              path="/home"
-              component={UserPage}
-            />
-            {/* This works the same as the other protected route, except that if the user is logged in,
-            they will see the info page instead. */}
-            <ProtectedRoute
-              exact
-              path="/info"
-              component={InfoPage}
-            />
-
             <ProtectedRoute
               exact
               path="/dashboard"
               component={UserDashboard}
             />
-
             <ProtectedRoute
               exact
               path="/add_project"
               component={AddProject}
             />
-
             <ProtectedRoute
               exact
               path="/project"
               component={ProjectPage}
             />
-
             <ProtectedRoute
               exact
               path="/saved_site"
               component={SavedSitePage}
             />
-
             <Route
               exact
               path="/add_site"
               component={AddSite}
-            />
-            <Route
-              exact
-              path="/site_type"
-              component={SiteTypeList}
-            />
-            <Route // Do we still need this route if the link has been removed from the nav bar? it shouldn't be necessary if it being rendered only when the site type is selected.
-              exact
-              path="/results"
-              component={Results}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
