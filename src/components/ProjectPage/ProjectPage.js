@@ -60,8 +60,10 @@ class ProjectPage extends Component {
 
 
                     </div>}
+
                         {this.props.sitesByProject.map((site, index) => 
                             <Card className={classes.card} key={index}>
+
                                 <CardMedia
                                     className={classes.media}
                                     // image="http://vibrance.co/clarity/img/Project-Icon.png"
@@ -69,12 +71,14 @@ class ProjectPage extends Component {
                                 />
                                 <CardContent>
                                     <Typography variant="h6">
+
                                         {site.site_name}
                                     </Typography>
                                     <br />
                                     <Typography>
                                         Energy Budget: &nbsp; {site.energy_budget}
                                     </Typography>
+
                                 </CardContent>
                                 <CardActions>
                                     <div className={classes.button}>
