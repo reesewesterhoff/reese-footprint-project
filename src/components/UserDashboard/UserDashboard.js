@@ -22,12 +22,12 @@ const styles = theme => ({
         justifyContent: 'space-evenly',
     },
     card: {
-        width: '20vmin',
-        height: '30vmin',
+        width: '30vmin',
+        height: '40vmin',
         margin: 10,
     },
     media: {
-        height: '15vmin',
+        height: '20vmin',
     },
 });
 
@@ -82,7 +82,7 @@ class UserDashboard extends Component {
                                     <Typography variant="h6">
                                         {project.name}
                                     </Typography>
-                                    <br />
+                                    {/* <br /> */}
                                     <Typography>
                                         {project.country}
                                     </Typography>
