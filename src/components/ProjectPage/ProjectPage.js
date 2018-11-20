@@ -25,7 +25,7 @@ const styles = theme => ({
         flexWrap: 'wrap',
     },
     button: {
-        margin: theme.spacing.unit,
+        margin: 'auto',
     },
     cardDiv: {
       marginTop: '5%',
@@ -35,15 +35,17 @@ const styles = theme => ({
       justifyContent: 'space-evenly',
   },
   card: {
+      paddingTop: '2vmin',
       width: '30vmin',
-      height: '40vmin',
+      height: '37vmin',
       margin: 10,
       textAlign: 'center',
   },
-  media: {
-    paddingTop: '5vmin',
-      height: '10vmin',
-  },
+
+  icon: {
+    width: '10vmin',
+    height: '10vmin',
+  }
 });
 
 class ProjectPage extends Component {
@@ -71,21 +73,21 @@ class ProjectPage extends Component {
   chooseIcon = iconCategory => {
     switch (iconCategory) {
         case 'Health':
-            return <LocalHospitalIcon />
+            return <LocalHospitalIcon style={{ width: "10vmin", height: "10vmin"}}/>
         case 'Water':
-            return <WavesIcon />
+            return <WavesIcon style={{ width: "10vmin", height: "10vmin"}}/>
         case 'Comms':
-            return <RouterIcon />
+            return <RouterIcon style={{ width: "10vmin", height: "10vmin"}}/>
         case 'Ops':
-            return <SecurityIcon />
+            return <SecurityIcon style={{ width: "10vmin", height: "10vmin"}}/>
         case 'Shelter':
-            return <HomeIcon />
+            return <HomeIcon style={{ width: "10vmin", height: "10vmin"}}/>
         case 'Food':
-            return <RestaurantIcon />
+            return <RestaurantIcon style={{ width: "10vmin", height: "10vmin"}}/>
         case 'Admin':
-            return <BusinessCenterIcon />
+            return <BusinessCenterIcon style={{ width: "10vmin", height: "10vmin"}}/>
         case 'Logs':
-            return <StoreIcon />
+            return <StoreIcon style={{ width: "10vmin", height: "10vmin"}}/>
         default:
             return null;
     }
@@ -125,39 +127,25 @@ class ProjectPage extends Component {
 
                     </div>}
 
-                      {!this.props.sitesByProject.length ? <h4>Add a site to get started!</h4> : 
+                      {!this.props.sitesByProject.length ? <h2>Add a site to get started!</h2> : 
                       <div className={classes.cardDiv}>
                       
                         {this.props.sitesByProject.map((site, index) => 
                             <Card className={classes.card} key={index}>
-                                {/* <CardMedia
-                                    className={classes.media}
-                                    image=
-                                    {
-                                      this.chooseIcon(
-                                      this.props.allSiteTypes[(site.site_type_id - 1)].category)
-                                      }
-                                    title="Site Icon"
-                                /> */}
-                               
-                                {/* <Typography variant="h4">
-                                  {
-                                      this.chooseIcon(
-                                      this.props.allSiteTypes[(site.site_type_id - 1)].category)
-                                      }
-                                </Typography> */}
                                 
                                 <CardContent>
-                                    <Typography variant="h6">
-                                        {site.site_name}
-                                    </Typography>
-                                    <Typography variant="h4">
+                                  <Typography variant="h4">
                                       {
                                         this.chooseIcon(
                                           this.props.allSiteTypes[(site.site_type_id - 1)].category)
                                       }
                                     <br />
-                                </Typography>
+                                  </Typography>
+
+                                    <Typography variant="h6">
+                                        {site.site_name}
+                                    </Typography>
+
                                     <Typography>
                                         Energy Budget: &nbsp; {site.energy_budget}
                                     </Typography>
@@ -171,6 +159,7 @@ class ProjectPage extends Component {
                                             variant="outlined"
                                             color="secondary"
                                             onClick={() => this.selectSite(index)}
+                                            
                                         >
                                             Select Site
                                         </Button>

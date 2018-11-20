@@ -25,6 +25,7 @@ const styles = theme => ({
         width: '30vmin',
         height: '40vmin',
         margin: 10,
+        textAlign: 'center',
     },
     media: {
         height: '20vmin',
@@ -88,18 +89,15 @@ class UserDashboard extends Component {
                                     title="Generic Project"
                                 />
                                 <CardContent>
-                                    <Typography variant="h6">
+                                    <Typography variant="h5">
                                         {project.name}
                                     </Typography>
                                     {/* <br /> */}
-                                    <Typography>
-                                        {project.country}
-                                    </Typography>
                                 </CardContent>
                                 <CardActions>
                                     <div className={classes.button}>
                                         <Button
-                                            size="large"
+                                            size="medium"
                                             variant="outlined"
                                             color="secondary"
                                             onClick={() => this.selectProject(project.id)}
