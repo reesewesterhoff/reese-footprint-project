@@ -101,13 +101,13 @@ class SiteTypeList extends Component {
                 </div>
                 </section>
                 <br />
+                <br />
                 {
                     this.props.selectedSite.id &&
                     <section className='results' ref={(section) => { this.results = section; }}>
-                        <Results />
+                        <Results getImageString={this.props.getImageString}  />
                     </section>
                 }
-                <br />
                 <div>
                     <Snackbar
                         open={this.state.snackbarOpen}

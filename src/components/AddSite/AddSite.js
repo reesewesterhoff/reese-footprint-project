@@ -90,12 +90,12 @@ class AddSite extends Component {
         });
 
         setTimeout(() => scrollToComponent(this.siteTypeList, { offset: 0, align: 'top', duration: 750 }), 200);
- 
+    }
 
     addSiteToProject = () => {
         this.props.dispatch({type: 'ADD_SITE', 
         payload: {state: this.state, 
-            project_id: this.props.project_id || 1, 
+            project_id: this.props.project_id, 
             site_type_id: this.props.selectedSite.id,
             energy_budget: this.props.generator.map(obj=>parseInt(obj.monthlyCost)
                 ).reduce((total,current) => total + current)}});
@@ -205,15 +205,12 @@ class AddSite extends Component {
 
                 <br />
                 <br />
-                              {
+                {
                     this.props.sites.length > 0 &&
                     <section className='siteTypeList' ref={(section) => { this.siteTypeList = section; }}>
-                        <SiteTypeList />
+                        <SiteTypeList getImageString={this.getImageString} />
                     </section>
                 }
-                {
-                    this.props.selectedSite.id && <Results getImageString={this.getImageString} />
-}
 
                 <br />
                 {this.props.user.id && this.props.selectedSite.id && <Button value="submit"
@@ -221,7 +218,6 @@ class AddSite extends Component {
                     className={classes.button} onClick={this.addSiteToProject}>
                     Add Site to Project
                     </Button>}
-                    <pre>{JSON.stringify(this.state,null,2)}</pre>
             </div>
 
         );
