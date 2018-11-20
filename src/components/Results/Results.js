@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import TextField from '@material-ui/core/TextField';
-import Snackbar from '@material-ui/core/Snackbar';
-import Button from '@material-ui/core/Button';
 
 let start = '2014-12-30T18:06:17.762Z';
 let end = '2020-01-05T18:06:17.762Z';
@@ -45,7 +42,6 @@ class Results extends Component {
 
     setImageString = () => {
         this.props.getImageString(this.refs.linegraph.chartInstance.toBase64Image());
-        // this.props.getImageString('testing');
     }
 
     render() {
@@ -58,11 +54,13 @@ class Results extends Component {
                 x: this.props.dieselCalculation.payOffDate,
                 y: 0
             }],
-            backgroundColor: [
-                'rgba(54, 162, 235, 0.2)'
+            backgroundColor: this.props.dieselCalculation.payOffInTime ? [
+                'rgb(0,0,255,0.7)'
+            ] : [
+                '#DC143C'
             ],
             borderColor: [
-                'rgba(54, 162, 235, 1)'
+                'rgb(0,0,255)'
             ],
 
             borderWidth: 1,
@@ -79,10 +77,10 @@ class Results extends Component {
                     this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price : 0
             }],
             backgroundColor: [
-                'rgba(100, 100, 300, 0.4)'
+                '#228b22'
             ],
             borderColor: [
-                'green'
+                '#228b22'
             ],
             borderWidth: 1
         }, {
@@ -95,7 +93,7 @@ class Results extends Component {
                 y: this.props.dieselCalculation.totalDieselCost || 35000
             }],
             backgroundColor: [
-                'grey'
+                'rgb(128,128,128,0.7)'
             ],
             borderColor: [
                 'grey'
@@ -113,19 +111,33 @@ class Results extends Component {
                         suggestedMax: '2020-01-05T18:06:17.762Z',
                         suggestedMin: '2014-12-30T18:06:17.762Z',
                     },
-                    distribution: 'linear'
+                    distribution: 'linear',
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Project Timeline'
+                    }
                 }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Energy Costs'
+                    }
+                }]
             },
             animation: {
                 onComplete: this.setImageString
-              }
+            }
         };
 
         return (<div>
             <h2 className="heading">Results</h2>
-            <div style={{ maxWidth: "90%", margin: "auto" }}>
-                <Line data={{ datasets: datasets }} options={options} ref="linegraph"  />
+            <div style={{ maxWidth: "75%", margin: "auto" }}>
+                <Line data={{ datasets: datasets }} options={options} ref="linegraph" />
             </div>
+            <h3>Time to pay off: {parseInt(this.props.dieselCalculation.timeToPayOff)} months</h3>
+            {this.props.dieselCalculation.payOffInTime ?
+                <h3>Total Savings: ${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price)}</h3> :
+                <h3>Monthly budget needed: ${parseInt(this.props.selectedSite.total_price / this.props.dieselCalculation.timeline)}</h3>}
             <div className="subHeading">
                 <p>
                     This is an estimate of the costs/benefits of using solar power at your site. There are purchase, lease, and renting options available.
@@ -133,10 +145,6 @@ class Results extends Component {
                     promptly with more details and information about how to make your project sustainable!
                 </p>
             </div>
-            <h3>Time to pay off: {parseInt(this.props.dieselCalculation.timeToPayOff)} months</h3>
-            {this.props.dieselCalculation.payOffInTime ?
-                <h3>Total Savings: ${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price)}</h3> :
-                <h3>Monthly budget needed: ${parseInt(this.props.selectedSite.total_price / this.props.dieselCalculation.timeline)}</h3>}
         </div>)
     }
 }
