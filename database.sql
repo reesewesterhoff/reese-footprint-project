@@ -62,11 +62,15 @@ CREATE TABLE "sites" (
     "project_id" INT REFERENCES "projects",
     "site_name" VARCHAR(255),
     "site_type_id" INT REFERENCES "site_type",
+    "start_date" DATE,
+    "end_date" DATE,
+    "energy_budget" INT,
     "latitude" DECIMAL,
     "longitude" DECIMAL,
     "image_string" TEXT,
     "appliances" INT[]
 );
+
 
 --appliances table. We want users to have the ability to select appliances from a preset list.
 --We will populate this table ahead of time with info on power needs of different appliances
