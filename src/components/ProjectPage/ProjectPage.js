@@ -17,8 +17,9 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
-import allSiteTypes from '../../redux/reducers/allSiteTypesReducer';
+import allSiteTypes from '../../redux/reducers/allSiteTypesReducer'; //why is this here?
 import './ProjectPage.css'
+
 
 const styles = theme => ({
     container: {
@@ -120,6 +121,7 @@ class ProjectPage extends Component {
                                         Add Site
                           </Button>
 
+
                                 </pre>
 
                             </h1>
@@ -165,6 +167,7 @@ class ProjectPage extends Component {
 
                                             >
                                                 Select Site
+
                                         </Button>
                                         </div>
                                     </CardActions>

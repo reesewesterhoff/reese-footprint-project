@@ -58,9 +58,16 @@ router.get('/:id', (req, res) => {
  * GET Sites by Project route
  */
 router.get('/sites/:id', (req, res) => {
-    const query = `SELECT * FROM "sites" WHERE "project_id" = $1;`
-    pool.query(query, [req.params.id ])
+    const query = `SELECT 
+        sites.*, 
+        json_agg(json_build_object('size', size, 'unit', unit, 'fuel_cost', fuel_cost)) AS generators 
+        FROM "sites" 
+        LEFT OUTER JOIN "generator" ON "generator"."site_id"="sites"."id"
+        WHERE "project_id" = $1
+        GROUP BY sites.id;`
+    pool.query(query, [req.params.id])
     .then(results => {
+        console.log(JSON.stringify(results.rows));
         res.send(results.rows);
     })
     .catch(error => {
@@ -72,16 +79,33 @@ router.get('/sites/:id', (req, res) => {
 router.post('/sites', rejectUnauthenticated, (req,res) => {
     const query = `INSERT INTO "sites" ("project_id", "site_name", 
     "site_type_id", "energy_budget", "start_date", "end_date", 
-    "latitude", "longitude", "image_string") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
+    "latitude", "longitude", "image_string") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+    RETURNING "sites"."id"`;
     console.log('/projects/sites hit. req.body=',req.body);
     pool.query(query, [req.body.project_id, req.body.state.siteName, req.body.site_type_id,
         req.body.energy_budget, req.body.state.fundStartDate, req.body.state.fundEndDate, 
-        req.body.state.location.lat, req.body.state.location.lng, req.body.state.url]).then(()=>{
-            res.sendStatus(201);
+        req.body.state.location.lat, req.body.state.location.lng, req.body.state.url]).then((results)=>{
+            res.send({site_id: results.rows[0].id});
         }).catch((error) => {
             console.log('Error posting site to project:',error);
             res.sendStatus(500);
         })
+})
+
+router.post('/generators/:id', rejectUnauthenticated, (req,res) => {
+    const query = `INSERT INTO generator (size, unit, fuel_cost, site_id)
+        VALUES ($1, $2, $3, $4)`;
+    console.log('req.body for posting generators:',req.body);
+    try{
+        for(generator of req.body){
+            pool.query(query,[generator.generatorSize,generator.energyUnit,generator.monthlyCost,req.params.id]);
+        }
+        res.sendStatus(200);
+    }catch(error){
+        console.log('Error posting generators:',error);
+        res.sendStatus(500);
+    }
+    
 })
 
 module.exports = router;
