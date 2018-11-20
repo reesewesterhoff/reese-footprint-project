@@ -7,7 +7,10 @@ function* addSite(action) {
     try{
         console.log('Inside addSite function');
         if(action.payload.project_id){
-            yield axios.post('/projects/sites', action.payload);
+            const results = yield axios.post('/projects/sites', action.payload);
+            const site_id = results.data.site_id;
+            console.log('site_id=',site_id);
+            yield axios.post(`/projects/generators/${site_id}`,action.payload.generators)
         }else{
             yield put({ type: 'SET_SITES', payload: action.payload });
             //does this do anything?

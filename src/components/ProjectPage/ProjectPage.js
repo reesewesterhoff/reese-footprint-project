@@ -147,7 +147,7 @@ class ProjectPage extends Component {
                                     </Typography>
 
                                     <Typography>
-                                        Energy Budget: &nbsp; {site.energy_budget}
+                                        Energy Budget: &nbsp; ${site.energy_budget.toLocaleString()}
                                     </Typography>
 
 

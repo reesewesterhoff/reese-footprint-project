@@ -97,6 +97,7 @@ class AddSite extends Component {
         payload: {state: this.state, 
             project_id: this.props.project_id, 
             site_type_id: this.props.selectedSite.id,
+            generators: this.props.generator,
             energy_budget: this.props.generator.map(obj=>parseInt(obj.monthlyCost)
                 ).reduce((total,current) => total + current)}});
         if (this.props.user.id && this.props.selectedSite.id) {
