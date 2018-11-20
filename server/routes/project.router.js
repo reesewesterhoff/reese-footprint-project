@@ -8,7 +8,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
 
-    const query = `SELECT projects.name, projects.country, projects.id FROM "projects"
+    const query = `SELECT projects.name, projects.id FROM "projects"
 
     INNER JOIN person ON person.id = projects.user_id
     WHERE person.id = $1;`; //The user_id is stored in the "projects" table, so we
@@ -27,9 +27,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  * POST Project route
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
-    const query = `INSERT INTO "projects" ("name", "country", "user_id")
-    VALUES ($1, $2, $3);`;
-    pool.query(query, [req.body.projectName, req.body.country, req.user.id]
+    const query = `INSERT INTO "projects" ("name", "user_id")
+    VALUES ($1, $2);`;
+    pool.query(query, [req.body.projectName, req.user.id]
     ).then(() => {
         res.sendStatus(201);
     }).catch(error => {
