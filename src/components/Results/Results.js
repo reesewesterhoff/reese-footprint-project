@@ -155,21 +155,9 @@ class Results extends Component {
                 </div>
                 :
                 null}
-            <div style={{ maxWidth: "75%", margin: "auto" }}>
+            <div style={{ maxWidth: "65%", margin: "auto" }}>
                 <Line data={{ datasets: datasets }} options={options} ref="linegraph" />
             </div>
-            <h3>Time to pay off: {parseInt(this.props.dieselCalculation.timeToPayOff)} months</h3>
-            {this.props.dieselCalculation.payOffInTime ?
-                <h3>Total Savings: ${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price)}</h3> :
-                <h3>Monthly budget needed: ${parseInt(this.props.selectedSite.total_price / this.props.dieselCalculation.timeline)}</h3>}
-            <div className="subHeading">
-                <p>
-                    This is an estimate of the costs/benefits of using solar power at your site. There are purchase, lease, and renting options available.
-                    Please click the "Contact The Experts" button to send your estimate and email address to a Footprint Project representative. We will contact
-                    promptly with more details and information about how to make your project sustainable!
-                </p>
-            </div>
-            <br />
             {this.props.dieselCalculation.payOffInTime ?
                 <div className="center" style={{ color: 'LimeGreen' }}>
                     <h3>Time to pay off: <strong style={{color: 'MediumTurquoise'}}>{parseInt(this.props.dieselCalculation.timeToPayOff)} months</strong></h3>
@@ -179,8 +167,13 @@ class Results extends Component {
                 </div>
                 :
                 <h3 className="center" style={{color: 'DarkRed'}}>Monthly Budget Needed To Pay Off In Time: ${parseInt(this.props.selectedSite.total_price / this.props.dieselCalculation.timeline).toLocaleString()}</h3>}
-            <br />
-            <br />
+            <div className="subHeading">
+                <p>
+                    This is an estimate of the costs/benefits of using solar power at your site. There are purchase, lease, and renting options available.
+                    Please click the "Contact The Experts" button to send your estimate and email address to a Footprint Project representative. We will contact
+                    promptly with more details and information about how to make your project sustainable!
+                </p>
+            </div>
             <div className="center">
                 <FloatingModal
                     buttonText="Contact The Experts For More Information!"

@@ -18,6 +18,8 @@ import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
 import allSiteTypes from '../../redux/reducers/allSiteTypesReducer'; //why is this here?
+import './ProjectPage.css'
+
 
 const styles = theme => ({
     container: {
@@ -28,74 +30,74 @@ const styles = theme => ({
         margin: 'auto',
     },
     cardDiv: {
-      marginTop: '5%',
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      justifyContent: 'space-evenly',
-  },
-  card: {
-      paddingTop: '2vmin',
-      width: '30vmin',
-      height: '37vmin',
-      margin: 10,
-      textAlign: 'center',
-  },
+        marginTop: '5%',
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-evenly',
+    },
+    card: {
+        paddingTop: '2vmin',
+        width: '30vmin',
+        height: '37vmin',
+        margin: 10,
+        textAlign: 'center',
+    },
 
-  icon: {
-    width: '10vmin',
-    height: '10vmin',
-  }
+    icon: {
+        width: '10vmin',
+        height: '10vmin',
+    }
 });
 
 class ProjectPage extends Component {
 
-  state = {
-    currentIndex: -1,
-    icon: '',
-  }
-
-  componentDidMount() {
-    this.props.dispatch({type: 'FETCH_ALL_SITE_TYPES'});
-    this.setState({
-      icon: this.chooseIcon('Health'),
-  });    
-  }
-
-  selectSite = (index) => {
-    console.log(index);
-    this.setState({
-      currentIndex: index,
-    })
-    
-  }
-
-  chooseIcon = iconCategory => {
-    switch (iconCategory) {
-        case 'Health':
-            return <LocalHospitalIcon style={{ width: "10vmin", height: "10vmin"}}/>
-        case 'Water':
-            return <WavesIcon style={{ width: "10vmin", height: "10vmin"}}/>
-        case 'Comms':
-            return <RouterIcon style={{ width: "10vmin", height: "10vmin"}}/>
-        case 'Ops':
-            return <SecurityIcon style={{ width: "10vmin", height: "10vmin"}}/>
-        case 'Shelter':
-            return <HomeIcon style={{ width: "10vmin", height: "10vmin"}}/>
-        case 'Food':
-            return <RestaurantIcon style={{ width: "10vmin", height: "10vmin"}}/>
-        case 'Admin':
-            return <BusinessCenterIcon style={{ width: "10vmin", height: "10vmin"}}/>
-        case 'Logs':
-            return <StoreIcon style={{ width: "10vmin", height: "10vmin"}}/>
-        default:
-            return null;
+    state = {
+        currentIndex: -1,
+        icon: '',
     }
-}
 
-  handleAddSite = () => {
-    this.props.history.push('/add_site')
-}
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_ALL_SITE_TYPES' });
+        this.setState({
+            icon: this.chooseIcon('Health'),
+        });
+    }
+
+    selectSite = (index) => {
+        console.log(index);
+        this.setState({
+            currentIndex: index,
+        })
+
+    }
+
+    chooseIcon = iconCategory => {
+        switch (iconCategory) {
+            case 'Health':
+                return <LocalHospitalIcon style={{ width: "10vmin", height: "10vmin" }} />
+            case 'Water':
+                return <WavesIcon style={{ width: "10vmin", height: "10vmin" }} />
+            case 'Comms':
+                return <RouterIcon style={{ width: "10vmin", height: "10vmin" }} />
+            case 'Ops':
+                return <SecurityIcon style={{ width: "10vmin", height: "10vmin" }} />
+            case 'Shelter':
+                return <HomeIcon style={{ width: "10vmin", height: "10vmin" }} />
+            case 'Food':
+                return <RestaurantIcon style={{ width: "10vmin", height: "10vmin" }} />
+            case 'Admin':
+                return <BusinessCenterIcon style={{ width: "10vmin", height: "10vmin" }} />
+            case 'Logs':
+                return <StoreIcon style={{ width: "10vmin", height: "10vmin" }} />
+            default:
+                return null;
+        }
+    }
+
+    handleAddSite = () => {
+        this.props.history.push('/add_site')
+    }
 
     render() {
 
@@ -106,76 +108,82 @@ class ProjectPage extends Component {
 
             <div>
                 <div>
-                    {!this.props.project.length ? <p>loading...</p> : 
-                    <div>
-                      <h1 className="heading">{this.props.project[0].name}
+                    {!this.props.project.length ? <p>loading...</p> :
+                        <div>
+                            <h1 className="heading">{this.props.project[0].name}
 
-                        <pre>
-                          <Button  
-                            onClick={this.handleAddSite}
-                            size="medium"
-                            variant="contained"
-                            color="primary">
-                            Add Site
+                                <pre>
+                                    <Button
+                                        onClick={this.handleAddSite}
+                                        size="medium"
+                                        variant="contained"
+                                        color="primary">
+                                        Add Site
                           </Button>
 
-                        </pre>
 
-                      </h1>
-      
+                                </pre>
 
-
-                    </div>}
-
-                      {!this.props.sitesByProject.length ? <h2>Add a site to get started!</h2> : 
-                      <div className={classes.cardDiv}>
-                      
-                        {this.props.sitesByProject.map((site, index) => 
-                            <Card className={classes.card} key={index}>
-                                
-                                <CardContent>
-                                  <Typography variant="h4">
-                                      {
-                                        this.chooseIcon(
-                                          this.props.allSiteTypes[(site.site_type_id - 1)].category)
-                                      }
-                                    <br />
-                                  </Typography>
-
-                                    <Typography variant="h6">
-                                        {site.site_name}
-                                    </Typography>
-
-                                    <Typography>
-                                        Energy Budget: &nbsp; ${site.energy_budget.toLocaleString()}
-                                    </Typography>
+                            </h1>
 
 
-                                </CardContent>
-                                <CardActions>
-                                    <div className={classes.button}>
-                                        <Button
-                                            size="large"
-                                            variant="outlined"
-                                            color="secondary"
-                                            onClick={() => this.selectSite(index)}
-                                            
-                                        >
-                                            Select Site
+
+                        </div>}
+
+                    {!this.props.sitesByProject.length ? <h2>Add a site to get started!</h2> :
+                    <div>
+                        <div className={classes.cardDiv}>
+
+                            {this.props.sitesByProject.map((site, index) =>
+
+                                <Card className={classes.card} key={index}>
+
+                                    <CardContent>
+                                        <Typography variant="h4">
+                                            {
+                                                this.chooseIcon(
+                                                    this.props.allSiteTypes[(site.site_type_id - 1)].category)
+                                            }
+                                            <br />
+                                        </Typography>
+
+                                        <Typography variant="h6">
+                                            {site.site_name}
+                                        </Typography>
+
+                                        <Typography>
+                                            Energy Budget: &nbsp; {site.energy_budget}
+                                        </Typography>
+
+
+                                    </CardContent>
+                                    <CardActions>
+                                        <div className={classes.button}>
+                                            <Button
+                                                size="large"
+                                                variant="outlined"
+                                                color="secondary"
+                                                onClick={() => this.selectSite(index)}
+
+                                            >
+                                                Select Site
+
                                         </Button>
-                                    </div>
-                                </CardActions>
-                            </Card>
-                        )}
+                                        </div>
+                                    </CardActions>
+                                </Card>
+                            )}
+                            
                         </div>
-                        }
-                        {this.state.currentIndex < 0 ? <p>Choose a site!</p> :
-                        <SavedSitePage
-                        index={this.state.currentIndex}
-                        />}
-                    
-                </div>
+                                {this.state.currentIndex < 0 ? <h2 id="siteSelect">Choose a site!</h2> :
+                                    <SavedSitePage
+                                        index={this.state.currentIndex}
+                                />}
+                    </div>
+                    }
 
+                </div>
+                <div id="bugSpacing"></div>
             </div>
 
         );
@@ -183,10 +191,10 @@ class ProjectPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  sitesByProject: state.sitesByProject,
-  state: state,
-  project: state.project,
-  allSiteTypes: state.allSiteTypes,
+    sitesByProject: state.sitesByProject,
+    state: state,
+    project: state.project,
+    allSiteTypes: state.allSiteTypes,
 });
 
 ProjectPage.propTypes = {

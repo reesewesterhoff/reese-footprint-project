@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import './Footer.css';
+import './BugReport.css';
 import FloatingModal from '../FloatingModal/FloatingModal';
 import Snackbar from '@material-ui/core/Snackbar';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-class Footer extends Component {
+class BugReport extends Component {
 
   state = {
-    contactExpertOpen: false,
     reportBugOpen: false,
     snackbarOpen: false,
     name: '',
@@ -29,14 +28,6 @@ class Footer extends Component {
       ...this.state,
       reportBugOpen: !this.state.reportBugOpen,
       contactExpertOpen: false,
-    });
-  };
-
-  handleContactExpertToggle = () => {
-    this.setState({
-      ...this.state,
-      contactExpertOpen: !this.state.contactExpertOpen,
-      reportBugOpen: false,
     });
   };
 
@@ -62,28 +53,14 @@ class Footer extends Component {
         message: '',
         snackbarOpen: true,
         reportBugOpen: false,
-        contactExpertOpen: false,
       });
     }).catch(error => console.log('Error in POST:', error));
   }
 
   render() {
     return (
-      <footer>
+      <div className="bugReport">
         <FloatingModal
-          buttonText="Contact Us"
-          color="8BC34A"
-          title="Please complete the following fields to send your solar estimate to a Footprint Project Representative. We will contact you soon!"
-          state={this.state}
-          modalOpen={this.state.contactExpertOpen}
-          handleModalToggle={this.handleContactExpertToggle}
-          handleChangeFor={this.handleChangeFor}
-          handleSubmit={this.handleSubmit}
-          handleClose={this.handleClose}
-          subject="Solar Estimate"
-          id="contact"
-        />
-        {/* <FloatingModal
           buttonText="Report A Bug"
           color="secondary"
           title="Please complete the following fields to report a bug to the Footprint Project team."
@@ -94,14 +71,14 @@ class Footer extends Component {
           handleSubmit={this.handleSubmit}
           handleClose={this.handleClose}
           subject="Bug Report"
-        /> */}
+        />
         <Snackbar
           open={this.state.snackbarOpen}
           message={<span id="message-id">Email Sent</span>}
           autoHideDuration={2000}
           onClose={() => this.setState({ snackbarOpen: false })}
         />
-      </footer>
+      </div>
     );
   }
 }
@@ -113,4 +90,4 @@ const mapStateToProps = state => ({
     generator: state.generator
 })
 
-export default connect(mapStateToProps)(Footer);
+export default connect(mapStateToProps)(BugReport);
