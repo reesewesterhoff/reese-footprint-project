@@ -58,9 +58,16 @@ router.get('/:id', (req, res) => {
  * GET Sites by Project route
  */
 router.get('/sites/:id', (req, res) => {
-    const query = `SELECT * FROM "sites" WHERE "project_id" = $1;`
-    pool.query(query, [req.params.id ])
+    const query = `SELECT 
+        sites.*, 
+        json_agg(json_build_object('size', size, 'unit', unit, 'fuel_cost', fuel_cost)) AS generators 
+        FROM "sites" 
+        LEFT OUTER JOIN "generator" ON "generator"."site_id"="sites"."id"
+        WHERE "project_id" = $1
+        GROUP BY sites.id;`
+    pool.query(query, [req.params.id])
     .then(results => {
+        console.log(JSON.stringify(results.rows));
         res.send(results.rows);
     })
     .catch(error => {

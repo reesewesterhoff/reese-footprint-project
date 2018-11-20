@@ -17,7 +17,7 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
-import allSiteTypes from '../../redux/reducers/allSiteTypesReducer';
+import allSiteTypes from '../../redux/reducers/allSiteTypesReducer'; //why is this here?
 
 const styles = theme => ({
     container: {
