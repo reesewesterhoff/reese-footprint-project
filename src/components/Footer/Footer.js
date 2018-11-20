@@ -72,7 +72,7 @@ class Footer extends Component {
       <footer>
         <FloatingModal
           buttonText="Contact The Experts!"
-          color="primary"
+          color="8BC34A"
           title="Please complete the following fields to send your solar estimate to a Footprint Project Representative. We will contact you soon!"
           state={this.state}
           modalOpen={this.state.contactExpertOpen}
@@ -82,7 +82,7 @@ class Footer extends Component {
           handleClose={this.handleClose}
           subject="Solar Estimate"
         />
-        <FloatingModal
+        {/* <FloatingModal
           buttonText="Report A Bug"
           color="secondary"
           title="Please complete the following fields to report a bug to the Footprint Project team."
@@ -93,7 +93,7 @@ class Footer extends Component {
           handleSubmit={this.handleSubmit}
           handleClose={this.handleClose}
           subject="Bug Report"
-        />
+        /> */}
         <Snackbar
           open={this.state.snackbarOpen}
           message={<span id="message-id">Email Sent</span>}
