@@ -37,14 +37,11 @@ const styles = theme => ({
   card: {
       paddingTop: '2vmin',
       width: '30vmin',
-      height: '30vmin',
+      height: '37vmin',
       margin: 10,
       textAlign: 'center',
   },
-  media: {
-    paddingTop: '5vmin',
-      height: '10vmin',
-  },
+
   icon: {
     width: '10vmin',
     height: '10vmin',
@@ -130,7 +127,7 @@ class ProjectPage extends Component {
 
                     </div>}
 
-                      {!this.props.sitesByProject.length ? <h4>Add a site to get started!</h4> : 
+                      {!this.props.sitesByProject.length ? <h2>Add a site to get started!</h2> : 
                       <div className={classes.cardDiv}>
                       
                         {this.props.sitesByProject.map((site, index) => 
@@ -145,7 +142,7 @@ class ProjectPage extends Component {
                                     <br />
                                   </Typography>
 
-                                    <Typography variant="h4">
+                                    <Typography variant="h6">
                                         {site.site_name}
                                     </Typography>
 
