@@ -42,3 +42,11 @@ a {
 .sitesCards {
     display: flex;
 }
+
+h2 {
+    text-align: center;
+}
+
+#siteSelect {
+    text-align: center;
+}
