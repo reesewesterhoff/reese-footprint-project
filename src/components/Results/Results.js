@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import Snackbar from '@material-ui/core/Snackbar';
+import FloatingModal from '../FloatingModal/FloatingModal';
+
 
 let start = '2014-12-30T18:06:17.762Z';
 let end = '2020-01-05T18:06:17.762Z';
@@ -10,6 +13,8 @@ class Results extends Component {
 
     state = {
         open: false,
+        contactExpertOpen: false,
+        snackbarOpen: false,
         name: '',
         email: '',
         message: '',
@@ -17,27 +22,40 @@ class Results extends Component {
 
     handleChange = property => event => this.setState({ [property]: event.target.value });
 
-    handleSubmit = () => event => {
+    handleContactExpertToggle = () => {
+        this.setState({
+            ...this.state,
+            contactExpertOpen: !this.state.contactExpertOpen,
+            reportBugOpen: false,
+        });
+    };
+
+    handleClose = () => this.setState({ ...this.state, contactExpertOpen: false, reportBugOpen: false });
+
+
+    handleSubmit = property => event => {
         event.preventDefault();
         axios.post('/email', {
-            content: { name: this.state.name, email: this.state.email, message: this.state.message },
-            siteName: this.props.sites[0].siteName,
-            fundStartDate: this.props.sites[0].fundStartDate,
-            fundEndDate: this.props.sites[0].fundEndDate,
-            location: this.props.sites[0].location,
-            generator: this.props.generator[0],
+            content: { name: this.state.name, email: this.state.email, subject: property, message: this.state.message },
+            siteName: this.props.sites.length ? this.props.sites[0].siteName : 'Not entered',
+            fundStartDate: this.props.sites.length ? this.props.sites[0].fundStartDate : 'Not entered',
+            fundEndDate: this.props.sites.length ? this.props.sites[0].fundEndDate : 'Not entered',
+            location: this.props.sites.length ? this.props.sites[0].location : 'Not entered',
+            generator: this.props.generator.length ? this.props.generator[0] : 'Not entered',
             selectedSite: this.props.selectedSite.type,
-            totalDieselCost: this.props.dieselCalculation.totalDieselCost,
-            address: this.props.sites[0].address,
+            totalDieselCost: this.props.dieselCalculation.totalDieselCost || 0,
+            address: this.props.sites.length ? this.props.sites[0].address : 'Not entered',
         }).then(response => {
             console.log('Response is:', response.data);
             this.setState({
-                open: true,
                 name: '',
                 email: '',
                 message: '',
+                snackbarOpen: true,
+                reportBugOpen: false,
+                contactExpertOpen: false,
             });
-        }).catch(error => console.log('Error in POST:', error))
+        }).catch(error => console.log('Error in POST:', error));
     }
 
     setImageString = () => {
@@ -131,6 +149,12 @@ class Results extends Component {
 
         return (<div>
             <h2 className="heading">Results</h2>
+            {this.props.dieselCalculation.payOffInTime ?
+                <div className="center">
+                    <h2 style={{ color: 'LimeGreen' }}>Total Savings: ${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price).toLocaleString()}</h2>
+                </div>
+                :
+                null}
             <div style={{ maxWidth: "75%", margin: "auto" }}>
                 <Line data={{ datasets: datasets }} options={options} ref="linegraph" />
             </div>
@@ -145,6 +169,40 @@ class Results extends Component {
                     promptly with more details and information about how to make your project sustainable!
                 </p>
             </div>
+            <br />
+            {this.props.dieselCalculation.payOffInTime ?
+                <div className="center" style={{ color: 'LimeGreen' }}>
+                    <h3>Time to pay off: <strong style={{color: 'MediumTurquoise'}}>{parseInt(this.props.dieselCalculation.timeToPayOff)} months</strong></h3>
+                    <h3>Total Savings: <strong style={{color: 'MediumTurquoise'}}>${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price).toLocaleString()}</strong></h3>
+                    <h3>Jobs Created: <strong style={{color: 'MediumTurquoise'}}>{this.props.selectedSite.jobs_created}</strong></h3>
+                    <h3>Total Co2 Saved: <strong style={{color: 'MediumTurquoise'}}>{this.props.selectedSite.co2_saved.toLocaleString()} lbs</strong></h3>
+                </div>
+                :
+                <h3 className="center" style={{color: 'DarkRed'}}>Monthly Budget Needed To Pay Off In Time: ${parseInt(this.props.selectedSite.total_price / this.props.dieselCalculation.timeline).toLocaleString()}</h3>}
+            <br />
+            <br />
+            <div className="center">
+                <FloatingModal
+                    buttonText="Contact The Experts For More Information!"
+                    color="primary"
+                    title="Please complete the following fields to send your solar estimate to a Footprint Project Representative. We will contact you soon!"
+                    state={this.state}
+                    modalOpen={this.state.contactExpertOpen}
+                    handleModalToggle={this.handleContactExpertToggle}
+                    handleChangeFor={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    handleClose={this.handleClose}
+                    subject="Solar Estimate"
+                />
+            </div>
+            <br />
+            <br />
+            <Snackbar
+                open={this.state.snackbarOpen}
+                message={<span id="message-id">Email Sent</span>}
+                autoHideDuration={2000}
+                onClose={() => this.setState({ snackbarOpen: false })}
+            />
         </div>)
     }
 }

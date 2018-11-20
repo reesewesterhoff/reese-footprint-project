@@ -26,7 +26,6 @@ class AddProject extends Component {
     state = {
         projectName: '',
         user_id: this.props.user.id,
-        country: '',
     }
 
     handleSubmit = event => {
@@ -36,7 +35,6 @@ class AddProject extends Component {
         });
         this.setState({
             projectName: '',
-            country: '',
         });
         this.props.history.push('/dashboard')
     }
@@ -64,15 +62,6 @@ class AddProject extends Component {
                                 value={this.state.projectName}
                                 required
                                 onChange={this.handleChange('projectName')}
-                                margin="normal"
-                            />
-                            <TextField
-                                id="standard-name"
-                                label="Project Country"
-                                className={classes.textField}
-                                value={this.state.country}
-                                required
-                                onChange={this.handleChange('country')}
                                 margin="normal"
                             />
                             <Button value="submit" type="submit" variant="contained" color="primary" className={classes.button}>
