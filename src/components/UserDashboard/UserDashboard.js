@@ -74,7 +74,9 @@ class UserDashboard extends Component {
                     </Button>
                 </h2>
                 <div>
-
+                    <div>
+                        
+                    </div>
                     {!this.props.projects.length ? <h3 className="heading">Add a project to get started!</h3> 
                     
                     :
@@ -114,7 +116,7 @@ class UserDashboard extends Component {
 
 
                 </div>
-
+                    <div id="bugSpacing"></div>
             </div>
 
         );
