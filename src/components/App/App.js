@@ -10,6 +10,7 @@ import {connect} from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
+import BugReport from '../BugReport/BugReport';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AddSite from '../AddSite/AddSite';
@@ -66,6 +67,8 @@ class App extends Component {
             <Route render={() => <h1>404</h1>} />
           </Switch>
           <Footer />
+          <div></div>
+          <BugReport />
         </div>
       </Router>
   )}

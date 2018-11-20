@@ -81,6 +81,7 @@ class Footer extends Component {
           handleSubmit={this.handleSubmit}
           handleClose={this.handleClose}
           subject="Solar Estimate"
+          id="contact"
         />
         {/* <FloatingModal
           buttonText="Report A Bug"

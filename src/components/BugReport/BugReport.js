@@ -59,7 +59,7 @@ class BugReport extends Component {
 
   render() {
     return (
-      <footer>
+      <div className="bugReport">
         <FloatingModal
           buttonText="Report A Bug"
           color="secondary"
@@ -78,7 +78,7 @@ class BugReport extends Component {
           autoHideDuration={2000}
           onClose={() => this.setState({ snackbarOpen: false })}
         />
-      </footer>
+      </div>
     );
   }
 }
