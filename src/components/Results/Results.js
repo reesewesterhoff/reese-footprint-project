@@ -16,7 +16,6 @@ class Results extends Component {
         name: '',
         email: '',
         message: '',
-        url: ''
     }
 
     handleChange = property => event => this.setState({ [property]: event.target.value });
@@ -129,7 +128,7 @@ class Results extends Component {
             </div>
             <div className="subHeading">
                 <p>
-                    This is an estimate of what the costs/benefits of using solar power at your site. There are purchase, lease, and renting options available.
+                    This is an estimate of the costs/benefits of using solar power at your site. There are purchase, lease, and renting options available.
                     Please click the "Contact The Experts" button to send your estimate and email address to a Footprint Project representative. We will contact
                     promptly with more details and information about how to make your project sustainable!
                 </p>
