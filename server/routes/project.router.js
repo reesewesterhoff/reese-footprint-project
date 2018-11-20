@@ -72,11 +72,11 @@ router.get('/sites/:id', (req, res) => {
 router.post('/sites', rejectUnauthenticated, (req,res) => {
     const query = `INSERT INTO "sites" ("project_id", "site_name", 
     "site_type_id", "energy_budget", "start_date", "end_date", 
-    "latitude", "longitude") VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
+    "latitude", "longitude", "image_string") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
     console.log('/projects/sites hit. req.body=',req.body);
     pool.query(query, [req.body.project_id, req.body.state.siteName, req.body.site_type_id,
         req.body.energy_budget, req.body.state.fundStartDate, req.body.state.fundEndDate, 
-        req.body.state.location.lat, req.body.state.location.lng]).then(()=>{
+        req.body.state.location.lat, req.body.state.location.lng, req.body.state.url]).then(()=>{
             res.sendStatus(201);
         }).catch((error) => {
             console.log('Error posting site to project:',error);

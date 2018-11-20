@@ -45,6 +45,7 @@ class AddSite extends Component {
         },
         mapClicked: false,
         address: '',
+        url: ''
     }
 
     handleClick = event => {
@@ -87,19 +88,9 @@ class AddSite extends Component {
         this.props.dispatch({
             type: 'ADD_SITE', payload: { ...this.state, siteGenerators: this.props.generator }
         });
+
         setTimeout(() => scrollToComponent(this.siteTypeList, { offset: 0, align: 'top', duration: 750 }), 200);
-        // this.setState({
-        //     siteName: '',
-        //     fundStartDate: '',
-        //     fundEndDate: '',
-        //     location: {
-        //         lat: 0,
-        //         lng: 0,
-        //     }
-        // });
-        // add toast
-        // store inputs in redux to clear inputs after successful post
-    }
+ 
 
     addSiteToProject = () => {
         this.props.dispatch({type: 'ADD_SITE', 
@@ -115,6 +106,11 @@ class AddSite extends Component {
             this.props.dispatch({ type: 'GET_SITES_BY_PROJECT', payload: id })
             this.props.history.push('/project');
         }
+    }
+
+    getImageString = (image_string) => {
+        console.log('Animation complete');
+        this.setState({url: image_string});
     }
 
     render() {
@@ -205,19 +201,27 @@ class AddSite extends Component {
                     </form>
                 </div>
                 <br />
-                {
+               
 
+                <br />
+                <br />
+                              {
                     this.props.sites.length > 0 &&
                     <section className='siteTypeList' ref={(section) => { this.siteTypeList = section; }}>
                         <SiteTypeList />
                     </section>
                 }
+                {
+                    this.props.selectedSite.id && <Results getImageString={this.getImageString} />
+}
+
                 <br />
                 {this.props.user.id && this.props.selectedSite.id && <Button value="submit"
                     type="submit" variant="contained" color="primary"
                     className={classes.button} onClick={this.addSiteToProject}>
                     Add Site to Project
                     </Button>}
+                    <pre>{JSON.stringify(this.state,null,2)}</pre>
             </div>
 
         );
