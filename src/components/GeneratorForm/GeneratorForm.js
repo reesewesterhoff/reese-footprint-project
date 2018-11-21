@@ -65,7 +65,7 @@ class GeneratorForm extends Component {
         return (
             <div>
                 <div>
-                    <InputLabel htmlFor={this.state.hasGenerator.toString()}>Do you currently have a generator?</InputLabel>
+                    <InputLabel htmlFor={this.state.hasGenerator.toString()}>Do you currently have a generator? </InputLabel>
                     <FormControlLabel
                         control={
                             <Switch
@@ -76,6 +76,7 @@ class GeneratorForm extends Component {
                         }
                         label={this.state.hasGenerator ? "Yes" : "No"}
                     />
+
                 </div>
                 <br />
                 {this.state.hasGenerator && (
