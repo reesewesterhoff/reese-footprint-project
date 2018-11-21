@@ -8,8 +8,7 @@ const SavedSitePage = (props) => {
         let site = props.sites[props.index] || {};
         const total_price = props.allSiteTypes[site.site_type_id-1].total_price; 
         const payoff_date = (moment(site.start_date)).add(
-            total_price/( site.generators.map(generator=>parseInt(generator.fuel_cost)).reduce((total,current)=>total+current) )
-        , 'months');
+            total_price/ site.energy_budget , 'months');
         const project_duration = (moment(site.end_date)).diff(moment(site.start_date), 'months');
         
         const datasets = [{

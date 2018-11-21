@@ -71,6 +71,14 @@ CREATE TABLE "sites" (
     "appliances" INT[]
 );
 
+--table to store all generators
+CREATE TABLE "generator" (
+    "id" SERIAL PRIMARY KEY,
+    "size" INT,
+    "unit" VARCHAR(5),
+    "fuel_cost" INT,
+    "site_id" INT
+);
 
 --appliances table. We want users to have the ability to select appliances from a preset list.
 --We will populate this table ahead of time with info on power needs of different appliances
