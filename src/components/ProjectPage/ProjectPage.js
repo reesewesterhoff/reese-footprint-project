@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
@@ -17,8 +16,8 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
-import allSiteTypes from '../../redux/reducers/allSiteTypesReducer'; //why is this here?
 import './ProjectPage.css'
+import Map from '../Map/Map'
 
 
 const styles = theme => ({
@@ -129,6 +128,20 @@ class ProjectPage extends Component {
 
 
                         </div>}
+                             <Map
+                                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
+                                loadingElement={<div style={{ height: `100%` }} />}
+                                containerElement={<div style={{ height: `80vmin`, width: '80vmin', margin: 'auto', }} />}
+                                mapElement={<div style={{ height: `100%` }} />}
+                                isMarkerShown={this.state.isMarkerShown}
+                                onMarkerClick={this.handleMarkerClick}
+                                handleToggleOpen={this.handleToggleOpen}
+                                isOpen={this.state.isOpen}
+                                onClick={this.handleClick}
+                                location={this.state.location}
+                                handleClick={this.handleClick}
+                                mapClicked={this.state.mapClicked}
+                            />
 
                     {!this.props.sitesByProject.length ? <h2>Add a site to get started!</h2> :
                     <div>
