@@ -15,7 +15,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 class GeneratorForm extends Component {
 
     state = {
-        hasGenerator: false, // property relating to if the user DOES have a generator
+        hasGenerator: false, // property relating to if the user has a generator
         energyUsage: {
             generatorSize: '',
             energyUnit: '',
@@ -65,7 +65,7 @@ class GeneratorForm extends Component {
         return (
             <div>
                 <div>
-                    <InputLabel htmlFor={this.state.hasGenerator.toString()}>Do you currently have a generator? </InputLabel>
+                    <InputLabel htmlFor={this.state.hasGenerator.toString()}>Do you currently have a generator?  </InputLabel>
                     <FormControlLabel
                         control={
                             <Switch
