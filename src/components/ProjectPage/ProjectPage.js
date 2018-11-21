@@ -156,6 +156,7 @@ class ProjectPage extends Component {
                                 {this.state.currentIndex < 0 ? <h2 id="siteSelect">Choose a site!</h2> :
                                     <SavedSitePage
                                         index={this.state.currentIndex}
+                                        energy_budget={0}
                                 />}
                     </div>}
                 </div>
