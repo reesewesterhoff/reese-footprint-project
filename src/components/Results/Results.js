@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import FloatingModal from '../FloatingModal/FloatingModal';
 
-
 let start = '2014-12-30T18:06:17.762Z';
 let end = '2020-01-05T18:06:17.762Z';
 
@@ -80,7 +79,6 @@ class Results extends Component {
             borderColor: [
                 'rgb(0,0,255)'
             ],
-
             borderWidth: 1,
 
         }, {
@@ -149,12 +147,10 @@ class Results extends Component {
 
         return (<div>
             <h2 className="heading">Results</h2>
-            {this.props.dieselCalculation.payOffInTime ?
+            {this.props.dieselCalculation.payOffInTime && 
                 <div className="center">
                     <h2 style={{ color: 'LimeGreen' }}>Total Savings: ${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price).toLocaleString()}</h2>
-                </div>
-                :
-                null}
+                </div>}
             <div style={{ maxWidth: "65%", margin: "auto" }}>
                 <Line data={{ datasets: datasets }} options={options} ref="linegraph" />
             </div>

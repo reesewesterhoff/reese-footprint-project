@@ -43,7 +43,6 @@ const styles = theme => ({
         margin: 10,
         textAlign: 'center',
     },
-
     icon: {
         width: '10vmin',
         height: '10vmin',
@@ -65,11 +64,9 @@ class ProjectPage extends Component {
     }
 
     selectSite = (index) => {
-        console.log('index:', index);
         this.setState({
             currentIndex: index,
         })
-
     }
 
     chooseIcon = iconCategory => {
@@ -101,17 +98,14 @@ class ProjectPage extends Component {
 
     render() {
 
-
         const { classes } = this.props;
 
         return (
-
             <div>
                 <div>
                     {!this.props.project.length ? <p>loading...</p> :
                         <div>
                             <h1 className="heading">{this.props.project[0].name}
-
                                 <pre>
                                     <Button
                                         onClick={this.handleAddSite}
@@ -120,24 +114,14 @@ class ProjectPage extends Component {
                                         color="primary">
                                         Add Site
                           </Button>
-
-
                                 </pre>
-
                             </h1>
-
-
-
                         </div>}
-
                     {!this.props.sitesByProject.length ? <h2>Add a site to get started!</h2> :
                     <div>
                         <div className={classes.cardDiv}>
-
                             {this.props.sitesByProject.map((site, index) =>
-
                                 <Card className={classes.card} key={index}>
-
                                     <CardContent>
                                         <Typography variant="h4">
                                             {
@@ -154,8 +138,6 @@ class ProjectPage extends Component {
                                         <Typography>
                                             Energy Budget: &nbsp; {site.energy_budget}
                                         </Typography>
-
-
                                     </CardContent>
                                     <CardActions>
                                         <div className={classes.button}>
@@ -167,12 +149,12 @@ class ProjectPage extends Component {
 
                                             >
                                                 Select Site
-
                                         </Button>
                                         </div>
                                     </CardActions>
                                 </Card>
                             )}
+
                                 <SitesMap
                                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
                                     loadingElement={<div style={{ height: `100%` }} />}
@@ -193,15 +175,14 @@ class ProjectPage extends Component {
                                 </SitesMap>
 
 
-                                
+
                         </div>
                                 {this.state.currentIndex < 0 ? <h2 id="siteSelect">Choose a site!</h2> :
                                     <SavedSitePage
                                         index={this.state.currentIndex}
+                                        energy_budget={0}
                                 />}
-                    </div>
-                    }
-
+                    </div>}
                 </div>
                 <div id="bugSpacing"></div>
             </div>
