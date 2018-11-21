@@ -44,8 +44,7 @@ class Results extends Component {
             selectedSite: this.props.selectedSite.type,
             totalDieselCost: this.props.dieselCalculation.totalDieselCost || 0,
             address: this.props.sites.length ? this.props.sites[0].address : 'Not entered',
-        }).then(response => {
-            console.log('Response is:', response.data);
+        }).then(() => {
             this.setState({
                 name: '',
                 email: '',
