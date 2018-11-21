@@ -44,7 +44,6 @@ class AddSite extends Component {
         },
         mapClicked: false,
         address: '',
-        url: ''
     }
 
     handleClick = event => {
@@ -108,9 +107,6 @@ class AddSite extends Component {
         }
     }
 
-    getImageString = (image_string) => {
-        this.setState({ url: image_string });
-    }
 
     render() {
 
@@ -214,7 +210,7 @@ class AddSite extends Component {
                 {
                     this.props.sites.length > 0 &&
                     <section className='siteTypeList' ref={(section) => { this.siteTypeList = section; }}>
-                        <SiteTypeList getImageString={this.getImageString} />
+                        <SiteTypeList  />
                     </section>
                 }
 
