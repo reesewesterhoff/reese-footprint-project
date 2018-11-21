@@ -93,17 +93,21 @@ class AddSite extends Component {
     }
 
     addSiteToProject = () => {
-        this.props.dispatch({type: 'ADD_SITE', 
-        payload: {state: this.state, 
-            project_id: this.props.project_id, 
-            site_type_id: this.props.selectedSite.id,
-            generators: this.props.generator,
-            energy_budget: this.props.generator.map(obj=>parseInt(obj.monthlyCost)
-                ).reduce((total,current) => total + current)}});
+        this.props.dispatch({
+            type: 'ADD_SITE',
+            payload: {
+                state: this.state,
+                project_id: this.props.project_id,
+                site_type_id: this.props.selectedSite.id,
+                generators: this.props.generator,
+                energy_budget: this.props.generator.map(obj => parseInt(obj.monthlyCost)
+                ).reduce((total, current) => total + current)
+            }
+        });
         if (this.props.user.id && this.props.selectedSite.id) {
             const id = this.props.project_id;
             console.log('project id for add site:', id);
-            
+
             this.props.dispatch({ type: 'GET_SITES_BY_PROJECT', payload: id })
             this.props.history.push('/project');
         }
@@ -111,7 +115,7 @@ class AddSite extends Component {
 
     getImageString = (image_string) => {
         console.log('Animation complete');
-        this.setState({url: image_string});
+        this.setState({ url: image_string });
     }
 
     render() {
@@ -192,9 +196,16 @@ class AddSite extends Component {
                         <GeneratorForm />
                         <br />
                         <br />
-                        <Button value="submit" type="submit" variant="contained" color="primary" className={classes.button}>
-                            Choose Solar Grid
-                        </Button>
+                        {this.props.generator.length > 0 &&
+                            <Button
+                                value="submit"
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                            >
+                                Choose Site Type
+                        </Button>}
                         <br />
                         <br />
                         <br />
@@ -202,7 +213,7 @@ class AddSite extends Component {
                     </form>
                 </div>
                 <br />
-               
+
 
                 <br />
                 <br />
