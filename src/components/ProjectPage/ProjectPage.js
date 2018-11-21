@@ -17,7 +17,8 @@ import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
 import './ProjectPage.css'
-import Map from '../Map/Map'
+import SitesMap from '../SitesMap/SitesMap'
+import SiteMarker from '../Marker/Marker'
 
 
 const styles = theme => ({
@@ -64,7 +65,7 @@ class ProjectPage extends Component {
     }
 
     selectSite = (index) => {
-        console.log(index);
+        console.log('index:', index);
         this.setState({
             currentIndex: index,
         })
@@ -128,20 +129,6 @@ class ProjectPage extends Component {
 
 
                         </div>}
-                             <Map
-                                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
-                                loadingElement={<div style={{ height: `100%` }} />}
-                                containerElement={<div style={{ height: `80vmin`, width: '80vmin', margin: 'auto', }} />}
-                                mapElement={<div style={{ height: `100%` }} />}
-                                isMarkerShown={this.state.isMarkerShown}
-                                onMarkerClick={this.handleMarkerClick}
-                                handleToggleOpen={this.handleToggleOpen}
-                                isOpen={this.state.isOpen}
-                                onClick={this.handleClick}
-                                location={this.state.location}
-                                handleClick={this.handleClick}
-                                mapClicked={this.state.mapClicked}
-                            />
 
                     {!this.props.sitesByProject.length ? <h2>Add a site to get started!</h2> :
                     <div>
@@ -186,7 +173,27 @@ class ProjectPage extends Component {
                                     </CardActions>
                                 </Card>
                             )}
-                            
+                                <SitesMap
+                                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
+                                    loadingElement={<div style={{ height: `100%` }} />}
+                                    containerElement={<div style={{ height: `80vmin`, width: '80vmin', marginLeft: '35vmin', }} />}
+                                    mapElement={<div style={{ height: `100%` }} />}
+                                    isMarkerShown={this.state.isMarkerShown}
+                                    onMarkerClick={this.handleMarkerClick}
+                                    handleToggleOpen={this.handleToggleOpen}
+                                    isOpen={this.state.isOpen}
+                                    onClick={this.handleClick}
+                                    location={this.state.location}
+                                    handleClick={this.handleClick}
+                                    mapClicked={this.state.mapClicked}
+                                    selectSite={this.selectSite}
+                                >
+                           
+
+                                </SitesMap>
+
+
+                                
                         </div>
                                 {this.state.currentIndex < 0 ? <h2 id="siteSelect">Choose a site!</h2> :
                                     <SavedSitePage
