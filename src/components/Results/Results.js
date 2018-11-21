@@ -56,9 +56,6 @@ class Results extends Component {
         }).catch(error => console.log('Error in POST:', error));
     }
 
-    setImageString = () => {
-        this.props.getImageString(this.refs.linegraph.chartInstance.toBase64Image());
-    }
 
     render() {
         const datasets = [{
@@ -139,9 +136,6 @@ class Results extends Component {
                     }
                 }]
             },
-            animation: {
-                onComplete: this.setImageString
-            }
         };
 
         return (<div>
