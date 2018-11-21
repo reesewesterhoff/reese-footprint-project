@@ -65,7 +65,13 @@ class AddProject extends Component {
                                 onChange={this.handleChange('projectName')}
                                 margin="normal"
                             />
-                            <Button value="submit" type="submit" variant="contained" color="primary" className={classes.button}>
+                            <Button 
+                                value="submit" 
+                                type="submit" 
+                                variant="contained" 
+                                color="primary" 
+                                className={classes.button}
+                            >
                                 Add Project
                             </Button>
                         </form>

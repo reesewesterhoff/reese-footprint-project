@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import GeneratorForm from '../GeneratorForm/GeneratorForm';
 import SiteTypeList from '../SiteTypeList/SiteTypeList';
-import Results from '../Results/Results';
 import Map from '../Map/Map'
 import Geocode from "react-geocode";
 import Button from '@material-ui/core/Button';
@@ -53,12 +52,10 @@ class AddSite extends Component {
             location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
             mapClicked: true,
         });
-        console.log('You clicked on', this.state.location);
         // Get Address from Lat/Long Coordinates
         Geocode.fromLatLng(this.state.location.lat, this.state.location.lng).then(
             response => {
                 const address = response.results[0].formatted_address;
-                console.log(address);
                 this.setState({
                     address: address,
                 })
@@ -106,15 +103,12 @@ class AddSite extends Component {
         });
         if (this.props.user.id && this.props.selectedSite.id) {
             const id = this.props.project_id;
-            console.log('project id for add site:', id);
-
             this.props.dispatch({ type: 'GET_SITES_BY_PROJECT', payload: id })
             this.props.history.push('/project');
         }
     }
 
     getImageString = (image_string) => {
-        console.log('Animation complete');
         this.setState({ url: image_string });
     }
 
