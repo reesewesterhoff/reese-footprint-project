@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
@@ -17,7 +16,6 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
-import allSiteTypes from '../../redux/reducers/allSiteTypesReducer'; //why is this here?
 import './ProjectPage.css'
 
 
@@ -43,7 +41,6 @@ const styles = theme => ({
         margin: 10,
         textAlign: 'center',
     },
-
     icon: {
         width: '10vmin',
         height: '10vmin',
@@ -65,11 +62,9 @@ class ProjectPage extends Component {
     }
 
     selectSite = (index) => {
-        console.log(index);
         this.setState({
             currentIndex: index,
         })
-
     }
 
     chooseIcon = iconCategory => {
@@ -101,17 +96,14 @@ class ProjectPage extends Component {
 
     render() {
 
-
         const { classes } = this.props;
 
         return (
-
             <div>
                 <div>
                     {!this.props.project.length ? <p>loading...</p> :
                         <div>
                             <h1 className="heading">{this.props.project[0].name}
-
                                 <pre>
                                     <Button
                                         onClick={this.handleAddSite}
@@ -120,24 +112,14 @@ class ProjectPage extends Component {
                                         color="primary">
                                         Add Site
                           </Button>
-
-
                                 </pre>
-
                             </h1>
-
-
-
                         </div>}
-
                     {!this.props.sitesByProject.length ? <h2>Add a site to get started!</h2> :
                     <div>
                         <div className={classes.cardDiv}>
-
                             {this.props.sitesByProject.map((site, index) =>
-
                                 <Card className={classes.card} key={index}>
-
                                     <CardContent>
                                         <Typography variant="h4">
                                             {
@@ -154,8 +136,6 @@ class ProjectPage extends Component {
                                         <Typography>
                                             Energy Budget: &nbsp; {site.energy_budget}
                                         </Typography>
-
-
                                     </CardContent>
                                     <CardActions>
                                         <div className={classes.button}>
@@ -167,21 +147,17 @@ class ProjectPage extends Component {
 
                                             >
                                                 Select Site
-
                                         </Button>
                                         </div>
                                     </CardActions>
                                 </Card>
                             )}
-                            
                         </div>
                                 {this.state.currentIndex < 0 ? <h2 id="siteSelect">Choose a site!</h2> :
                                     <SavedSitePage
                                         index={this.state.currentIndex}
                                 />}
-                    </div>
-                    }
-
+                    </div>}
                 </div>
                 <div id="bugSpacing"></div>
             </div>

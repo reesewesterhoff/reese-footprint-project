@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 // import google maps api for Marker
 import { Marker } from 'react-google-maps';
 
@@ -18,10 +17,7 @@ class SiteMarker extends Component {
         });
     };
 
-
-
   render() {
-
     return (  
         // Setup Marker
         <Marker
@@ -31,8 +27,6 @@ class SiteMarker extends Component {
             size: {width: 60, height: 100}, anchor: {x: 15, y: 50}, scaledSize: {width: 30, height: 30}, }}>
         </Marker>
         // End Marker
-
-
     );
   }
 }
