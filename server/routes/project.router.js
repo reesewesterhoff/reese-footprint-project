@@ -67,7 +67,6 @@ router.get('/sites/:id', (req, res) => {
         GROUP BY sites.id;`
     pool.query(query, [req.params.id])
     .then(results => {
-        console.log(JSON.stringify(results.rows));
         res.send(results.rows);
     })
     .catch(error => {
