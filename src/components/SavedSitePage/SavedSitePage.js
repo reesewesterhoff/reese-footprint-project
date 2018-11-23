@@ -143,62 +143,64 @@ class SavedSitePage extends Component {
         };
         return (
             <div>
-                <h1>Saved Site</h1>
-                <h2>Name: {site.site_name}</h2>
-                {this.state.editing ?
-                    <div>
-                        <TextField
-                            id="date"
-                            label="Funding Start Date"
-                            type="date"
-                            onChange={this.handleChange('fundStartDateTemp')}
-                            className={classes.textField}
-                            value={this.state.fundStartDateTemp}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            required
-                        />
-                        <TextField
-                            label="Funding End Date"
-                            type="date"
-                            onChange={this.handleChange('fundEndDateTemp')}
-                            className={classes.textField}
-                            value={this.state.fundEndDateTemp}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            required
-                        />
-                    </div> :
-                    <div>
-                        <Button color="primary" onClick={() => this.setState({ editing: !this.state.editing })}>
-                            Edit</Button>
-                        <h4>Start Date: {(new Date(startDate).toDateString())}</h4>
-                        <h4>End Date: {(new Date(endDate)).toDateString()}</h4>
-                    </div>}
-
-                <h4>{this.state.editing ?
-                    <span>
-                        <TextField
-                            label="Monthly Energy Budget"
-                            className={classes.textField}
-                            value={this.state.new_budget}
-                            required
-                            onChange={this.handleChange('new_budget')}
-                            margin="normal"
-                        />
-                        <Button color="primary" onClick={() => this.setState({
-                            energy_budget: this.state.new_budget,
-                            fundStartDate: this.state.fundStartDateTemp,
-                            fundEndDate: this.state.fundEndDateTemp
-                        })}>Reset Chart</Button>
-                        <Button color="primary" onClick={() => { this.setState({ editing: false }) }}>Save Changes</Button>
-                    </span> :
-                    <span>Monthly Energy Budget: ${energy_budget.toLocaleString()}
-                    </span>}
-                </h4>
-                <h4>Site Type: {this.props.allSiteTypes[site.site_type_id - 1].type}</h4>
+                <h1 className="heading">Saved Site</h1>
+                <div className="center">
+                    <h2>Name: {site.site_name}</h2>
+                    {this.state.editing ?
+                        <div>
+                            <TextField
+                                id="date"
+                                label="Funding Start Date"
+                                type="date"
+                                onChange={this.handleChange('fundStartDateTemp')}
+                                className={classes.textField}
+                                value={this.state.fundStartDateTemp}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                required
+                            />
+                            <TextField
+                                label="Funding End Date"
+                                type="date"
+                                onChange={this.handleChange('fundEndDateTemp')}
+                                className={classes.textField}
+                                value={this.state.fundEndDateTemp}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                required
+                            />
+                        </div> :
+                        <div>
+                            <h4>Start Date: {(new Date(startDate).toDateString())}</h4>
+                            <h4>End Date: {(new Date(endDate)).toDateString()}</h4>
+                        </div>}
+                    <h4>{this.state.editing ?
+                        <span>
+                            <TextField
+                                label="Monthly Energy Budget"
+                                className={classes.textField}
+                                value={this.state.new_budget}
+                                required
+                                onChange={this.handleChange('new_budget')}
+                                margin="normal"
+                            />
+                            <Button color="primary" onClick={() => this.setState({
+                                energy_budget: this.state.new_budget,
+                                fundStartDate: this.state.fundStartDateTemp,
+                                fundEndDate: this.state.fundEndDateTemp
+                            })}>Reset Chart</Button>
+                            <Button color="primary" onClick={() => { this.setState({ editing: false }) }}>Save Changes</Button>
+                        </span> :
+                        <span>Monthly Energy Budget: ${energy_budget.toLocaleString()}
+                        </span>}
+                    </h4>
+                    <h4>Site Type: {this.props.allSiteTypes[site.site_type_id - 1].type}</h4>
+                    <Button color="primary" variant="outlined" size="medium" onClick={() => this.setState({ editing: !this.state.editing })}>
+                        Edit
+                    </Button>
+                </div>
                 <h4>{site.generators[0].size &&
                     <div>Generators:
                     <ul>
@@ -207,7 +209,7 @@ class SavedSitePage extends Component {
                         </ul>
                     </div>}
                 </h4>
-                <div style={{ maxWidth: "75%", margin: "auto" }}>
+                <div style={{ maxWidth: "65%", margin: "auto" }}>
                     <Line data={{ datasets: datasets }} options={options} />
                 </div>
             </div>
