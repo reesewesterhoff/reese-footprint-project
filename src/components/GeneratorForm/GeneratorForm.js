@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import GeneratorList from '../GeneratorList/GeneratorList';
 import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
@@ -11,6 +13,12 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Snackbar from '@material-ui/core/Snackbar';
+
+const styles = {
+    label: {
+        textTransform: 'capitalize',
+    },
+}
 
 class GeneratorForm extends Component {
 
@@ -62,6 +70,7 @@ class GeneratorForm extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <div>
                 <div>
@@ -72,6 +81,7 @@ class GeneratorForm extends Component {
                                 checked={this.state.hasGenerator}
                                 onChange={this.handleHasGeneratorToggle}
                                 value="hasGenerator"
+                                color="primary"
                             />
                         }
                         label={this.state.hasGenerator ? "Yes" : "No"}
@@ -136,6 +146,7 @@ class GeneratorForm extends Component {
                             variant="contained"
                             color="primary"
                             onClick={this.handleAddEnergyUsage}
+                            classes={{label: classes.label}}
                         >
                             Add Monthly Energy Budget
                     </Button>
@@ -153,9 +164,13 @@ class GeneratorForm extends Component {
     }
 }
 
+GeneratorForm.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
 const mapStateToProps = state => ({
     sites: state.sites,
     generator: state.generator,
 });
 
-export default connect(mapStateToProps)(GeneratorForm);
+export default withStyles(styles)(connect(mapStateToProps)(GeneratorForm));

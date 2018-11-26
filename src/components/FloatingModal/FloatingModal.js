@@ -46,6 +46,7 @@ class FloatingModal extends Component {
           onClick={this.props.handleModalToggle}
           variant="contained"
           color={this.props.color}
+          classes={{label: this.props.classes.label}}
         >
           {this.props.buttonText}
         </Button>
