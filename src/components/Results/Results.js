@@ -4,10 +4,17 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Snackbar from '@material-ui/core/Snackbar';
 import FloatingModal from '../FloatingModal/FloatingModal';
-
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
 let start = '2014-12-30T18:06:17.762Z';
 let end = '2020-01-05T18:06:17.762Z';
+
+const styles = {
+    label: {
+        textTransform: 'capitalize',
+    },
+}
 
 class Results extends Component {
 
@@ -45,8 +52,7 @@ class Results extends Component {
             selectedSite: this.props.selectedSite.type,
             totalDieselCost: this.props.dieselCalculation.totalDieselCost || 0,
             address: this.props.sites.length ? this.props.sites[0].address : 'Not entered',
-        }).then(response => {
-            console.log('Response is:', response.data);
+        }).then(() => {
             this.setState({
                 name: '',
                 email: '',
@@ -58,11 +64,10 @@ class Results extends Component {
         }).catch(error => console.log('Error in POST:', error));
     }
 
-    setImageString = () => {
-        this.props.getImageString(this.refs.linegraph.chartInstance.toBase64Image());
-    }
 
     render() {
+        const { classes } = this.props;
+
         const datasets = [{
             label: 'Time to cover initial investment',
             data: [{ //these values will be set dynamically when user enters info
@@ -75,12 +80,11 @@ class Results extends Component {
             backgroundColor: this.props.dieselCalculation.payOffInTime ? [
                 'rgb(0,0,255,0.7)'
             ] : [
-                '#DC143C'
-            ],
+                    '#DC143C'
+                ],
             borderColor: [
                 'rgb(0,0,255)'
             ],
-
             borderWidth: 1,
 
         }, {
@@ -142,38 +146,26 @@ class Results extends Component {
                     }
                 }]
             },
-            animation: {
-                onComplete: this.setImageString
-            }
         };
 
         return (<div>
             <h2 className="heading">Results</h2>
-            {this.props.dieselCalculation.payOffInTime ?
+            {this.props.dieselCalculation.payOffInTime &&
                 <div className="center">
                     <h2 style={{ color: 'LimeGreen' }}>Total Savings: ${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price).toLocaleString()}</h2>
-                </div>
-                :
-                null}
+                </div>}
             <div style={{ maxWidth: "65%", margin: "auto" }}>
                 <Line data={{ datasets: datasets }} options={options} ref="linegraph" />
             </div>
             {this.props.dieselCalculation.payOffInTime ?
                 <div className="center" style={{ color: 'LimeGreen' }}>
-                    <h3>Time to pay off: <strong style={{color: 'MediumTurquoise'}}>{parseInt(this.props.dieselCalculation.timeToPayOff)} months</strong></h3>
-                    <h3>Total Savings: <strong style={{color: 'MediumTurquoise'}}>${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price).toLocaleString()}</strong></h3>
-                    <h3>Jobs Created: <strong style={{color: 'MediumTurquoise'}}>{this.props.selectedSite.jobs_created}</strong></h3>
-                    <h3>Total Co2 Saved: <strong style={{color: 'MediumTurquoise'}}>{this.props.selectedSite.co2_saved.toLocaleString()} lbs</strong></h3>
+                    <h3>Time to pay off: <strong style={{ color: 'MediumTurquoise' }}>{parseInt(this.props.dieselCalculation.timeToPayOff)} months</strong></h3>
+                    <h3>Total Savings: <strong style={{ color: 'MediumTurquoise' }}>${parseInt(this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price).toLocaleString()}</strong></h3>
+                    <h3>Jobs Created: <strong style={{ color: 'MediumTurquoise' }}>{this.props.selectedSite.jobs_created}</strong></h3>
+                    <h3>Total Co2 Saved: <strong style={{ color: 'MediumTurquoise' }}>{this.props.selectedSite.co2_saved.toLocaleString()} lbs</strong></h3>
                 </div>
                 :
-                <h3 className="center" style={{color: 'DarkRed'}}>Monthly Budget Needed To Pay Off In Time: ${parseInt(this.props.selectedSite.total_price / this.props.dieselCalculation.timeline).toLocaleString()}</h3>}
-            <div className="subHeading">
-                <p>
-                    This is an estimate of the costs/benefits of using solar power at your site. There are purchase, lease, and renting options available.
-                    Please click the "Contact The Experts" button to send your estimate and email address to a Footprint Project representative. We will contact
-                    promptly with more details and information about how to make your project sustainable!
-                </p>
-            </div>
+                <h3 className="center" style={{ color: 'DarkRed' }}>Monthly Budget Needed To Pay Off In Time: ${parseInt(this.props.selectedSite.total_price / this.props.dieselCalculation.timeline).toLocaleString()}</h3>}
             <div className="center">
                 <FloatingModal
                     buttonText="Contact The Experts For More Information!"
@@ -186,8 +178,17 @@ class Results extends Component {
                     handleSubmit={this.handleSubmit}
                     handleClose={this.handleClose}
                     subject="Solar Estimate"
+                    classes={{label: classes.label}}
                 />
             </div>
+            <div className="subHeading">
+                <p>
+                    This is an estimate of the costs/benefits of using solar power at your site. There are purchase, lease, and renting options available.
+                    Please click the "Contact The Experts" button to send your estimate and email address to a Footprint Project representative. We will contact
+                    promptly with more details and information about how to make your project sustainable!
+                </p>
+            </div>
+
             <br />
             <br />
             <Snackbar
@@ -200,6 +201,10 @@ class Results extends Component {
     }
 }
 
+Results.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
 const mapStateToProps = state => ({
     sites: state.sites,
     selectedSite: state.selectedSite,
@@ -208,4 +213,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps)(Results);
+export default withStyles(styles)(connect(mapStateToProps)(Results));

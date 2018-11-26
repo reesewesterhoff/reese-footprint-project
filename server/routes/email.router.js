@@ -36,8 +36,8 @@ router.post('/', (req, res, next) => {
       Address: ${req.body.address} \n
       Funding Start Date: ${req.body.fundStartDate}, \n
       Funding End Date: ${req.body.fundEndDate}, \n
-      Location: ${JSON.stringify(req.body.location)}, \n
-      Generator(s)/Energy Budget: ${JSON.stringify(req.body.generator)}, \n
+      GPS Location: Lat: ${req.body.location.lat} Lon: ${req.body.location.lng}, \n
+      Generator(s)/Energy Budget: ${req.body.generator.generatorSize}${req.body.generator.energyUnit} $${req.body.generator.monthlyCost}, \n
       Selected Site Type: ${req.body.selectedSite}, \n
       Total Diesel Cost over Project Timeline: $${req.body.totalDieselCost.toLocaleString()}`
   

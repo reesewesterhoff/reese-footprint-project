@@ -16,9 +16,10 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
-import './ProjectPage.css'
-import SitesMap from '../SitesMap/SitesMap'
-
+import './ProjectPage.css';
+import SitesMap from '../SitesMap/SitesMap';
+import SiteMarker from '../Marker/Marker';
+import scrollToComponent from 'react-scroll-to-component';
 
 const styles = theme => ({
     container: {
@@ -42,7 +43,6 @@ const styles = theme => ({
         margin: 10,
         textAlign: 'center',
     },
-
     icon: {
         width: '10vmin',
         height: '10vmin',
@@ -64,11 +64,10 @@ class ProjectPage extends Component {
     }
 
     selectSite = (index) => {
-        console.log('index:', index);
         this.setState({
             currentIndex: index,
         })
-
+        setTimeout(() => scrollToComponent(this.siteSelect, { offset: 0, align: 'top', duration: 750 }), 200);
     }
 
     chooseIcon = iconCategory => {
@@ -100,17 +99,14 @@ class ProjectPage extends Component {
 
     render() {
 
-
         const { classes } = this.props;
 
         return (
-
             <div>
                 <div>
                     {!this.props.project.length ? <p>loading...</p> :
                         <div>
                             <h1 className="heading">{this.props.project[0].name}
-
                                 <pre>
                                     <Button
                                         onClick={this.handleAddSite}
@@ -119,63 +115,51 @@ class ProjectPage extends Component {
                                         color="primary">
                                         Add Site
                           </Button>
-
-
                                 </pre>
-
                             </h1>
-
-
-
                         </div>}
-
                     {!this.props.sitesByProject.length ? <h2>Add a site to get started!</h2> :
-                    <div>
-                        <div className={classes.cardDiv}>
+                        <div>
+                            <div className={classes.cardDiv}>
+                                {this.props.sitesByProject.map((site, index) =>
+                                    <Card className={classes.card} key={index}>
+                                        <CardContent>
+                                            <Typography variant="h4">
+                                                {
+                                                    this.chooseIcon(
+                                                        this.props.allSiteTypes[(site.site_type_id - 1)].category)
+                                                }
+                                                <br />
+                                            </Typography>
 
-                            {this.props.sitesByProject.map((site, index) =>
+                                            <Typography variant="h6">
+                                                {site.site_name}
+                                            </Typography>
 
-                                <Card className={classes.card} key={index}>
+                                            <Typography>
+                                                Energy Budget: &nbsp; {site.energy_budget}
+                                            </Typography>
+                                        </CardContent>
+                                        <CardActions>
+                                            <div className={classes.button}>
+                                                <Button
+                                                    size="large"
+                                                    variant="outlined"
+                                                    color="secondary"
+                                                    onClick={() => this.selectSite(index)}
 
-                                    <CardContent>
-                                        <Typography variant="h4">
-                                            {
-                                                this.chooseIcon(
-                                                    this.props.allSiteTypes[(site.site_type_id - 1)].category)
-                                            }
-                                            <br />
-                                        </Typography>
-
-                                        <Typography variant="h6">
-                                            {site.site_name}
-                                        </Typography>
-
-                                        <Typography>
-                                            Energy Budget: &nbsp; {site.energy_budget}
-                                        </Typography>
-
-
-                                    </CardContent>
-                                    <CardActions>
-                                        <div className={classes.button}>
-                                            <Button
-                                                size="large"
-                                                variant="outlined"
-                                                color="secondary"
-                                                onClick={() => this.selectSite(index)}
-
-                                            >
-                                                Select Site
-
+                                                >
+                                                    Select Site
                                         </Button>
-                                        </div>
-                                    </CardActions>
-                                </Card>
-                            )}
+                                            </div>
+                                        </CardActions>
+                                    </Card>
+                                )}
+                                <div>
                                 <SitesMap
                                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
                                     loadingElement={<div style={{ height: `100%` }} />}
-                                    containerElement={<div style={{ height: `80vmin`, width: '80vmin', marginLeft: '35vmin', }} />}
+                                    containerElement={<div style={{ height: `80vmin`, width: '80vmin', margin: 'auto', }} />}
                                     mapElement={<div style={{ height: `100%` }} />}
                                     isMarkerShown={this.state.isMarkerShown}
                                     onMarkerClick={this.handleMarkerClick}
@@ -187,20 +171,22 @@ class ProjectPage extends Component {
                                     mapClicked={this.state.mapClicked}
                                     selectSite={this.selectSite}
                                 >
-                           
+
 
                                 </SitesMap>
+                                </div>
 
 
-                                
-                        </div>
-                                {this.state.currentIndex < 0 ? <h2 id="siteSelect">Choose a site!</h2> :
+                            </div>
+                            {this.state.currentIndex < 0 ? <h2 id="siteSelect">Choose a site!</h2> :
+                                <section className='siteSelect' ref={(section) => { this.siteSelect = section; }}>
                                     <SavedSitePage
                                         index={this.state.currentIndex}
-                                />}
-                    </div>
-                    }
-
+                                        energy_budget={0}
+                                    />
+                                </section>
+                            }
+                        </div>}
                 </div>
                 <div id="bugSpacing"></div>
             </div>

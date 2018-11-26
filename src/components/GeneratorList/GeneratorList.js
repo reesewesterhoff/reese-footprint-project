@@ -7,7 +7,7 @@ class GeneratorList extends Component {
         this.props.generator.map(newGen => totalCost += Number(newGen.monthlyCost));
         return (
             <div>
-                Total Monthly Diesel Cost:
+                Total Monthly Energy Cost:
                    ${totalCost.toFixed(2)}
             </div>
         )

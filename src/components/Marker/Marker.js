@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 // import google maps api for Marker
 import { Marker } from 'react-google-maps';
 import Hospital from '../../icons/hospital.svg'
@@ -12,9 +11,6 @@ import Router from '../../icons/router.svg'
 import Security from '../../icons/security.svg'
 import Store from '../../icons/store.svg'
 import Waves from '../../icons/waves.svg'
-
-
-
 
 class SiteMarker extends Component {
     state = {
@@ -51,7 +47,6 @@ class SiteMarker extends Component {
     }
 
   render() {
-
     return (  
         // Setup Marker
         <Marker
@@ -67,8 +62,6 @@ class SiteMarker extends Component {
             >
         </Marker>
         // End Marker
-
-
     );
   }
 }
