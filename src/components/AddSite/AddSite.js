@@ -100,6 +100,7 @@ class AddSite extends Component {
                 ).reduce((total, current) => total + current)
             }
         });
+        this.props.dispatch({type: 'CLEAR_FORM'});
         if (this.props.user.id && this.props.selectedSite.id) {
             const id = this.props.project_id;
             this.props.dispatch({ type: 'GET_SITES_BY_PROJECT', payload: id })
