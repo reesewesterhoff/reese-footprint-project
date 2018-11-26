@@ -21,7 +21,6 @@ import SitesMap from '../SitesMap/SitesMap';
 import SiteMarker from '../Marker/Marker';
 import scrollToComponent from 'react-scroll-to-component';
 
-
 const styles = theme => ({
     container: {
         display: 'flex',
