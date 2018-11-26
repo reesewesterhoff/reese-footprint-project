@@ -27,7 +27,7 @@ class SitesMap extends React.Component {
     this.setState({
       bounds: null,
       center: {
-        lat: 40, lng: 45
+        lat: Number(this.props.sitesByProject[0].latitude), lng: Number(this.props.sitesByProject[0].longitude)
       },
       markers: [],
       onMapMounted: ref => {
@@ -82,7 +82,7 @@ class SitesMap extends React.Component {
       <div>
         <GoogleMap
           ref={this.state.onMapMounted}
-          defaultZoom={2.2}
+          defaultZoom={5.5}
           center={this.state.center}
           onClick={this.props.handleClick}
           onBoundsChanged={this.props.onBoundsChanged}

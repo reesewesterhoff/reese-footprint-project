@@ -43,10 +43,14 @@ a {
     display: flex;
 }
 
-h2 {
+h2, #generators {
     text-align: center;
 }
 
 #siteSelect {
     text-align: center;
+}
+
+.leftAlign{
+    text-align: left;
 }
