@@ -18,7 +18,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
 import './ProjectPage.css'
 import SitesMap from '../SitesMap/SitesMap'
-import SiteMarker from '../Marker/Marker'
 
 
 const styles = theme => ({
