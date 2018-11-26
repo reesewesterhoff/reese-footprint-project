@@ -50,14 +50,10 @@ class SiteMarker extends Component {
     return (  
         // Setup Marker
         <Marker
-
             optimized="false"
             position={this.props.position}
-            // position={{lat: 6.542503571838057, lng: -1.4808464031250423}}
             onClick={() => this.props.selectSite(this.props.index)}
             icon={{ url: this.chooseIcon(this.props.image),
-            class: "siteIcon",
-            // icon={{ url: this.chooseIcon(this.props.image), 
             size: {width: 60, height: 100}, anchor: {x: 15, y: 50}, scaledSize: {width: 30, height: 30}, }}
             >
         </Marker>
