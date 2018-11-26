@@ -5,14 +5,6 @@ import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
 import _ from 'lodash';
 import { Marker } from 'react-google-maps';
 import SiteMarker from '../Marker/Marker'
-import Hospital from '../../icons/hospital.svg'
-import Business from '../../icons/business.svg'
-import Home from '../../icons/home.svg'
-import Restaurant from '../../icons/restaurant.svg'
-import Router from '../../icons/router.svg'
-import Security from '../../icons/security.svg'
-import Store from '../../icons/store.svg'
-import Waves from '../../icons/waves.svg'
 
 /* global google */
 
@@ -29,29 +21,6 @@ class SitesMap extends React.Component {
     windowPosition: null,
     mapClicked: false,
   }
-
-  chooseIcon = iconCategory => {
-    switch (iconCategory) {
-        case 'Health':
-            return <Hospital style={{ width: "10vmin", height: "10vmin" }} />
-        case 'Water':
-            return <Waves style={{ width: "10vmin", height: "10vmin" }} />
-        case 'Comms':
-            return <Router style={{ width: "10vmin", height: "10vmin" }} />
-        case 'Ops':
-            return <Security style={{ width: "10vmin", height: "10vmin" }} />
-        case 'Shelter':
-            return <Home style={{ width: "10vmin", height: "10vmin" }} />
-        case 'Food':
-            return <Restaurant style={{ width: "10vmin", height: "10vmin" }} />
-        case 'Admin':
-            return <Business style={{ width: "10vmin", height: "10vmin" }} />
-        case 'Logs':
-            return <Store style={{ width: "10vmin", height: "10vmin" }} />
-        default:
-            return null;
-    }
-}
 
   componentWillMount() {
     const refs = {}
@@ -115,7 +84,7 @@ class SitesMap extends React.Component {
       <div>
         <GoogleMap
           ref={this.state.onMapMounted}
-          defaultZoom={8}
+          defaultZoom={5.5}
           center={this.state.center}
           onClick={this.props.handleClick}
           onBoundsChanged={this.props.onBoundsChanged}
