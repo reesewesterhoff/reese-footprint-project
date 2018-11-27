@@ -13,6 +13,7 @@ let end = '2020-01-05T18:06:17.762Z';
 const styles = {
     label: {
         textTransform: 'capitalize',
+        fontSize: 25,
     },
 }
 
@@ -168,9 +169,10 @@ class Results extends Component {
                 </div>
                 :
                 <h3 className="center" style={{ color: 'DarkRed' }}>Monthly Budget Needed To Pay Off In Time: ${parseInt(this.props.selectedSite.total_price / this.props.dieselCalculation.timeline).toLocaleString()}</h3>}
+                <br />
             <div className="center">
                 <FloatingModal
-                    buttonText="Contact The Experts For More Information!"
+                    buttonText="Contact the Experts"
                     color="primary"
                     title="Please complete the following fields to send your solar estimate to a Footprint Project Representative. We will contact you soon!"
                     state={this.state}
