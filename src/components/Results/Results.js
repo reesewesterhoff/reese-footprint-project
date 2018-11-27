@@ -69,7 +69,7 @@ class Results extends Component {
         const { classes } = this.props;
 
         const datasets = [{
-            label: 'Time to cover initial investment',
+            label: 'Time to cover initial solar grid investment',
             data: [{ //these values will be set dynamically when user enters info
                 x: this.props.sites.length ? new Date(this.props.sites[0].fundStartDate) : start,
                 y: this.props.selectedSite.total_price || 25000
@@ -120,7 +120,7 @@ class Results extends Component {
             borderColor: [
                 'grey'
             ],
-            borderWidth: 1
+            borderWidth: 1,
         }]
 
         const options = {
@@ -136,13 +136,15 @@ class Results extends Component {
                     distribution: 'linear',
                     scaleLabel: {
                         display: true,
-                        labelString: 'Project Timeline'
+                        labelString: 'Project Timeline',
+                        fontSize: 22,
                     }
                 }],
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: 'Energy Costs'
+                        labelString: 'Energy Costs',
+                        fontSize: 22,
                     }
                 }]
             },
