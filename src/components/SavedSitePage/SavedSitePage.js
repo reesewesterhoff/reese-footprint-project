@@ -61,7 +61,7 @@ class SavedSitePage extends Component {
         const project_duration = (moment(endDate)).diff(moment(startDate), 'months');
 
         const datasets = [{
-            label: 'Time to cover initial investment',
+            label: 'Time to cover initial solar grid investment',
             data: [{
                 x: moment(startDate),
                 y: total_price
@@ -130,13 +130,15 @@ class SavedSitePage extends Component {
                     distribution: 'linear',
                     scaleLabel: {
                         display: true,
-                        labelString: 'Project Timeline'
+                        labelString: 'Project Timeline',
+                        fontSize: 22,
                     }
                 }],
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: 'Energy Costs'
+                        labelString: 'Energy Costs',
+                        fontSize: 22,
                     }
                 }]
             },
