@@ -4,6 +4,8 @@ const selectedSite = (state = {}, action) => {
         return action.payload;
       case 'UNSET_USER':
         return {};
+      case 'ADD_SITE_TO_PROJECT':
+        return {};
       default:
         return state;
     }
