@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// connect to redux state
 import { connect } from 'react-redux';
 
 class GeneratorList extends Component {
@@ -14,6 +15,7 @@ class GeneratorList extends Component {
     }
 }
 
+// allows access to info in redux state
 const mapStateToProps = state => ({
     sites: state.sites,
     generator: state.generator,

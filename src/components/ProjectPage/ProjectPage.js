@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+// connect to redux
 import { connect } from 'react-redux';
+// material-ui imports
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
@@ -7,7 +9,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
-import SavedSitePage from '../SavedSitePage/SavedSitePage';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import RestaurantIcon from '@material-ui/icons/Restaurant';
@@ -16,10 +17,16 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
+// css
 import './ProjectPage.css';
+// import saved sites page to see info about specific site on click
+import SavedSitePage from '../SavedSitePage/SavedSitePage';
+// import map to see sites on map with icons
 import SitesMap from '../SitesMap/SitesMap';
+// forced scrolling
 import scrollToComponent from 'react-scroll-to-component';
 
+// jss styles
 const styles = theme => ({
     container: {
         display: 'flex',

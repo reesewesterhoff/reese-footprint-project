@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+// connect to redux state
 import { connect } from 'react-redux';
+// material-ui imports
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+// for routing
 import { withRouter } from 'react-router-dom';
+// css
 import './AddProject.css'
 
+// jss styles
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -30,6 +35,7 @@ class AddProject extends Component {
         image_url: ''
     }
 
+    // handles adding a project for logged in users
     handleSubmit = event => {
         event.preventDefault();
         this.props.dispatch({
@@ -39,14 +45,15 @@ class AddProject extends Component {
             projectName: '',
         });
         this.props.history.push('/dashboard')
-    }
+    } // end handleSubmit
 
+    // handles changes in input boxes 
     handleChange = property => event => {
         this.setState({
             ...this.state,
             [property]: event.target.value
         })
-    }
+    } // end handleChange
 
     render() {
 
@@ -91,11 +98,13 @@ class AddProject extends Component {
     }
 }
 
+// access to redux state
 const mapStateToProps = state => ({
     state: state,
     user: state.user,
 });
 
+// needed for jss styles
 AddProject.propTypes = {
     classes: PropTypes.object.isRequired,
 };
