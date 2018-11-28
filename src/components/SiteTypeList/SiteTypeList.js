@@ -115,7 +115,9 @@ class SiteTypeList extends Component {
                     this.props.selectedSite.id &&
                     // scrolls here upon selecting a site
                     <section className='results' ref={(section) => { this.results = section; }}>
-                        <Results  />
+                        <Results  
+                        addSiteToProject={this.props.addSiteToProject}
+                        />
                     </section>
                 }
                 <div>

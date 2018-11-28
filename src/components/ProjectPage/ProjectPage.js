@@ -67,6 +67,7 @@ class ProjectPage extends Component {
         this.setState({
             icon: this.chooseIcon('Health'),
         });
+        window.scrollTo(0,0)
     }
 
     selectSite = (index) => {
@@ -203,7 +204,6 @@ class ProjectPage extends Component {
 
 const mapStateToProps = state => ({
     sitesByProject: state.sitesByProject,
-    state: state,
     project: state.project,
     allSiteTypes: state.allSiteTypes,
 });

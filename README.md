@@ -71,6 +71,3 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 * Nathan Salazar - Initial Work
 * Samuel Solberg - Initial Work
 * Reese Westerhoff - Initial Work
-
-## License
-This project is licensed under the MIT License
