@@ -24,9 +24,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
  * POST Project route
  */
 router.post('/', rejectUnauthenticated, (req, res) => {
-    const query = `INSERT INTO "projects" ("name", "user_id")
-    VALUES ($1, $2);`;
-    pool.query(query, [req.body.projectName, req.user.id]
+    const query = `INSERT INTO "projects" ("name", "user_id", "image")
+    VALUES ($1, $2, $3);`;
+    pool.query(query, [req.body.projectName, req.user.id, req.body.image_url]
     ).then(() => {
         res.sendStatus(201);
     }).catch(error => {
