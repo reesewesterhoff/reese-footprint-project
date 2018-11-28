@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+// import SiteTypeItem, SiteTypeCategory, and Results components
 import SiteTypeItem from '../SiteTypeItem/SiteTypeItem';
-import { connect } from 'react-redux';
 import SiteTypeCategory from '../SiteTypeCategory/SiteTypeCategory';
+import Results from '../Results/Results';
+// connect to redux state
+import { connect } from 'react-redux';
+// material-ui imports
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
@@ -12,11 +16,12 @@ import WavesIcon from '@material-ui/icons/Waves';
 import SecurityIcon from '@material-ui/icons/Security';
 import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
-import Results from '../Results/Results';
+// import for forced scrolling
 import scrollToComponent from 'react-scroll-to-component';
+// snackbar for site selection
 import Snackbar from '@material-ui/core/Snackbar';
 
-
+// jss styles
 const styles = {
     card: {
         display: 'flex',
@@ -34,6 +39,7 @@ class SiteTypeList extends Component {
         snackbarOpen: false,
     }
 
+    // handles select of site, forces scroll to results component, and opens snackbar
     selectSite = site => {
         this.props.dispatch({ type: 'SET_SELECTED_SITE', payload: site });
         setTimeout(() => scrollToComponent(this.results, { offset: 0, align: 'top', duration: 750 }), 200);
@@ -41,8 +47,9 @@ class SiteTypeList extends Component {
             ...this.state,
             snackbarOpen: true, 
         });
-    }
+    } // end selectSite
 
+    // handles select of site category, forces scroll to site types
     selectSiteCategory = category => {
         this.props.dispatch({ type: 'FETCH_SITE_TYPES', payload: category });
         this.setState({
@@ -51,6 +58,7 @@ class SiteTypeList extends Component {
         setTimeout(() => scrollToComponent(this.siteTypeItem, { offset: 0, align: 'top', duration: 750 }), 200);
     }
 
+    // based on category, selects the appropriate icon for the site type cards
     chooseIcon = iconCategory => {
         switch (iconCategory) {
             case 'Health':
@@ -87,6 +95,7 @@ class SiteTypeList extends Component {
                         selectSiteCategory={this.selectSiteCategory}
                     />
                 </div>
+                {/* scrolls to here when a category is selected */}
                 <section className='siteTypeItem' ref={(section) => { this.siteTypeItem = section; }}>
                 <div className={classes.card}>
                     {this.props.siteTypes.map(site => {
@@ -104,6 +113,7 @@ class SiteTypeList extends Component {
                 <br />
                 {
                     this.props.selectedSite.id &&
+                    // scrolls here upon selecting a site
                     <section className='results' ref={(section) => { this.results = section; }}>
                         <Results  
                         addSiteToProject={this.props.addSiteToProject}
@@ -111,6 +121,7 @@ class SiteTypeList extends Component {
                     </section>
                 }
                 <div>
+                    {/* snackbar for site select */}
                     <Snackbar
                         open={this.state.snackbarOpen}
                         message={<span id="message-id">Site Selected</span>}
@@ -123,11 +134,12 @@ class SiteTypeList extends Component {
     }
 }
 
+// needed for jss styles
 SiteTypeList.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-
+// allows component to access redux state for information
 const mapStateToProps = state => {
     return {
         siteTypes: state.siteTypes,

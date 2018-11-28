@@ -17,6 +17,8 @@ const dieselCalculation = (state = {}, action) => {
                 payOffInTime: action.payload.payOffInTime,
                 timeline: action.payload.timeline
             };
+        case 'UNSET_USER':
+          return {};
         default:
             return state;
     }

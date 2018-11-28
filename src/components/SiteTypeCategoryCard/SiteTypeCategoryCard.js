@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// material-ui imports
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -7,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-
+// jss styles
 const styles = {
     card: {
         marginTop: 20,
@@ -31,6 +32,7 @@ class SiteTypeCategoryCard extends Component {
 
         return(
             <div>
+                {/* card styling for each site type category, takes in props for content from SiteTypeCategory component */}
                 <Card className={classes.card} style={this.props.color}>
                     <CardContent>
                         <Typography>
@@ -59,6 +61,7 @@ class SiteTypeCategoryCard extends Component {
     }
 }
 
+// needed for jss styles
 SiteTypeCategoryCard.propTypes = {
     classes: PropTypes.object.isRequired,
 };

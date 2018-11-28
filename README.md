@@ -1,7 +1,8 @@
-# Prime Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+# Footprint Project Transition Tool
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+The client, the Footprint Project, presented the problem of many organizations remaining unaware of the feasibility of implementing solar energy alternatives in their relief projects. Often trying to gather data and put together a cohesive and realistic picture of when and how to implement solar can be very difficult, with the user experience often being very off putting for an organization trying to switch to solar. 
+
+The solution created is application allowing users to calculate the cost benefits of transitioning from the use of diesel generators to solar grids, for the power needs of their humanitarian efforts. The user enters the details of their relief effort including the start and end dates, name and location of project site, and generator specs/fuel cost if any are being used. The results of their calculation are graphed after selecting the type of site they need to power, to illustrate the cost of solar versus the cost of diesel fuel over their project timeline. Users are then able to email a representative of the Footprint Project with a custom message and all of the information they entered for the calculation. Users are also able to register to the application and save multiple projects and subsequent sites with the ability to edit the timeline and energy budget costs to see the requirements necessary to transition to solar energy.
 
 ## Prerequisites
 
@@ -13,47 +14,24 @@ Before you get started, make sure you have the following software installed on y
 
 ## Create database and table
 
-Create a new database called `prime_app` and create a `person` table:
+Create a new database called `footprint_project` and create tables listed in the database.sql file in the order presented.
 
-```SQL
-CREATE TABLE person (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR (80) UNIQUE NOT NULL,
-    password VARCHAR (1000) NOT NULL
-);
-```
-
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
-
-## Download (Don't Clone) This Repository
-
-* Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
+If you would like to name your database something else, you will need to change `footprint_project` to the name of your new database name in `server/modules/pool.js`
 
 ## Development Setup Instructions
 
 * Run `npm install`
-* Create a `.env` file at the root of the project and paste this line into the file:
+* Create a `.env` file at the root of the project and paste these lines into the file:
     ```
     SERVER_SESSION_SECRET=superDuperSecret
+    PASSWORD=footprintEmailPassword
     ```
     While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+    Next you will want to replace `footprintEmailPassword` with the password matching that of an email address that is being used for testing purposes. You will also have to change the email address used in the `/server/routes/email.router.js` file. These need to be changed for production to the correct email and password that the client requires.
 * Start postgres if not running already by using `brew services start postgresql`
 * Run `npm run server`
 * Run `npm run client`
 * Navigate to `localhost:3000`
-
-## Debugging
-
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run dev:client`. Start the debugging server by selecting the Debug button.
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
 
 ## Production Build
 
@@ -62,27 +40,6 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 * Start postgres if not running already by using `brew services start postgresql`
 * Run `npm start`
 * Navigate to `localhost:5000`
-
-## Lay of the Land
-
-* `src/` contains the React application
-* `public/` contains static assets for the client-side
-* `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-* `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-* src/components
-  * App/App
-  * Footer/Footer
-  * Nav/Nav
-  * AboutPage/AboutPage
-  * InfoPage/InfoPage
-  * UserPage/UserPage
-  * LoginPage/LoginPage
-  * RegisterPage/RegisterPage
-  * LogOutButton/LogOutButton
-  * ProtectedRoute/ProtectedRoute
 
 ## Deployment
 
@@ -94,6 +51,26 @@ This code is also heavily commented. We recommend reading through the comments, 
 1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
 1. In the deploy section, select manual deploy
 
-## Update Documentation
+## Built With
 
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+* React.js
+* Redux
+* Redux Saga
+* Google Maps API
+* Node.js
+* Express
+* PostgreSQL
+* Passport
+* Nodemailer
+* Material-UI
+* Chart.js
+
+## Authors
+
+* Nicholas Manchanthasouk - Initial Work
+* Nathan Salazar - Initial Work
+* Samuel Solberg - Initial Work
+* Reese Westerhoff - Initial Work
+
+## License
+This project is licensed under the MIT License

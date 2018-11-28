@@ -2,6 +2,8 @@ const selectedSite = (state = {}, action) => {
     switch (action.type) {
       case 'SET_SELECTED_SITE':
         return action.payload;
+      case 'UNSET_USER':
+        return {};
       default:
         return state;
     }

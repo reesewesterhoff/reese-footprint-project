@@ -4,6 +4,8 @@ const sites = (state = [], action) => {
         return [...state, action.payload];
       case 'CLEAR_FORM':
         return [];
+      case 'UNSET_USER':
+        return [];
       default:
         return state;
     }

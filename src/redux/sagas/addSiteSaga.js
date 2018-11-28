@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { put, takeEvery, call } from 'redux-saga/effects';
-
-//SET UP FOR POST TO DATABASE IN STRETCH
+import { takeEvery } from 'redux-saga/effects';
 
 function* addSite(action) {
     try{
