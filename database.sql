@@ -39,9 +39,6 @@ VALUES('Small Health Clinic', 'Daytime clinic with limited services. Electricity
 ('Large Warehouse', 'Approximately 50,000 square feet/5000 square meters. Electricity needed for lighting and office', 100, 20, 16, 60, null, 80000, 'Logs', 3, 429936);
 
 
-
------------------------------------------- BELOW IS STRETCH MODE --------------------------------------------
-
 --a table of user emails and passwords. A user's email will serve as their "username".
 CREATE TABLE "person" (
     "id" SERIAL PRIMARY KEY,
