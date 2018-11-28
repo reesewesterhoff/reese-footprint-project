@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// material-ui imports
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
@@ -31,6 +32,7 @@ class SiteTypeCategory extends Component {
         active: null,
     }
 
+    // toggles card color on click of site type category
     toggleColor = (position) => {
         if (this.state.active === position) {
           this.setState({active : null})
@@ -39,6 +41,7 @@ class SiteTypeCategory extends Component {
         }
       }
       
+      // card turns this color
       myColor = (position) => {
         if (this.state.active === position) {
           return "MediumAquaMarine";
@@ -51,6 +54,7 @@ class SiteTypeCategory extends Component {
 
         const { classes } = this.props;
 
+        // save icon as a variable to pass it through props
         const hospitalIcon = <LocalHospitalIcon className={classes.icon} />
         const waterIcon = <WavesIcon className={classes.icon} />
         const commsIcon = <RouterIcon className={classes.icon} />
@@ -62,6 +66,7 @@ class SiteTypeCategory extends Component {
 
         return (
             <div className={classes.cardDiv}>
+                {/* site type category cards */}
                 <SiteTypeCategoryCard 
                     icon={hospitalIcon}
                     title="Health"
@@ -123,6 +128,7 @@ class SiteTypeCategory extends Component {
     }
 }
 
+// needed for jss styles
 SiteTypeCategory.propTypes = {
     classes: PropTypes.object.isRequired,
 };
