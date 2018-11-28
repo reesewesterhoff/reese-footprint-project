@@ -27,6 +27,7 @@ class AddProject extends Component {
     state = {
         projectName: '',
         user_id: this.props.user.id,
+        image_url: ''
     }
 
     handleSubmit = event => {
@@ -63,6 +64,14 @@ class AddProject extends Component {
                                 value={this.state.projectName}
                                 required
                                 onChange={this.handleChange('projectName')}
+                                margin="normal"
+                            />
+                             <TextField
+                                id="standard-name"
+                                label="Image URL"
+                                className={classes.textField}
+                                value={this.state.image_url}
+                                onChange={this.handleChange('image_url')}
                                 margin="normal"
                             />
                             <Button 
