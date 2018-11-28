@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import './BugReport.css';
+// import floating modal for bug report
 import FloatingModal from '../FloatingModal/FloatingModal';
+// snackbar for confirmation
 import Snackbar from '@material-ui/core/Snackbar';
+// connect to redux
 import { connect } from 'react-redux';
+// enable axios requests
 import axios from 'axios';
 
 class BugReport extends Component {
@@ -15,24 +19,28 @@ class BugReport extends Component {
     message: '',
   };
 
+  // handles changes in input fields
   handleChangeFor = propertyName => event => {
     this.setState({
       // saves whatever state previously was and only changes current TextField
       ...this.state,
       [propertyName]: event.target.value
     });
-  };
+  }; // end handleChangeFor
 
+  // handles the modal open
   handleReportBugToggle = () => {
     this.setState({
       ...this.state,
       reportBugOpen: !this.state.reportBugOpen,
       contactExpertOpen: false,
     });
-  };
+  }; // end handleReportBugToggle
 
+  // closes modal
   handleClose = () => this.setState({ ...this.state, contactExpertOpen: false, reportBugOpen: false });
 
+  // submits entered information in modal
   handleSubmit = property => event => {
     event.preventDefault();
     axios.post('/email', {
@@ -82,6 +90,7 @@ class BugReport extends Component {
   }
 }
 
+// allows access to information in redux state
 const mapStateToProps = state => ({
     sites: state.sites,
     selectedSite: state.selectedSite,

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+// connect to redux
 import { connect } from 'react-redux';
+// use GeneratorList
+import GeneratorList from '../GeneratorList/GeneratorList';
+// material-ui imports
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import GeneratorList from '../GeneratorList/GeneratorList';
 import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -12,8 +15,10 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+// snackbar for when generator is selected/energy budget added
 import Snackbar from '@material-ui/core/Snackbar';
 
+// jss styles
 const styles = {
     label: {
         textTransform: 'capitalize',
@@ -32,6 +37,7 @@ class GeneratorForm extends Component {
         snackbarOpen: false,
     }
 
+    // handles toggle switch for generator
     handleHasGeneratorToggle = () => {
         this.setState({
             hasGenerator: !this.state.hasGenerator,
@@ -41,8 +47,9 @@ class GeneratorForm extends Component {
                 monthlyCost: '',
             }
         });
-    }
+    } // end handleHasGeneratorToggle
 
+    // handles changes in input fields
     handleChangeFor = property => event => {
         this.setState({
             ...this.state,
@@ -51,14 +58,16 @@ class GeneratorForm extends Component {
                 [property]: event.target.value,
             },
         });
-    }
+    } // end handleChangeFor
 
+    // handles adding an energy budget
     handleAddEnergyUsage = event => {
         event.preventDefault();
         this.props.dispatch({
             type: 'ADD_GENERATOR',
             payload: this.state.energyUsage,
         });
+        // reset inputs
         this.setState({
             energyUsage: {
                 generatorSize: '',
@@ -149,7 +158,7 @@ class GeneratorForm extends Component {
                             classes={{label: classes.label}}
                         >
                             Add Monthly Energy Budget
-                    </Button>
+                        </Button>
                         {this.props.generator.length > 0 && <GeneratorList />}
                     </>
                 )}
@@ -164,10 +173,12 @@ class GeneratorForm extends Component {
     }
 }
 
+// needed for jss styles
 GeneratorForm.propTypes = {
     classes: PropTypes.object.isRequired,
   };
 
+// allows access to info in redux state
 const mapStateToProps = state => ({
     sites: state.sites,
     generator: state.generator,

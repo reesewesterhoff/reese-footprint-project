@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import './Footer.css';
+// to use modal
 import FloatingModal from '../FloatingModal/FloatingModal';
+// alerts user that email was sent
 import Snackbar from '@material-ui/core/Snackbar';
+// connect to redux state
 import { connect } from 'react-redux';
+// allows axios requests
 import axios from 'axios';
 
 class Footer extends Component {
@@ -16,32 +20,28 @@ class Footer extends Component {
     message: '',
   };
 
+  // handles changes in input fields
   handleChangeFor = propertyName => event => {
     this.setState({
       // saves whatever state previously was and only changes current TextField
       ...this.state,
       [propertyName]: event.target.value
     });
-  };
+  }; // end handleChangeFor
 
-  handleReportBugToggle = () => {
-    this.setState({
-      ...this.state,
-      reportBugOpen: !this.state.reportBugOpen,
-      contactExpertOpen: false,
-    });
-  };
-
+  // modal opens
   handleContactExpertToggle = () => {
     this.setState({
       ...this.state,
       contactExpertOpen: !this.state.contactExpertOpen,
       reportBugOpen: false,
     });
-  };
+  }; // end handleContactExpertToggle
 
+  // close modal
   handleClose = () => this.setState({ ...this.state, contactExpertOpen: false, reportBugOpen: false });
 
+  // submits info entered in modal to email
   handleSubmit = property => event => {
     event.preventDefault();
     axios.post('/email', {
@@ -82,18 +82,6 @@ class Footer extends Component {
           subject="Solar Estimate"
           id="contact"
         />
-        {/* <FloatingModal
-          buttonText="Report A Bug"
-          color="secondary"
-          title="Please complete the following fields to report a bug to the Footprint Project team."
-          state={this.state}
-          modalOpen={this.state.reportBugOpen}
-          handleModalToggle={this.handleReportBugToggle}
-          handleChangeFor={this.handleChangeFor}
-          handleSubmit={this.handleSubmit}
-          handleClose={this.handleClose}
-          subject="Bug Report"
-        /> */}
         <Snackbar
           open={this.state.snackbarOpen}
           message={<span id="message-id">Email Sent</span>}
@@ -105,6 +93,7 @@ class Footer extends Component {
   }
 }
 
+// allows access to info in redux state
 const mapStateToProps = state => ({
     sites: state.sites,
     selectedSite: state.selectedSite,

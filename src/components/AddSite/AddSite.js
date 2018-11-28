@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
+// connect to redux state
 import { connect } from 'react-redux';
+// import GeneratorForm and SiteTypeList so we can force scroll to them
 import GeneratorForm from '../GeneratorForm/GeneratorForm';
 import SiteTypeList from '../SiteTypeList/SiteTypeList';
+// map imports
 import Map from '../Map/Map'
 import Geocode from "react-geocode";
+// material-ui imports
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+// import css
 import './AddSite.css';
+// forced scrolling package
 import scrollToComponent from 'react-scroll-to-component';
 // Set Google Maps API Key
 Geocode.setApiKey("AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68");
 
+// jss styles
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -46,6 +53,7 @@ class AddSite extends Component {
         address: '',
     }
 
+    // handles clicking on map, sets lat and long
     handleClick = event => {
         this.setState({
             location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
@@ -64,7 +72,7 @@ class AddSite extends Component {
                 alert('There was an error, please refresh or contact us');
             }
         );
-    }
+    } // end handleClick
 
     handleToggleOpen = () => {
         this.setState({
@@ -72,22 +80,25 @@ class AddSite extends Component {
         });
     };
 
+    // handles changes in input fields
     handleChange = property => event => {
         this.setState({
             ...this.state,
             [property]: event.target.value
         })
-    }
+    } // end handleChange
 
+    // handles adding a new site
     handleSubmit = event => {
         event.preventDefault();
         this.props.dispatch({
             type: 'ADD_SITE', payload: { ...this.state, siteGenerators: this.props.generator }
         });
-
+        // force scrolls to SiteTypeList
         setTimeout(() => scrollToComponent(this.siteTypeList, { offset: 0, align: 'top', duration: 750 }), 200);
-    }
+    } // end handleSubmit
 
+    // adds site to project
     addSiteToProject = () => {
         this.props.dispatch({
             type: 'ADD_SITE',
@@ -106,7 +117,7 @@ class AddSite extends Component {
             this.props.dispatch({ type: 'GET_SITES_BY_PROJECT', payload: id })
             this.props.history.push('/project');
         }
-    }
+    } // end addSiteToProject
 
 
     render() {
@@ -165,7 +176,7 @@ class AddSite extends Component {
                         <div className="map">
                             <h4>Search by Country and click on map below to set site location.</h4>
                             <h4>Latitude: {this.state.location.lat} <br></br> Longitude: {this.state.location.lng}</h4>
-
+                            {/* google map */}
                             <Map
                                 googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZv9A4Vtnra6r04z9JnNk91zeXwX82O68&v=3.exp&libraries=geometry,drawing,places"
                                 loadingElement={<div style={{ height: `100%` }} />}
@@ -227,6 +238,7 @@ class AddSite extends Component {
     }
 }
 
+// access to redux state
 const mapStateToProps = state => ({
     sites: state.sites,
     generator: state.generator,
@@ -235,6 +247,7 @@ const mapStateToProps = state => ({
     user: state.user,
 });
 
+// needed for jss styles
 AddSite.propTypes = {
     classes: PropTypes.object.isRequired,
 };
