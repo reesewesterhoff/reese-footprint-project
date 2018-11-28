@@ -90,7 +90,7 @@ class AddSite extends Component {
 
     addSiteToProject = () => {
         this.props.dispatch({
-            type: 'ADD_SITE',
+            type: 'ADD_SITE_TO_PROJECT',
             payload: {
                 state: this.state,
                 project_id: this.props.project_id,
@@ -101,13 +101,14 @@ class AddSite extends Component {
             }
         });
         this.props.dispatch({type: 'CLEAR_FORM'});
-        if (this.props.user.id && this.props.selectedSite.id) {
-            const id = this.props.project_id;
-            this.props.dispatch({ type: 'GET_SITES_BY_PROJECT', payload: id })
+    }
+    componentWillReceiveProps = (nextProps) => {
+        if (nextProps.sitesByProject.length > this.props.sitesByProject.length) {
             this.props.history.push('/project');
+            console.log('Tried to push to project view!');
+            
         }
     }
-
 
     render() {
 
@@ -211,16 +212,11 @@ class AddSite extends Component {
                 {
                     this.props.sites.length > 0 &&
                     <section className='siteTypeList' ref={(section) => { this.siteTypeList = section; }}>
-                        <SiteTypeList  />
+                        <SiteTypeList  
+                        addSiteToProject={this.addSiteToProject}
+                        />
                     </section>
                 }
-
-                <br />
-                {this.props.user.id && this.props.selectedSite.id && <Button value="submit"
-                    type="submit" variant="contained" color="primary"
-                    className={classes.button} onClick={this.addSiteToProject}>
-                    Add Site to Project
-                    </Button>}
             </div>
 
         );
@@ -229,6 +225,7 @@ class AddSite extends Component {
 
 const mapStateToProps = state => ({
     sites: state.sites,
+    sitesByProject: state.sitesByProject,
     generator: state.generator,
     selectedSite: state.selectedSite,
     project_id: state.projectId,

@@ -85,6 +85,7 @@ class RegisterPage extends Component {
             Login
           </button>
         </center>
+        <div id="bugSpacing"></div>
       </div>
     );
   }
