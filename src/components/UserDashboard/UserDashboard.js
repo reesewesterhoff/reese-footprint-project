@@ -36,6 +36,7 @@ class UserDashboard extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'GET_PROJECTS', payload: { id: this.props.user.id } });
+        this.props.dispatch({ type: 'FETCH_ALL_SITE_TYPES' });
     }
 
     selectProject = (id) => {

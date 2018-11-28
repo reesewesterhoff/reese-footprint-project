@@ -60,6 +60,7 @@ class ProjectPage extends Component {
         this.setState({
             icon: this.chooseIcon('Health'),
         });
+        window.scrollTo(0,0)
     }
 
     selectSite = (index) => {

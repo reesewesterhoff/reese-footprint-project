@@ -6,6 +6,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import FloatingModal from '../FloatingModal/FloatingModal';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 let start = '2014-12-30T18:06:17.762Z';
 let end = '2020-01-05T18:06:17.762Z';
@@ -15,6 +16,11 @@ const styles = {
         textTransform: 'capitalize',
         fontSize: 25,
     },
+    // button: {
+    //     margin: 'auto',
+    //     height: '5.4vmax',
+    //     width: '28vmax',
+    // },
 }
 
 class Results extends Component {
@@ -169,8 +175,19 @@ class Results extends Component {
                 </div>
                 :
                 <h3 className="center" style={{ color: 'DarkRed' }}>Monthly Budget Needed To Pay Off In Time: ${parseInt(this.props.selectedSite.total_price / this.props.dieselCalculation.timeline).toLocaleString()}</h3>}
-                <br />
+            <br />
             <div className="center">
+
+                {this.props.user.id && this.props.selectedSite.id &&
+                    <Button value="submit"
+                        type="submit" variant="contained" color="primary"
+                        classes={{label: classes.label}}
+                        className={classes.button} onClick={this.props.addSiteToProject}>
+                        <span styles={{fontSize: '40vw'}}>
+                            Add to Project
+                        </span>
+                    </Button>}
+
                 <FloatingModal
                     buttonText="Contact the Experts"
                     color="primary"
@@ -182,7 +199,7 @@ class Results extends Component {
                     handleSubmit={this.handleSubmit}
                     handleClose={this.handleClose}
                     subject="Solar Estimate"
-                    classes={{label: classes.label}}
+                    classes={{ label: classes.label }}
                 />
             </div>
             <div className="subHeading">
@@ -207,13 +224,15 @@ class Results extends Component {
 
 Results.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+};
 
 const mapStateToProps = state => ({
     sites: state.sites,
     selectedSite: state.selectedSite,
     dieselCalculation: state.dieselCalculation,
-    generator: state.generator
+    generator: state.generator,
+    project_id: state.projectId,
+    user: state.user,
 });
 
 

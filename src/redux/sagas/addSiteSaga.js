@@ -11,9 +11,7 @@ function* addSite(action) {
             const site_id = results.data.site_id;
             console.log('site_id=',site_id);
             yield axios.post(`/projects/generators/${site_id}`,action.payload.generators)
-        }else{
-            yield put({ type: 'SET_SITES', payload: action.payload });
-            //does this do anything?
+            yield put({ type: 'GET_SITES_BY_PROJECT', payload: action.payload.project_id });
         }
     }catch(error){
         console.log('Error adding site to project:',error);
@@ -21,7 +19,7 @@ function* addSite(action) {
 }
 
 function* addSiteSaga() {
-    yield takeEvery('ADD_SITE', addSite);
+    yield takeEvery('ADD_SITE_TO_PROJECT', addSite);
 }
 
 export default addSiteSaga;

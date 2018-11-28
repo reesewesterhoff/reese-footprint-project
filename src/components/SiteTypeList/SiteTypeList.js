@@ -105,7 +105,9 @@ class SiteTypeList extends Component {
                 {
                     this.props.selectedSite.id &&
                     <section className='results' ref={(section) => { this.results = section; }}>
-                        <Results  />
+                        <Results  
+                        addSiteToProject={this.props.addSiteToProject}
+                        />
                     </section>
                 }
                 <div>
