@@ -5,7 +5,7 @@ import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
 import _ from 'lodash';
 import { Marker } from 'react-google-maps';
 import SiteMarker from '../Marker/Marker'
-
+// Allow usage of Google Map by declaring global google
 /* global google */
 
 class SitesMap extends React.Component {
@@ -94,15 +94,15 @@ class SitesMap extends React.Component {
             scaleControl: false,
             mapTypeControl: false,
             panControl: false,
-            // zoomControl: false,
             rotateControl: false,
-            fullscreenControl: false}}>
-              < SearchBox
-            ref={ this.state.onSearchBoxMounted }
-            bounds={ this.state.bounds }
-            controlPosition={ google.maps.ControlPosition.TOP_LEFT }
-            
-            onPlacesChanged={ this.state.onPlacesChanged } >
+            fullscreenControl: false
+          }}>
+          < SearchBox
+            ref={this.state.onSearchBoxMounted}
+            bounds={this.state.bounds}
+            controlPosition={google.maps.ControlPosition.TOP_LEFT}
+
+            onPlacesChanged={this.state.onPlacesChanged} >
             <input
               type="text"
               placeholder="Enter Site Location"
@@ -122,15 +122,14 @@ class SitesMap extends React.Component {
               }}
             />
           </SearchBox>
-              {/*  Display Markers with InfoWindows */}
-              {this.props.sitesByProject.map((site, index) => <SiteMarker key={index}
-                                        position={{ lat: Number(site.latitude), lng: Number(site.longitude)}}
-                                        selectSite= {this.props.selectSite}
-                                        index={index}
-                                        image=  {this.props.allSiteTypes[(site.site_type_id - 1)].category}
-                                    />)}
-
-                                    {/* End Markers Display */}
+          {/*  Display Markers with InfoWindows */}
+          {this.props.sitesByProject.map((site, index) => <SiteMarker key={index}
+            position={{ lat: Number(site.latitude), lng: Number(site.longitude) }}
+            selectSite={this.props.selectSite}
+            index={index}
+            image={this.props.allSiteTypes[(site.site_type_id - 1)].category}
+          />)}
+          {/* End Markers Display */}
         </GoogleMap>
       </div>
     );
