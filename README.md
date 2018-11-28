@@ -1,6 +1,8 @@
 # Footprint Project Transition Tool
 
-This application is a tool for users to calculate the cost benefits of transitioning from the use of diesel generators to solar grids, for the power needs of their humanitarian efforts. The user enters the details of their relief effort including the start and end dates, name and location of project site, and generator specs/fuel cost if any are being used. The results of their calculation are graphed after selecting the type of site they need to power, to illustrate the cost of solar versus the cost of diesel fuel over their project timeline. Users are then able to email a representative of the Footprint Project with a custom message and all of the information they entered for the calculation. Users are also able to register to the application and save multiple projects and subsequent sites with the ability to edit the timeline and energy budget costs to see the requirements necessary to transition to solar energy.
+The client, the Footprint Project, presented the problem of many organizations remaining unaware of the feasibility of implementing solar energy alternatives in their relief projects. Often trying to gather data and put together a cohesive and realistic picture of when and how to implement solar can be very difficult, with the user experience often being very off putting for an organization trying to switch to solar. 
+
+The solution created is application allowing users to calculate the cost benefits of transitioning from the use of diesel generators to solar grids, for the power needs of their humanitarian efforts. The user enters the details of their relief effort including the start and end dates, name and location of project site, and generator specs/fuel cost if any are being used. The results of their calculation are graphed after selecting the type of site they need to power, to illustrate the cost of solar versus the cost of diesel fuel over their project timeline. Users are then able to email a representative of the Footprint Project with a custom message and all of the information they entered for the calculation. Users are also able to register to the application and save multiple projects and subsequent sites with the ability to edit the timeline and energy budget costs to see the requirements necessary to transition to solar energy.
 
 ## Prerequisites
 
@@ -15,12 +17,6 @@ Before you get started, make sure you have the following software installed on y
 Create a new database called `footprint_project` and create tables listed in the database.sql file in the order presented.
 
 If you would like to name your database something else, you will need to change `footprint_project` to the name of your new database name in `server/modules/pool.js`
-
-## Download (Don't Clone) This Repository
-
-* Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
 
 ## Development Setup Instructions
 
