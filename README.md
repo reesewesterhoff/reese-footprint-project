@@ -1,15 +1,15 @@
 # Footprint Project Transition Tool
 
-The client, the Footprint Project, presented the problem of many organizations remaining unaware of the feasibility of implementing solar energy alternatives in their relief projects. Often trying to gather data and put together a cohesive and realistic picture of when and how to implement solar can be very difficult, with the user experience often being very off putting for an organization trying to switch to solar. 
+Our client the Footprint Project presented the problem of disaster relief organizations being unaware of the possibility of implementing solar energy infrastructures with their aid projects. The emphasis was made that in many cases this was within their existing energy budgets. Finding data that paints a clear and realistic picture of when and how to implement solar can be very difficult.  It is also often that the user experience is vague and confusing.
 
-The solution created is application allowing users to calculate the cost benefits of transitioning from the use of diesel generators to solar grids, for the power needs of their humanitarian efforts. The user enters the details of their relief effort including the start and end dates, name and location of project site, and generator specs/fuel cost if any are being used. The results of their calculation are graphed after selecting the type of site they need to power, to illustrate the cost of solar versus the cost of diesel fuel over their project timeline. Users are then able to email a representative of the Footprint Project with a custom message and all of the information they entered for the calculation. Users are also able to register to the application and save multiple projects and subsequent sites with the ability to edit the timeline and energy budget costs to see the requirements necessary to transition to solar energy.
+The solution is an application that allows users to run a cost-benefit analysis of transitioning from the use of diesel generators to solar grids which power their humanitarian efforts. The user enters the details of their relief effort including the start and end dates, name and location of the relief site followed by a monthly energy budget.  This will be different if a generator already exists as the energy budget will now be their monthly fuel cost cost. The results of their calculation are graphed after selecting the type of site they need to power.  This illustrates the cost of solar versus the cost of diesel fuel over their project timeline. Users are then able to email a representative of the Footprint Project with a custom message which includes all of their site calculations. They are also able to register to the application where they can save multiple projects and subsequent sites. Within each specific project is the ability to edit the timeline and energy budget for a site to see the requirements necessary to transition to solar energy.
 
 ## Prerequisites
 
 Before you get started, make sure you have the following software installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
+- [PostgreSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
 
 ## Create database and table
@@ -57,13 +57,15 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 * Redux
 * Redux Saga
 * Google Maps API
+* react-google-maps
 * Node.js
 * Express
 * PostgreSQL
 * Passport
 * Nodemailer
 * Material-UI
-* Chart.js
+* react-chartjs-2
+* Moment.js
 
 ## Authors
 
