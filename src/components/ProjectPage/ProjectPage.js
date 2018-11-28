@@ -18,7 +18,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import StoreIcon from '@material-ui/icons/Store';
 import './ProjectPage.css';
 import SitesMap from '../SitesMap/SitesMap';
-import SiteMarker from '../Marker/Marker';
 import scrollToComponent from 'react-scroll-to-component';
 
 const styles = theme => ({
@@ -197,7 +196,6 @@ class ProjectPage extends Component {
 
 const mapStateToProps = state => ({
     sitesByProject: state.sitesByProject,
-    state: state,
     project: state.project,
     allSiteTypes: state.allSiteTypes,
 });
