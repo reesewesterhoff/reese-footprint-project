@@ -31,22 +31,11 @@ If you would like to name your database something else, you will need to change 
     PASSWORD=footprintEmailPassword
     ```
     While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-    Next you will want to replace `footprintEmailPassword` with the password matching that of an email address that is being used for testing. You will also have to change the email address used in the `/server/routes/email.router.js` file.
+    Next you will want to replace `footprintEmailPassword` with the password matching that of an email address that is being used for testing purposes. You will also have to change the email address used in the `/server/routes/email.router.js` file. These need to be changed for production to the correct email and password that the client requires.
 * Start postgres if not running already by using `brew services start postgresql`
 * Run `npm run server`
 * Run `npm run client`
 * Navigate to `localhost:3000`
-
-## Debugging
-
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run dev:client`. Start the debugging server by selecting the Debug button.
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
 
 ## Production Build
 
@@ -80,3 +69,12 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 * Material-UI
 * Chart.js
 
+## Authors
+
+* Nicholas Manchanthasouk - Initial Work
+* Nathan Salazar - Initial Work
+* Samuel Solberg - Initial Work
+* Reese Westerhoff - Initial Work
+
+## License
+This project is licensed under the MIT License
