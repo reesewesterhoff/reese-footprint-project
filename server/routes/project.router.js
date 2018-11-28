@@ -8,11 +8,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  */
 router.get('/', rejectUnauthenticated, (req, res) => {
 
-    const query = `SELECT projects.name, projects.id FROM "projects"
-
-    INNER JOIN person ON person.id = projects.user_id
-    WHERE person.id = $1;`; //The user_id is stored in the "projects" table, so we
-    //don't need the "person" table in this query
+    const query = `SELECT * FROM "projects"
+    WHERE projects.user_id = $1;`; 
     pool.query(query, [req.user.id])
     .then(results => {
         res.send(results.rows);
@@ -40,7 +37,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 
 /**
- * GET Project route
+ * GET Project by id route
  */
 router.get('/:id', (req, res) => {
     const query = `SELECT * FROM "projects" WHERE "id" = $1;`
@@ -55,9 +52,10 @@ router.get('/:id', (req, res) => {
 });
 
 /**
- * GET Sites by Project route
+ * GET Sites by Project id route
  */
 router.get('/sites/:id', (req, res) => {
+    //we retrieve all generator data as an array of objects
     const query = `SELECT 
         sites.*, 
         json_agg(json_build_object('size', size, 'unit', unit, 'fuel_cost', fuel_cost)) AS generators 
@@ -75,6 +73,9 @@ router.get('/sites/:id', (req, res) => {
     })
 });
 
+/**
+ * POST Site route
+ */
 router.post('/sites', rejectUnauthenticated, (req,res) => {
     const query = `INSERT INTO "sites" ("project_id", "site_name", 
     "site_type_id", "energy_budget", "start_date", "end_date", 
@@ -90,6 +91,9 @@ router.post('/sites', rejectUnauthenticated, (req,res) => {
         })
 })
 
+/**
+ * POST Generators by site id route
+ */
 router.post('/generators/:id', rejectUnauthenticated, (req,res) => {
     const query = `INSERT INTO generator (size, unit, fuel_cost, site_id)
         VALUES ($1, $2, $3, $4)`;
