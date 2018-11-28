@@ -55,6 +55,7 @@ class UserDashboard extends Component {
 
     render() {
 
+        const defaultImage = 'http://vibrance.co/clarity/img/Project-Icon.png';
 
         const { classes } = this.props;
 
@@ -82,13 +83,13 @@ class UserDashboard extends Component {
                     :
                         <div>
                     <div className={classes.cardDiv}>
-                        {this.props.projects.map(project =>
-                            <Card className={classes.card}>
+                        {this.props.projects.map((project,index) =>
+                            <Card className={classes.card} key={index}>
 
                                 <CardMedia
                                     className={classes.media}
-                                    image="http://vibrance.co/clarity/img/Project-Icon.png"
-                                    title="Generic Project"
+                                    image={project.image || defaultImage}
+                                    title={project.name}
                                 />
                                 <CardContent>
                                     <Typography variant="h5">

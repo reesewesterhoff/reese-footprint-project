@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { put, takeEvery, call } from 'redux-saga/effects';
-
-//SET UP FOR POST TO DATABASE IN STRETCH
+import { takeEvery } from 'redux-saga/effects';
 
 function* addSite(action) {
     try{
@@ -11,9 +9,6 @@ function* addSite(action) {
             const site_id = results.data.site_id;
             console.log('site_id=',site_id);
             yield axios.post(`/projects/generators/${site_id}`,action.payload.generators)
-        }else{
-            yield put({ type: 'SET_SITES', payload: action.payload });
-            //does this do anything?
         }
     }catch(error){
         console.log('Error adding site to project:',error);

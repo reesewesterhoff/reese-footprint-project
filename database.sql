@@ -53,7 +53,8 @@ CREATE TABLE "person" (
 CREATE TABLE "projects" (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR(255),
-    "user_id" INT REFERENCES "person"
+    "user_id" INT REFERENCES "person",
+    "image" TEXT
 );
 
 --sites table, for projects which have multiple sites
@@ -67,7 +68,6 @@ CREATE TABLE "sites" (
     "energy_budget" INT,
     "latitude" DECIMAL,
     "longitude" DECIMAL,
-    "image_string" TEXT,
     "appliances" INT[]
 );
 
