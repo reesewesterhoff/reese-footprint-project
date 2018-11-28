@@ -71,7 +71,8 @@ class Results extends Component {
 
         const datasets = [{
             label: 'Time to cover initial solar grid investment',
-            data: [{ //these values will be set dynamically when user enters info
+            data: [{ //these values will be set dynamically when user enters info. 
+                //We added default start/end dates and starting price
                 x: this.props.sites.length ? new Date(this.props.sites[0].fundStartDate) : start,
                 y: this.props.selectedSite.total_price || 25000
             }, {
@@ -96,8 +97,10 @@ class Results extends Component {
                 y: 0
             }, {
                 x: this.props.sites.length ? this.props.sites[0].fundEndDate : end,
-                y: this.props.dieselCalculation.payOffInTime ?
+                y: this.props.dieselCalculation.payOffInTime ? //the savings is just (dieselCost - totalPrice)
                     this.props.dieselCalculation.totalDieselCost - this.props.selectedSite.total_price : 0
+                    //if the payoff date is after the funding end date, we set the y-value to 0 as a way  
+                    //of "hiding" that part of the graph 
             }],
             backgroundColor: [
                 '#228b22'
@@ -113,7 +116,7 @@ class Results extends Component {
                 y: 0
             }, {
                 x: this.props.sites.length ? this.props.sites[0].fundEndDate : end,
-                y: this.props.dieselCalculation.totalDieselCost || 35000
+                y: this.props.dieselCalculation.totalDieselCost || 35000 //35000 is just a default value
             }],
             backgroundColor: [
                 'rgb(128,128,128,0.7)'
