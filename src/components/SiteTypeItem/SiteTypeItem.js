@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// material-ui imports
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -6,10 +7,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// import Tooltip from '@material-ui/core/Tooltip';
-// import Zoom from '@material-ui/core/Zoom';
 
-
+// jss styles
 const styles = {
     card: {
         marginTop: 15,
@@ -31,16 +30,12 @@ const styles = {
 
 class SiteTypeItem extends Component {
 
-    componentDidMount() {
-        
-    }
-
     render() {
 
         const { classes } = this.props;
 
         return (
-            
+            // hovering over each card will bring up tooltip with description, props for card icon passed down from SiteTypeList
             <div className="toolTip">
                 <span className="toolTipText">{this.props.site.description}</span>
                 <Card className={classes.card} >
@@ -48,7 +43,6 @@ class SiteTypeItem extends Component {
                         <Typography>
                             {this.props.icon}
                         </Typography>
-                        {/* <br /> */}
                         <Typography variant="h6">
                             <strong>{this.props.site.type}</strong>
                         </Typography>
@@ -67,6 +61,7 @@ class SiteTypeItem extends Component {
                     </CardContent>
                     <CardActions>
                         <div className={classes.button}>
+                            {/* clicking button sends site to redux state for calculations */}
                             <Button
                                 size="large"
                                 variant="outlined"
@@ -84,6 +79,7 @@ class SiteTypeItem extends Component {
     }
 }
 
+// needed for jss styles
 SiteTypeItem.propTypes = {
     classes: PropTypes.object.isRequired,
 };
